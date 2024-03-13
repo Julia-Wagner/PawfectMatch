@@ -1,6 +1,6 @@
 # **PawfectMatch**
 
-PawfectMatch a platform to connect shelters with loving homes for their dogs. Shelters can register and post their dogs, share stories and photos. Future dog owners can register to look for dogs.
+PawfectMatch is a platform to connect shelters with loving homes for their dogs. Shelters can register and post their dogs, share stories and photos. Future dog owners can register to look for dogs.
 
 # **Table of Contents**
 
@@ -15,6 +15,12 @@ PawfectMatch a platform to connect shelters with loving homes for their dogs. Sh
     * [**Necessary Features:**](#necessary-features)
     * [**Nice-to-have Features:**](#nice-to-have-features)
   * [**Structure Plane**](#structure-plane)
+    * [**Epic: User Authentication**](#epic-user-authentication)
+    * [**Epic: General UX**](#epic-general-ux)
+    * [**Epic: Profile**](#epic-profile)
+    * [**Epic: Posts**](#epic-posts)
+    * [**Epic: Dog Posts**](#epic-dog-posts)
+    * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
   * [**Skeleton Plane**](#skeleton-plane)
     * [**Wireframes**](#wireframes)
     * [**Database Schema**](#database-schema)
@@ -85,6 +91,69 @@ To get a better understanding of what the application will look like, I wrote do
 - Messaging/chat with notifications.
 
 ## **Structure Plane**
+
+From the features defined above I was able to create epics and break these down into user stories.
+
+### **Epic: User Authentication**
+
+| User Story                                                                                                                              | Priority       |
+|-----------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| As a **new user**, I want to **register to the application**, so that I can **create posts**.                                           | **MUST HAVE**  |
+| As an **existing user**, I want to **log in to the application**, so that I can **access my profile and posts**.                        | **MUST HAVE**  |
+| As a **site user**, I want to **be able to see the feed without being logged in**, so that I can **decide whether I want to register**. | **MUST HAVE**  |
+
+### **Epic: General UX**
+
+| User Story                                                                                                                 | Priority        |
+|----------------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **site user**, I expect **a responsive design**, so that I can **use the application on various screen sizes**.       | **MUST HAVE**   |
+| As a **site user**, I expect **clear and intuitive site navigation**, so that I can **easily navigate the application**.   | **MUST HAVE**   |
+| As a **site user**, I expect **the application to be accessible**, so that **everyone can use it**.                        | **MUST HAVE**   |
+| As a **site user**, I want to **contact the site owner**, so that I can **ask questions or report inappropriate content**. | **SHOULD HAVE** |
+
+### **Epic: Profile**
+
+| User Story                                                                                                           | Priority        |
+|----------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **shelter**, I want to **create and edit my profile**, so that I can **present myself to possible adopters**.   | **MUST HAVE**   |
+| As an **adopter**, I want to **create and edit my profile**, so that I can **search for a new dog**.                 | **MUST HAVE**   |
+| As a **site user**, I want to **deactivate my profile**, so that I can **show that I am unavailable at the moment**. | **COULD HAVE**  |
+
+### **Epic: User Interaction**
+
+| User Story                                                                                                           | Priority        |
+|----------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **site user**, I want to **follow other users**, so that I can **personalize my feed**.                         | **SHOULD HAVE** |
+| As a **site user**, I want to **comment other profiles**, so that I can **share my opinions and experiences**.       | **COULD HAVE**  |
+| As the **site owner**, I want to **define banned words for comments**, so that I can **ensure appropriate use**.     | **COULD HAVE**  |
+
+### **Epic: Posts**
+
+| User Story                                                                                                          | Priority        |
+|---------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **site user**, I want to **create, edit, and delete posts**, so that I can **share stories**.                  | **MUST HAVE**   |
+| As a **site user**, I want to **add pictures to my posts**, so that I can **show the dogs**.                        | **MUST HAVE**   |
+| As a **site user**, I want to **save posts**, so that I can **find them again easily**.                             | **SHOULD HAVE** |
+| As a **site user**, I want to **filter posts based on specific criteria**, so that I can **find relevant content**. | **SHOULD HAVE** |
+
+### **Epic: Dog Posts**
+
+| User Story                                                                                                                 | Priority        |
+|----------------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **shelter**, I want to **create posts for dogs**, so that I can **show my dogs available for adoption**.              | **MUST HAVE**   |
+| As a **shelter**, I want to **define characteristics for each dog**, so that I can **improve the adoption process**.       | **SHOULD HAVE** |
+| As a **shelter**, I want to **define adoption requirements for each dog**, so that I can **improve the adoption process**. | **COULD HAVE**  |
+| As a **shelter**, I want to **mark a dog as adopted**, so that I can **show successful adoptions**.                        | **SHOULD HAVE** |
+| As an **adopter**, I want to **search and filter for dogs**, so that I can **find the perfect dog for me**.                | **MUST HAVE**   |
+| As an **adopter**, I want to **define my housing situation**, so that I can **match with dogs based on requirements**.     | **COULD HAVE**  |
+
+### **Epic: Notifications and Communication**
+
+| User Story                                                                                                            | Priority        |
+|-----------------------------------------------------------------------------------------------------------------------|-----------------|
+| As a **site user**, I want to **receive notifications**, so that I can **stay up-to-date**.                           | **COULD HAVE**  |
+| As a **site user**, I want to **mark notifications as read**, so that I can **clearly see new notifications**.        | **COULD HAVE**  |
+| As a **site user**, I want to **be able to use a chat**, so that I can **easily communicate with shelters/adopters**. | **COULD HAVE**  |
 
 ## **Skeleton Plane**
 
