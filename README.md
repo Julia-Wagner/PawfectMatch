@@ -18,6 +18,7 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
     * [**Epic: User Authentication**](#epic-user-authentication)
     * [**Epic: General UX**](#epic-general-ux)
     * [**Epic: Profile**](#epic-profile)
+    * [**Epic: User Interaction**](#epic-user-interaction)
     * [**Epic: Posts**](#epic-posts)
     * [**Epic: Dog Posts**](#epic-dog-posts)
     * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
@@ -28,6 +29,7 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
     * [**Design**](#design)
     * [**Colors and Fonts**](#colors-and-fonts)
     * [**Logo**](#logo)
+* [**Agile Process**](#agile-process)
 * [**Credits**](#credits)
   * [**Content**](#content)
   * [**Media and Design**](#media-and-design)
@@ -115,7 +117,7 @@ From the features defined above I was able to create epics and break these down 
 
 | User Story                                                                                                           | Priority        |
 |----------------------------------------------------------------------------------------------------------------------|-----------------|
-| As a **shelter**, I want to **create and edit my profile**, so that I can **present myself to possible adopters**.   | **MUST HAVE**   |
+| As a **shelter**, I want to **edit my profile**, so that I can **present myself to possible adopters**.              | **MUST HAVE**   |
 | As an **adopter**, I want to **create and edit my profile**, so that I can **search for a new dog**.                 | **MUST HAVE**   |
 | As a **site user**, I want to **deactivate my profile**, so that I can **show that I am unavailable at the moment**. | **COULD HAVE**  |
 
@@ -125,23 +127,21 @@ From the features defined above I was able to create epics and break these down 
 |----------------------------------------------------------------------------------------------------------------------|-----------------|
 | As a **site user**, I want to **follow other users**, so that I can **personalize my feed**.                         | **SHOULD HAVE** |
 | As a **site user**, I want to **comment other profiles**, so that I can **share my opinions and experiences**.       | **COULD HAVE**  |
-| As the **site owner**, I want to **define banned words for comments**, so that I can **ensure appropriate use**.     | **COULD HAVE**  |
 
 ### **Epic: Posts**
 
-| User Story                                                                                                          | Priority        |
-|---------------------------------------------------------------------------------------------------------------------|-----------------|
-| As a **site user**, I want to **create, edit, and delete posts**, so that I can **share stories**.                  | **MUST HAVE**   |
-| As a **site user**, I want to **add pictures to my posts**, so that I can **show the dogs**.                        | **MUST HAVE**   |
-| As a **site user**, I want to **save posts**, so that I can **find them again easily**.                             | **SHOULD HAVE** |
-| As a **site user**, I want to **filter posts based on specific criteria**, so that I can **find relevant content**. | **SHOULD HAVE** |
+| User Story                                                                                           | Priority        |
+|------------------------------------------------------------------------------------------------------|-----------------|
+| As a **site user**, I want to **create, edit, and delete posts**, so that I can **share stories**.   | **MUST HAVE**   |
+| As a **site user**, I want to **add pictures to my posts**, so that I can **show the dogs**.         | **MUST HAVE**   |
+| As a **site user**, I want to **save posts**, so that I can **find them again easily**.              | **SHOULD HAVE** |
+| As a **site user**, I want to **have a personalized feed**, so that I can **find relevant content**. | **SHOULD HAVE** |
 
 ### **Epic: Dog Posts**
 
 | User Story                                                                                                                 | Priority        |
 |----------------------------------------------------------------------------------------------------------------------------|-----------------|
 | As a **shelter**, I want to **create posts for dogs**, so that I can **show my dogs available for adoption**.              | **MUST HAVE**   |
-| As a **shelter**, I want to **define characteristics for each dog**, so that I can **improve the adoption process**.       | **SHOULD HAVE** |
 | As a **shelter**, I want to **define adoption requirements for each dog**, so that I can **improve the adoption process**. | **COULD HAVE**  |
 | As a **shelter**, I want to **mark a dog as adopted**, so that I can **show successful adoptions**.                        | **SHOULD HAVE** |
 | As an **adopter**, I want to **search and filter for dogs**, so that I can **find the perfect dog for me**.                | **MUST HAVE**   |
@@ -152,7 +152,6 @@ From the features defined above I was able to create epics and break these down 
 | User Story                                                                                                            | Priority        |
 |-----------------------------------------------------------------------------------------------------------------------|-----------------|
 | As a **site user**, I want to **receive notifications**, so that I can **stay up-to-date**.                           | **COULD HAVE**  |
-| As a **site user**, I want to **mark notifications as read**, so that I can **clearly see new notifications**.        | **COULD HAVE**  |
 | As a **site user**, I want to **be able to use a chat**, so that I can **easily communicate with shelters/adopters**. | **COULD HAVE**  |
 
 ## **Skeleton Plane**
@@ -229,6 +228,9 @@ I created a logo for **PawfectMatch** using the paw print of my dog and the head
 
 ![Logo](docs/screenshots/logo.png)\
 *PawfectMatch Logo*
+
+# **Agile Process**
+I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/4) to plan and document my work. The details of my agile approach can be found in the separate [AGILE.md file](AGILE.md).
 
 # **Credits**
 
