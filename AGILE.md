@@ -30,3 +30,10 @@ I added all my user stories with the according epic, acceptance criteria and tas
 ## **Sprints**
 
 Below is a summary of each of my sprints. As described above, I am using milestones for sprints. To focus on the tasks of my current sprint, I am using a filter for the current milestone to only see the issues added to my current sprint.
+
+### **Sprint 1 (23.03. - 29.03.)**
+
+For my first sprint, I added a backend dev task, to set up the project. Additionally, I added three backend user stories with a total of **14 story points**.
+
+![Sprint 1 start](docs/agile/sprint1_start.png)\
+*Start of Sprint 1*
