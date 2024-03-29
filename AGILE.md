@@ -37,3 +37,8 @@ For my first sprint, I added a backend dev task, to set up the project. Addition
 
 ![Sprint 1 start](docs/agile/sprint1_start.png)\
 *Start of Sprint 1*
+
+I finished all the tasks planned for my first sprint. I also decided to deploy the API right away to Heroku, so I added an additional dev task for this.
+
+![Sprint 1 end](docs/agile/sprint1_end.png)\
+*End of Sprint 1*
