@@ -42,3 +42,10 @@ I finished all the tasks planned for my first sprint. I also decided to deploy t
 
 ![Sprint 1 end](docs/agile/sprint1_end.png)\
 *End of Sprint 1*
+
+### **Sprint 2 (30.03. - 05.04.)**
+
+I added four user stories with a total of **21 story points** for my second sprint. I have two *must have* and two *could have* user stories. As I am not sure yet how difficult it will be to create the dog posts and if I will still have time for the comments in this sprint.
+
+![Sprint 2 start](docs/agile/sprint2_start.png)\
+*Start of Sprint 2*
