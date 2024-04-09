@@ -49,3 +49,15 @@ I added four user stories with a total of **21 story points** for my second spri
 
 ![Sprint 2 start](docs/agile/sprint2_start.png)\
 *Start of Sprint 2*
+
+I only finished one of the planned user stories for this sprint. I started the second *must have* story, but did not finish it completely as it was more complex than I originally thought. I will move all unfinished user stories to the backlog.
+
+![Sprint 2 end](docs/agile/sprint2_end.png)\
+*End of Sprint 2*
+
+### **Sprint 3 (06.04. - 12.04.)**
+
+I decided to add the unfinished user stories from the last sprint with a total of **13 story points** for my next sprint.
+
+![Sprint 3 start](docs/agile/sprint3_start.png)\
+*Start of Sprint 3*
