@@ -13,7 +13,7 @@
 
 ## **Methodology**
 
-I used an agile approach to plan and work on my project. I decided to create one [GitHub projects board](https://github.com/users/Julia-Wagner/projects/4) that I use for both frontend and backend tasks. This way I have an overview of all user stories and can manage sprints and milestones for the whole project at one place.
+I used an agile approach to plan and work on my project. I decided to create one [GitHub projects board](https://github.com/users/Julia-Wagner/projects/4) that I use for both frontend and backend tasks. This way I have an overview of all user stories and can manage sprints and milestones for the whole project in one place.
 
 I decided to group my features into **Epics** and create several **User Stories** for each epic. To prioritize the stories, I used **MoSCoW Prioritization**. To represent this in my Kanban board I created custom labels (*must have*, *should have*, *could have* and *won´t have*).
 
@@ -61,3 +61,8 @@ I decided to add the unfinished user stories from the last sprint with a total o
 
 ![Sprint 3 start](docs/agile/sprint3_start.png)\
 *Start of Sprint 3*
+
+I finished all planned user stories and added one *dev task* at the end as I still had time. I decided to create automated tests for all my existing apps. It was a good idea to do this early, as I found a few issues with the permissions with the automated tests.
+
+![Sprint 3 end](docs/agile/sprint3_end.png)\
+*End of Sprint 3*
