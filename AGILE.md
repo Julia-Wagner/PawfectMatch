@@ -66,3 +66,10 @@ I finished all planned user stories and added one *dev task* at the end as I sti
 
 ![Sprint 3 end](docs/agile/sprint3_end.png)\
 *End of Sprint 3*
+
+### **Sprint 4 (13.04. - 19.04.)**
+
+For this sprint I added five user stories with a total of **16 story points**. I have two *new* user stories to implement and three stories that should already be covered by the existing functionality. These just need to be tested to make sure the acceptance criteria is met, so I just gave them one story point each.
+
+![Sprint 4 start](docs/agile/sprint4_start.png)\
+*Start of Sprint 4*
