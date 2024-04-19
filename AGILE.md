@@ -79,3 +79,9 @@ I finished all planned user stories and added one more from the backlog. I manag
 ![Sprint 4 end](docs/agile/sprint4_end.png)\
 *End of Sprint 4*
 
+### **Sprint 5 (20.04. - 26.04.)**
+
+For my first frontend sprint, I added two dev tasks, to set up and deploy the project. Additionally, I added two user stories with a total of **11 story points**.
+
+![Sprint 5 start](docs/agile/sprint5_start.png)\
+*Start of Sprint 5*
