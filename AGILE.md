@@ -73,3 +73,9 @@ For this sprint I added five user stories with a total of **16 story points**. I
 
 ![Sprint 4 start](docs/agile/sprint4_start.png)\
 *Start of Sprint 4*
+
+I finished all planned user stories and added one more from the backlog. I managed to finish all *must have* and *should have* user stories for the backend. I also added the backend features and testing details to the readme. So for now I am finished with the backend part of the project.
+
+![Sprint 4 end](docs/agile/sprint4_end.png)\
+*End of Sprint 4*
+
