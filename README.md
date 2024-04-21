@@ -8,31 +8,31 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
 * [**PawfectMatch**](#pawfectmatch)
 * [**Table of Contents**](#table-of-contents)
 * [**Planning**](#planning)
-  * [**Strategy Plane**](#strategy-plane)
-    * [**Target Audience**](#target-audience)
-    * [**Site Goals**](#site-goals)
-  * [**Scope Plane**](#scope-plane)
-    * [**Necessary Features:**](#necessary-features)
-    * [**Nice-to-have Features:**](#nice-to-have-features)
-  * [**Structure Plane**](#structure-plane)
-    * [**Epic: User Authentication**](#epic-user-authentication)
-    * [**Epic: General UX**](#epic-general-ux)
-    * [**Epic: Profile**](#epic-profile)
-    * [**Epic: User Interaction**](#epic-user-interaction)
-    * [**Epic: Posts**](#epic-posts)
-    * [**Epic: Dog Posts**](#epic-dog-posts)
-    * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
-  * [**Skeleton Plane**](#skeleton-plane)
-    * [**Wireframes**](#wireframes)
-    * [**Database Schema**](#database-schema)
-  * [**Surface Plane**](#surface-plane)
-    * [**Design**](#design)
-    * [**Colors and Fonts**](#colors-and-fonts)
-    * [**Logo**](#logo)
+    * [**Strategy Plane**](#strategy-plane)
+        * [**Target Audience**](#target-audience)
+        * [**Site Goals**](#site-goals)
+    * [**Scope Plane**](#scope-plane)
+        * [**Necessary Features:**](#necessary-features)
+        * [**Nice-to-have Features:**](#nice-to-have-features)
+    * [**Structure Plane**](#structure-plane)
+        * [**Epic: User Authentication**](#epic-user-authentication)
+        * [**Epic: General UX**](#epic-general-ux)
+        * [**Epic: Profile**](#epic-profile)
+        * [**Epic: User Interaction**](#epic-user-interaction)
+        * [**Epic: Posts**](#epic-posts)
+        * [**Epic: Dog Posts**](#epic-dog-posts)
+        * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
+    * [**Skeleton Plane**](#skeleton-plane)
+        * [**Wireframes**](#wireframes)
+        * [**Database Schema**](#database-schema)
+    * [**Surface Plane**](#surface-plane)
+        * [**Design**](#design)
+        * [**Colors and Fonts**](#colors-and-fonts)
+        * [**Logo**](#logo)
 * [**Agile Process**](#agile-process)
 * [**Credits**](#credits)
-  * [**Content**](#content)
-  * [**Media and Design**](#media-and-design)
+    * [**Content**](#content)
+    * [**Media and Design**](#media-and-design)
 <!-- TOC -->
 
 # **Planning**
@@ -48,22 +48,22 @@ The idea for my PP5 is to create a platform to match shelter dogs with loving ho
 There are two target groups for this project with different needs and goals.
 
 1. **Dog shelters** that want to use the application to find new homes for their dogs.
-   - Shelters that want to reach more people and present themselves.
-   - Shelters that want to have a point of reference for everyone interested in their dogs and adoption stories.
-   - Shelters that want to find adopters based on the characteristics and needs of each dog.
+    - Shelters that want to reach more people and present themselves.
+    - Shelters that want to have a point of reference for everyone interested in their dogs and adoption stories.
+    - Shelters that want to find adopters based on the characteristics and needs of each dog.
 2. **Individuals and families** that want to adopt a dog or are simply interested in dogs.
-   - Adopters that are looking for a dog to adopt.
-   - Adopters that want to have a closer look at a specific shelter before adopting a dog from them.
-   - Dog lovers that are interested in the shelters work.
-   - Dog lovers that want to read heartwarming stories about adopted dogs.
+    - Adopters that are looking for a dog to adopt.
+    - Adopters that want to have a closer look at a specific shelter before adopting a dog from them.
+    - Dog lovers that are interested in the shelters work.
+    - Dog lovers that want to read heartwarming stories about adopted dogs.
 
 ### **Site Goals**
 
 - Build a platform for dog lovers.
 - Connect shelters and adopters.
 - Improve the adoption process by allowing to define criteria for each side.
-  - Shelters can define the characteristics and needs for each dog.
-  - Adopters give information about their housing situation and can look for dogs based on filters.
+    - Shelters can define the characteristics and needs for each dog.
+    - Adopters give information about their housing situation and can look for dogs based on filters.
 - Allow creating posts with multiple photos.
 - Implement CRUD functionality.
 - Make the application responsive, so it can be used on desktop, tablet and mobile screen sizes.
@@ -74,21 +74,21 @@ To get a better understanding of what the application will look like, I wrote do
 
 ### **Necessary Features:**
 
-- Shelters can register and login. 
-- Adopters can register and login. 
-- Users (shelters and adopters) can fill out a profile. 
-- Profiles can be edited. 
-- Posts with pictures can be created, edited and deleted. 
-- Posts for dogs get a special flag, to be able to filter for dogs. 
-- Adopters can search and filter for dogs using characteristics and location. 
+- Shelters can register and login.
+- Adopters can register and login.
+- Users (shelters and adopters) can fill out a profile.
+- Profiles can be edited.
+- Posts with pictures can be created, edited and deleted.
+- Posts for dogs get a special flag, to be able to filter for dogs.
+- Adopters can search and filter for dogs using characteristics and location.
 - Shelters can define characteristics for each dog. (breed, age, size,…)
 - Dogs can be marked as adopted.
 
 ### **Nice-to-have Features:**
 
-- Profiles can be deactivated/deleted. 
-- Users can follow each other. 
-- Have a match functionality where dogs are suggested to adopters based on filtering. 
+- Profiles can be deactivated/deleted.
+- Users can follow each other.
+- Have a match functionality where dogs are suggested to adopters based on filtering.
 - Comments for all user profiles.
 - Messaging/chat with notifications.
 
@@ -231,6 +231,18 @@ I created a logo for **PawfectMatch** using the paw print of my dog and the head
 
 # **Agile Process**
 I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/4) to plan and document my work. The details of my agile approach can be found in the separate [AGILE.md file](AGILE.md).
+
+# **Deployment**
+
+## **Create Repository**
+
+The first step is to create a new empty repository. After creating the repository, you can open it in the IDE of your choice.
+
+## **Project Setup**
+
+1. Create the **React App**:
+    - `npx create-react-app . --use-npm`
+    - `npm start` to check the installation
 
 # **Credits**
 
