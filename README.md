@@ -234,15 +234,23 @@ I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/
 
 # **Deployment**
 
-## **Create Repository**
+Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.herokuapp.com/). The deployment process for the API can be found [here](https://github.com/Julia-Wagner/PawfectMatch-API?tab=readme-ov-file#deployment).
 
-The first step is to create a new empty repository. After creating the repository, you can open it in the IDE of your choice.
+1. **Create Repository**
+    - The first step is to create a new empty repository. After creating the repository, you can open it in the IDE of your choice.
 
-## **Project Setup**
+2. **Project Setup**
+   - Create the **React App**:
+       - `npx create-react-app . --use-npm`
+       - run `npm start` to check the installation
 
-1. Create the **React App**:
-    - `npx create-react-app . --use-npm`
-    - `npm start` to check the installation
+3. **Heroku Setup**
+   1. Log in to your [Heruko](https://www.heroku.com/) account
+   2. On the dashboard click *New* - *Create new app*
+   3. Give the app a unique name
+   4. Select the region closest to you and click *Create app*
+   5. Select your created app and open the *Deploy* tab
+   6. Connect your GitHub repository and click *Deploy Branch* at the bottom of the page.
 
 # **Credits**
 
