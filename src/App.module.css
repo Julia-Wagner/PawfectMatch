@@ -12,7 +12,7 @@
     background-color: #ffffff;
     padding: 10px;
     border-radius: 2px;
-    border: 1px solid #dadadf;
+    border: 1px solid #eee6d9;
 }
 
 .FillerImage {
@@ -32,7 +32,7 @@
 }
 
 a {
-    color: #555555;
+    color: #54443a;
     transition: color ease-in-out 0.3s;
 }
 
@@ -40,31 +40,9 @@ a:hover {
     text-decoration: none;
 }
 
-a:hover i {
-    color: #2142b2;
+a:hover span {
+    color: #9cc63b;
     transition: color ease-in-out 0.3s;
-}
-
-input[type="file"] {
-    display: none;
-}
-
-i {
-    color: #cfced3;
-    font-size: 1.6rem;
-    padding: 7px;
-    vertical-align: middle;
-}
-
-i:hover {
-    cursor: pointer;
-    transition: color ease-in-out 0.3s;
-    color: #2142b2;
-}
-
-figure {
-    text-align: center;
-    display: inline-block;
 }
 
 /* scrollbar */

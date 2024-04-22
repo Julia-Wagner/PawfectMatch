@@ -1,0 +1,44 @@
+.Row {
+    height: auto;
+}
+.Input {
+    background: #ffffff;
+    border: 1px solid #eee6d9;
+    box-sizing: border-box;
+    border-radius: 2px;
+    color: #0d546f;
+    text-align: center;
+    padding: 10px;
+}
+
+.Header {
+    font-family: "Shrikhand", serif;
+    font-size: 2.3rem;
+    text-align: center;
+    letter-spacing: 0.05rem;
+    color: #54443a;
+    margin: 0.8rem 0 2rem 0;
+}
+
+.Link {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.Link span {
+    color: #ff6431;
+    font-weight: bold;
+}
+
+.Container {
+    height: calc(100vh - 81px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.SignInCol {
+    height: 320px;
+}
