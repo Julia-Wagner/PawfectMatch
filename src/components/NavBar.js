@@ -1,7 +1,8 @@
 import React from 'react'
-import {Container, Nav, Navbar, NavLink} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import logo from "../assets/logo.webp";
 import styles from "../styles/NavBar.module.css"
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
@@ -15,9 +16,9 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto text-left">
-                        <Nav.Link><i className="fas fa-home"></i> Home</Nav.Link>
-                        <Nav.Link><i className="fas fa-sign-in-alt"></i> Sign in</Nav.Link>
-                        <Nav.Link><i className="fas fa-user-plus"></i> Sign up</Nav.Link>
+                        <NavLink to="/feed" exact className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
+                        <NavLink to="/signin" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign in</NavLink>
+                        <NavLink to="/signup" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign up</NavLink>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
