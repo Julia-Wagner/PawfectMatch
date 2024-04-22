@@ -6,7 +6,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import playground from "../../assets/playground.svg"
 
-import {Form, Button, Image, Col, Row, Container, Alert} from "react-bootstrap";
+import {Form, Button, Image, Col, Row, Container, Alert, ToggleButton, ButtonGroup} from "react-bootstrap";
 import axios from "axios";
 
 const SignUpForm = () => {
@@ -18,6 +18,7 @@ const SignUpForm = () => {
     const { username, password1, password2 } = signUpData;
 
     const [errors, setErrors] = useState({});
+    const [checked, setChecked] = useState(false);
 
     const navigate= useNavigate();
 
@@ -31,10 +32,22 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("/dj-rest-auth/registration/", signUpData)
+            const response = await axios.post("/dj-rest-auth/registration/", signUpData);
+            if (checked) {
+                // update profile if user registers as shelter
+                let profileId = response.data.user.profile_id;
+                let token = response.data.access_token;
+                await axios.put(`/profiles/${profileId}/`, {
+                    type: "shelter"
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            }
             navigate("/signin");
         } catch (err) {
-            setErrors(err.response?.data)
+            setErrors(err.response?.data);
         }
     }
 
@@ -93,6 +106,19 @@ const SignUpForm = () => {
                             {errors.non_field_errors?.map((message, idx) =>
                                 <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
                             )}
+
+                            <ButtonGroup className="mb-4 d-flex justify-content-center">
+                                <ToggleButton
+                                    className={checked ? `${btnStyles.Checked}` : `${btnStyles.Toggle}`}
+                                    id="toggle-check"
+                                    type="checkbox"
+                                    checked={checked}
+                                    value="1"
+                                    onChange={(e) => setChecked(e.currentTarget.checked)}
+                                >
+                                    Register as shelter
+                                </ToggleButton>
+                            </ButtonGroup>
 
                             <Button className={`${btnStyles.Button} ${btnStyles.Wide}`} type="submit">
                                 Sign up
