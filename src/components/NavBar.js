@@ -6,16 +6,16 @@ import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <Navbar className={styles.NavBar} expand="md" fixed="top">
+        <Navbar className={styles.NavBar} expand="md" sticky="top">
             <Container>
                 <NavLink to="/">
                     <Navbar.Brand>
-                        <img src={logo} alt="logo" height="45" />
+                        <img className={styles.Logo} src={logo} alt="logo" height="45" />
                     </Navbar.Brand>
                 </NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ms-auto text-left">
+                    <Nav className="ms-auto text-center">
                         <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
                         <NavLink to="/signin" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign in</NavLink>
                         <NavLink to="/signup" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign up</NavLink>
