@@ -27,12 +27,20 @@
 }
 
 .BottomNavLink, .BottomActive {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.5rem;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.9rem;
     width: inherit;
     box-shadow: 3px -1px 10px 2px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 3px -1px 10px 2px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 3px -1px 10px 2px rgba(0, 0, 0, 0.4);
+}
+
+.BottomActive {
+    box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
+    -webkit-box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
+    -moz-box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
 }
 
 .BottomNavLink {
@@ -40,17 +48,26 @@
 }
 
 .BottomGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 5px;
     box-shadow: 1px 0px 20px 5px rgba(0, 0, 0, 0.2);
 }
 
-#feed.BottomActive {
+#feed {
     background-color: #9cc63b;
 }
 
-#sign.BottomActive {
-    background-color: #0d546f;
-    color: #ffffff;
+#following {
+    background-color: #f7bf3d;
+}
+
+#matches {
+    background-color: #ffa06e;
+}
+
+#profile {
+    background-color: #6dcbec;
+}
+
+#sign {
+    background-color: #eee6d9;
 }
