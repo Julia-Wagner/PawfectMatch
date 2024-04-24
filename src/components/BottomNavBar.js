@@ -10,7 +10,7 @@ const BottomNavBar = () => {
                 <Navbar.Collapse id="bottom-navbar-nav">
                     <Nav className={`text-center w-100 ${styles.BottomGrid}`}>
                         <NavLink to="/feed" id={styles.feed} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Feed</NavLink>
-                        <NavLink to="/signin" id={styles.feed} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign in</NavLink>
+                        <NavLink to="/signin" id={styles.sign} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign in</NavLink>
                         <NavLink to="/signup" id={styles.sign} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign up</NavLink>
                     </Nav>
                 </Navbar.Collapse>
