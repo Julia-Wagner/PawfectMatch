@@ -85,3 +85,15 @@ For my first frontend sprint, I added two dev tasks, to set up and deploy the pr
 
 ![Sprint 5 start](docs/agile/sprint5_start.png)\
 *Start of Sprint 5*
+
+I finished my planned dev tasks and user stories. As I still had time, I added one more use story. For this additional story I also found two bugs while testing. One was resolved immediately in this sprint. I added the other bug to the backlog.
+
+![Sprint 5 end](docs/agile/sprint5_end.png)\
+*End of Sprint 5*
+
+### **Sprint 6 (27.04. - 03.05.)**
+
+For my next sprint, I added three user stories with a total of **16 story points**.
+
+![Sprint 6 start](docs/agile/sprint6_start.png)\
+*Start of Sprint 6*
