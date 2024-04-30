@@ -26,11 +26,33 @@ const Post = (props) => {
 
     return (
         <Card className={styles.Post}>
-            <Card.Body className="d-flex justify-content-between">
-                <Link className="d-flex align-items-center gap-2" to={`/profiles/${profile_id}`}>
-                    <Image src={profile_image} height={55} rounded />
-                    {owner}
-                </Link>
+            <Card.Body className="d-flex justify-content-between flex-wrap">
+                <div className="d-flex gap-4 flex-wrap">
+                    <Link className="d-flex align-items-center gap-2" to={`/profiles/${profile_id}`}>
+                        <Image src={profile_image} height={55} rounded />
+                        {owner}
+                    </Link>
+                    <div className={styles.PostBar}>
+                        {/*TODO: adapt conditions*/}
+                        {is_owner ? (
+                            <OverlayTrigger placement="top" overlay={<Tooltip>You can´t follow yourself!</Tooltip>}>
+                                <span><i className="fa fa-plus-circle" /> Follow</span>
+                            </OverlayTrigger>
+                        ) : save_id ? (
+                            <span onClick={()=>{}}>
+                            <span className={styles.Heart}><i className="fa fa-check-circle" /> Following</span>
+                        </span>
+                        ) : currentUser ? (
+                            <span onClick={()=>{}}>
+                            <span className={styles.HeartOutline}><i className="fa fa-plus-circle" /> Follow</span>
+                        </span>
+                        ) : (
+                            <OverlayTrigger placement="top" overlay={<Tooltip>Log in to follow profiles!</Tooltip>}>
+                                <span><i className="fa fa-plus-circle" /> Follow</span>
+                            </OverlayTrigger>
+                        )}
+                    </div>
+                </div>
                 <div className="d-flex align-items-center">
                     <span>{updated_at}</span>
                 </div>
@@ -42,13 +64,14 @@ const Post = (props) => {
                 {title && <Card.Title className="text-center">{title}</Card.Title>}
                 {content && <Card.Text>{content}</Card.Text>}
                 <div className={styles.PostBar}>
+                    {/*TODO: add onclick functions*/}
                     {is_owner ? (
                         <OverlayTrigger placement="top" overlay={<Tooltip>You can´t save your own post!</Tooltip>}>
                             <span>Save <i className="far fa-heart" /></span>
                         </OverlayTrigger>
                     ) : save_id ? (
                         <span onClick={()=>{}}>
-                            <span className={styles.Heart}>Save <i className="fas fa-heart" /></span>
+                            <span className={styles.Heart}>Saved <i className="fas fa-heart" /></span>
                         </span>
                     ) : currentUser ? (
                         <span onClick={()=>{}}>
