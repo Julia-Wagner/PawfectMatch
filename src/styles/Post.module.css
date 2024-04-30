@@ -4,3 +4,23 @@
     margin-bottom: 16px;
     text-align: center;
 }
+
+.Heart {
+    color: #ff6431;
+}
+
+.Heart:hover {
+    color: #0d546f;
+}
+
+.HeartOutline:hover {
+    color: #ff6431;
+}
+
+.PostBar {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
