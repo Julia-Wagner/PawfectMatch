@@ -38,9 +38,9 @@
 }
 
 .BottomActive {
-    box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
-    -webkit-box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
-    -moz-box-shadow: 0 0 3px 5px rgb(84 68 85 / 75%) inset;
+    box-shadow: 0 0 0 3px rgb(84 68 85 / 75%) inset;
+    -webkit-box-shadow: 0 0 0 3px rgb(84 68 85 / 75%) inset;
+    -moz-box-shadow: 0 0 0 3px rgb(84 68 85 / 75%) inset;
 }
 
 .BottomNavLink {
@@ -49,7 +49,7 @@
 
 .BottomGrid {
     gap: 5px;
-    box-shadow: 1px 0px 20px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 0 20px 5px rgba(0, 0, 0, 0.2);
 }
 
 #feed {
