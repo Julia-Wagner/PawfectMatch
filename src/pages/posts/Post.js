@@ -61,7 +61,7 @@ const Post = (props) => {
                 <Card.Img src={main_image} alt={title} />
             </Link>
             <Card.Body>
-                {title && <Card.Title className="text-center">{title}</Card.Title>}
+                {title && <h2 className="text-center">{title}</h2>}
                 {content && <Card.Text>{content}</Card.Text>}
                 <div className={styles.PostBar}>
                     {/*TODO: add onclick functions*/}

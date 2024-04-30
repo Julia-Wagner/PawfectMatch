@@ -56,7 +56,7 @@ const SignUpForm = () => {
             <Row className={`my-auto`}>
                 <Col className="my-auto py-2 p-md-2 mx-auto" md={8}>
                     <Container className={`${appStyles.Content} p-4 `}>
-                        <h1 className={styles.Header}>Create your account</h1>
+                        <h2 className={styles.Header}>Create your account</h2>
 
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="username">

@@ -33,6 +33,12 @@ main {
     flex-grow: 1;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Shrikhand", serif;
+    letter-spacing: 0.05rem;
+    color: #54443a;
+}
+
 a {
     color: #54443a;
     transition: color ease-in-out 0.3s;

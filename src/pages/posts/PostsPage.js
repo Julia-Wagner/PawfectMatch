@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
+import styles from "../../styles/PostsPage.module.css";
 import {useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
@@ -44,7 +45,7 @@ function PostsPage({message, filter = ""}) {
                                 ))
                             ) : (
                                 <Container className={appStyles.Content}>
-                                    <div className="my-3 fw-bold text-center">No posts to display.</div>
+                                    <h2 className="mt-3 mb-5 text-center">No posts to display.</h2>
                                     <Image src={NoResults} />
                                 </Container>
                             )}
@@ -56,7 +57,9 @@ function PostsPage({message, filter = ""}) {
                     )}
                 </Col>
                 <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                    <p>Sidebar</p>
+                    <Container className={`text-center ${appStyles.Content}`}>
+                        <h3 className={styles.SidebarHeading}>Saved Posts</h3>
+                    </Container>
                 </Col>
             </Row>
         </Container>

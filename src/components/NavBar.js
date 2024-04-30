@@ -40,9 +40,10 @@ const NavBar = () => {
             <Navbar expanded={expanded} className={styles.NavBar} expand="md" sticky="top">
                 <Container>
                     <NavLink to="/">
-                        <Navbar.Brand>
+                        <h1>
+                            <span className="sr-only">PawfectMatch</span>
                             <img className={styles.Logo} src={logo} alt="logo" height="45" />
-                        </Navbar.Brand>
+                        </h1>
                     </NavLink>
                     <Navbar.Toggle
                         ref={ref}

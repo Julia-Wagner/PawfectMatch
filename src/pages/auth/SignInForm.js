@@ -52,7 +52,7 @@ function SignInForm() {
             <Row className={`my-auto`}>
                 <Col className="my-auto py-2 p-md-2 mx-auto" md={8}>
                     <Container className={`${appStyles.Content} p-4 `}>
-                        <h1 className={styles.Header}>Sign in</h1>
+                        <h2 className={styles.Header}>Sign in</h2>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="username">
                                 <Form.Label className="d-none">Username</Form.Label>
