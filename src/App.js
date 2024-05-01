@@ -23,6 +23,9 @@ function App() {
                     <Route exact={true} path="/following" element={<PostsPage
                         filter={`owner__followed__owner__profile=${profile_id}&`}
                     />}/>
+                    <Route exact={true} path="/matches" element={<PostsPage
+                        filter="has_dogs=true&"
+                    />}/>
                     <Route path="/signin" element={<SignInForm/>}/>
                     <Route path="/signup" element={<SignUpForm/>}/>
                     <Route path="*" element={<p>Page not found!</p>}/>
