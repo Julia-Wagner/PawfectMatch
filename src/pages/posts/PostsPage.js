@@ -13,6 +13,8 @@ import {Image, Spinner} from "react-bootstrap";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/playground.svg";
+import InfiniteScroll from "react-infinite-scroll-component";
+import {fetchMoreData} from "../../utils/utils";
 
 function PostsPage({message, filter = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -43,9 +45,15 @@ function PostsPage({message, filter = ""}) {
                     {hasLoaded ? (
                         <>
                             {posts.results.length ? (
-                                posts.results.map((post) => (
-                                    <Post key={post.id} {...post} setPosts={setPosts} />
-                                ))
+                                <InfiniteScroll
+                                    children={
+                                    posts.results.map((post) => (
+                                        <Post key={post.id} {...post} setPosts={setPosts} />
+                                    ))}
+                                    next={() => fetchMoreData(posts, setPosts)}
+                                    hasMore={!!posts.next}
+                                    loader={<Spinner animation="border" />}
+                                    dataLength={posts.results.length}/>
                             ) : (
                                 <Container className={appStyles.Content}>
                                     <h2 className="mt-3 mb-5 text-center">No posts to display.</h2>
