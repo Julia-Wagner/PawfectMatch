@@ -10,6 +10,7 @@ import {useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
 import {Image, Spinner} from "react-bootstrap";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/playground.svg";
 
@@ -17,6 +18,8 @@ function PostsPage({message, filter = ""}) {
     const [posts, setPosts] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
     const {pathname} = useLocation();
+
+    const currentUser = useCurrentUser();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -31,7 +34,7 @@ function PostsPage({message, filter = ""}) {
 
         setHasLoaded(false);
         fetchPosts();
-    }, [filter, pathname]);
+    }, [filter, pathname, currentUser]);
 
     return (
         <Container>
