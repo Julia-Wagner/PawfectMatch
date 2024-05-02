@@ -202,7 +202,7 @@ I created wireframes for desktop and mobile screens for each of the main parts o
 
 ### **Database Schema**
 
-After defining the needed features for the application, I started creating my database schema.
+After defining the needed features for the application, I started creating my database schema. A detailed description of it and the final ERD for the finished API can be found in the [readme of the PawfectMatch API](https://github.com/Julia-Wagner/PawfectMatch-API?tab=readme-ov-file#database-schema).
 
 ![Database Schema](docs/screenshots/database_schema.png)\
 *Database Schema for PawfectMatch*
