@@ -97,3 +97,15 @@ For my next sprint, I added three user stories with a total of **16 story points
 
 ![Sprint 6 start](docs/agile/sprint6_start.png)\
 *Start of Sprint 6*
+
+Two of my planned user stories are finished. For the third, I did not finish all tasks so I am moving it back to the backlog for now. In addition to these three I fixed the bug from the last sprint.
+
+![Sprint 6 end](docs/agile/sprint6_end.png)\
+*End of Sprint 6*
+
+### **Sprint 7 (04.05. - 10.05.)**
+
+For this sprint I added four user stories with a total of **21 story points**. I added more story points this time, as I noticed that I was doing more than I had planned in most of my sprints.
+
+![Sprint 7 start](docs/agile/sprint7_start.png)\
+*Start of Sprint 7*
