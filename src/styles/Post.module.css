@@ -23,3 +23,11 @@
     justify-content: flex-end;
     gap: 0.8rem;
 }
+
+.Truncate {
+    /*https://blog.logrocket.com/ways-truncate-text-css/*/
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+}

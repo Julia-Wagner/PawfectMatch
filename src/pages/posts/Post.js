@@ -63,7 +63,8 @@ const Post = (props) => {
             </Link>
             <Card.Body>
                 {title && <h2 className="text-center">{title}</h2>}
-                {content && <Card.Text>{content}</Card.Text>}
+                {content && <Card.Text className={styles.Truncate}>{content}</Card.Text>}
+                <Card.Link href={`/posts/${id}`}>Read more</Card.Link>
                 <div className={styles.PostBar}>
                     {/*TODO: add onclick functions*/}
                     {is_owner ? (
