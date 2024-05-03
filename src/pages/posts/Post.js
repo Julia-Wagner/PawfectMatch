@@ -59,7 +59,7 @@ const Post = (props) => {
                 </div>
             </Card.Body>
             <Link to={`/posts/${id}`}>
-                <Card.Img src={main_image} alt={title} />
+                <Image src={main_image} width="100%" alt={title} />
             </Link>
             <Card.Body>
                 {title && <h2 className="text-center">{title}</h2>}
