@@ -8,6 +8,8 @@ const Post = (props) => {
     const {
         id,
         owner,
+        is_owner,
+        is_following,
         profile_id,
         profile_image,
         saves_count,
@@ -22,7 +24,6 @@ const Post = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner
 
     return (
         <Card className={styles.Post}>
@@ -33,12 +34,12 @@ const Post = (props) => {
                         {owner}
                     </Link>
                     <div className={styles.PostBar}>
-                        {/*TODO: adapt conditions*/}
+                        {/*TODO: add onclick functions*/}
                         {is_owner ? (
                             <OverlayTrigger placement="top" overlay={<Tooltip>You can´t follow yourself!</Tooltip>}>
                                 <span><i className="fa fa-plus-circle" /> Follow</span>
                             </OverlayTrigger>
-                        ) : save_id ? (
+                        ) : is_following ? (
                             <span onClick={()=>{}}>
                             <span className={styles.Heart}><i className="fa fa-check-circle" /> Following</span>
                         </span>
