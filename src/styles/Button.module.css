@@ -10,6 +10,7 @@
     min-width: 75px;
     color: #f1f1f2;
     background-color: #0d546f;
+    text-decoration: none;
 }
 
 .Button:hover {
