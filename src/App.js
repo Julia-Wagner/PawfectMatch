@@ -8,6 +8,7 @@ import SignInForm from "./pages/auth/SignInForm";
 import PostsPage from "./pages/posts/PostsPage";
 import {useCurrentUser} from "./contexts/CurrentUserContext";
 import PrivateRoute from "./components/PrivateRoute";
+import PostCreateForm from "./pages/posts/PostCreateForm";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -20,6 +21,9 @@ function App() {
                 <Routes>
                     <Route exact={true} path="/" element={<h1>Home page</h1>}/>
                     <Route exact={true} path="/feed" element={<PostsPage/>}/>
+                    <Route path="/signin" element={<SignInForm/>}/>
+                    <Route path="/signup" element={<SignUpForm/>}/>
+                    <Route path="*" element={<p>Page not found!</p>}/>
                     <Route exact={true} path="/following" element={
                         <PrivateRoute>
                             <PostsPage filter={`owner__followed__owner__profile=${profile_id}&`} />
@@ -30,9 +34,11 @@ function App() {
                             <PostsPage filter="has_dogs=true&" />
                         </PrivateRoute>
                     }/>
-                    <Route path="/signin" element={<SignInForm/>}/>
-                    <Route path="/signup" element={<SignUpForm/>}/>
-                    <Route path="*" element={<p>Page not found!</p>}/>
+                    <Route exact={true} path="/posts/create" element={
+                        <PrivateRoute>
+                            <PostCreateForm />
+                        </PrivateRoute>
+                    }/>
                 </Routes>
             </main>
             <BottomNavBar />

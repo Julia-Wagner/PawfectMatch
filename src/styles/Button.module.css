@@ -13,6 +13,12 @@
     text-decoration: none;
 }
 
+.ReverseButton {
+    background-color: #eee6d9 !important;
+    color: #0d546f !important;
+    border-color: #0d546f !important;
+}
+
 .Button:hover {
     opacity: 0.8;
     border-color: transparent;
