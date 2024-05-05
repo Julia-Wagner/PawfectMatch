@@ -1,4 +1,5 @@
 import React from 'react'
+import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
 import {useCurrentUser} from "../../contexts/CurrentUserContext";
 import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
@@ -24,6 +25,11 @@ const Post = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
+
+    // Sanitize HTML content to prevent security issues
+    const sanitizedContent = React.useMemo(() => {
+        return { __html: DOMPurify.sanitize(content) };
+    }, [content]);
 
     return (
         <Card className={styles.Post}>
@@ -63,7 +69,10 @@ const Post = (props) => {
             </Link>
             <Card.Body>
                 {title && <h2 className="text-center">{title}</h2>}
-                {content && <Card.Text className={styles.Truncate}>{content}</Card.Text>}
+                {sanitizedContent && <Card.Text
+                    className={styles.Truncate}
+                    dangerouslySetInnerHTML={sanitizedContent}
+                />}
                 <Card.Link href={`/posts/${id}`}>View post</Card.Link>
                 <div className={styles.PostBar}>
                     {/*TODO: add onclick functions*/}
