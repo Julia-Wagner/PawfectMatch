@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate} from "react-router-dom";
-import {Alert, FloatingLabel} from "react-bootstrap";
+import {Alert} from "react-bootstrap";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
@@ -17,8 +17,11 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
+import {useCurrentUser} from "../../contexts/CurrentUserContext";
 
 function PostCreateForm() {
+    const currentUser = useCurrentUser();
+    const profile_id = currentUser?.profile_id || '';
 
     const navigate = useNavigate();
 
@@ -34,6 +37,11 @@ function PostCreateForm() {
     });
     const {title, content} = postData;
 
+    const [dogs, setDogs] = useState([]);
+    const [selectedDogs, setSelectedDogs] = useState([]);
+
+    const [isShelterUser, setIsShelterUser] = useState(false);
+
     const handleChange = (event) => {
         setPostData({
             ...postData,
@@ -41,8 +49,8 @@ function PostCreateForm() {
         });
     };
 
-    // Initialize Quill editor
     useEffect(() => {
+        // Initialize Quill editor
         const editor = new Quill("#editor", {
             theme: "snow",
             modules: {
@@ -61,7 +69,36 @@ function PostCreateForm() {
                 content: editor.root.innerHTML,
             });
         });
+
+        // Fetch the current user's dogs
+        const fetchUserDogs = async () => {
+            try {
+                const response = await axiosReq.get("/dogs");
+                const userDogs = response.data.results.filter(dog => dog.is_owner);
+                setDogs(userDogs);
+            } catch (error) {
+                console.error("Error fetching user's dogs:", error);
+            }
+        };
+
+        // Check if user is a shelter user
+        const checkUserType = async () => {
+            try {
+                const response = await axiosReq.get(`/profiles/${profile_id}`);
+                setIsShelterUser(response.data.type === "shelter");
+            } catch (error) {
+                console.error("Error fetching user type:", error);
+            }
+        };
+
+        fetchUserDogs();
+        checkUserType();
     }, []);
+
+    const handleSelectChange = (event) => {
+        const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+        setSelectedDogs(selectedOptions);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -69,6 +106,10 @@ function PostCreateForm() {
 
         formData.append("title", title)
         formData.append("content", content)
+
+        if (selectedDogs.length > 0) {
+            formData.append("dogs", selectedDogs);
+        }
 
         try {
             const {data} = await axiosReq.post('/posts/', formData);
@@ -88,16 +129,31 @@ function PostCreateForm() {
                     <Col className="p-0 p-md-2" sm={12} md={6}>
                         <Container className={appStyles.Content}>
                             <div className="text-center">
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Title</Form.Label>
+                                    <Form.Control type="text" name="title" value={title} onChange={handleChange} />
+                                </Form.Group>
                                 {errors?.title?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <FloatingLabel controlId="floatingTitle" label="Title" className="mb-3">
-                                    <Form.Control type="text" name="title" value={title} onChange={handleChange} />
-                                </FloatingLabel>
-                                <div id="editor"></div>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Content</Form.Label>
+                                    <div id="editor"></div>
+                                </Form.Group>
                                 {errors?.content?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
+                                {isShelterUser && (
+                                    <Form.Group className="mt-4">
+                                        <Form.Label>Link dogs to the post</Form.Label>
+                                        <Form.Select multiple onChange={handleSelectChange}>
+                                            <option selected value="">No dogs</option>
+                                            {dogs.map((dog) => (
+                                                <option key={dog.id} value={dog.id}>{dog.name}</option>
+                                            ))}
+                                        </Form.Select>
+                                    </Form.Group>
+                                )}
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
