@@ -14,6 +14,9 @@ import {Alert, FloatingLabel} from "react-bootstrap";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import {axiosReq} from "../../api/axiosDefaults";
+import Asset from "../../components/Asset";
+
+import Upload from "../../assets/upload.png"
 
 function PostCreateForm() {
 
@@ -118,7 +121,7 @@ function PostCreateForm() {
                                     className="d-flex justify-content-center"
                                     htmlFor="image-upload"
                                 >
-                                    MEDIAS
+                                    <Asset src={Upload} message="Click or tap to upload an image" />
                                 </Form.Label>
 
                             </Form.Group>
