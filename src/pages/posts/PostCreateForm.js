@@ -9,10 +9,11 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate} from "react-router-dom";
-import {FloatingLabel} from "react-bootstrap";
+import {Alert, FloatingLabel} from "react-bootstrap";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
+import {axiosReq} from "../../api/axiosDefaults";
 
 function PostCreateForm() {
 
@@ -41,27 +42,59 @@ function PostCreateForm() {
     useEffect(() => {
         const editor = new Quill("#editor", {
             theme: "snow",
-            placeholder: "Add content to your post",
             modules: {
-                clipboard: {
-                    matchVisual: false
-                }
-            }
+                toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{'list': 'ordered'}, {'list': 'bullet'}],
+                    ['link']
+                ]
+            },
+            placeholder: "Add content to your post",
+        });
+
+        editor.on("text-change", () => {
+            setPostData({
+                ...postData,
+                content: editor.root.innerHTML,
+            });
         });
     }, []);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = new FormData();
+
+        formData.append("title", title)
+        formData.append("content", content)
+
+        try {
+            const {data} = await axiosReq.post('/posts/', formData);
+            navigate(`/posts/${data.id}`)
+        } catch (err) {
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data)
+            }
+        }
+    }
 
     return (
         <Container>
             <h2 className="text-center my-3">Create a new post</h2>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Row>
                     <Col className="p-0 p-md-2" sm={12} md={6}>
                         <Container className={appStyles.Content}>
                             <div className="text-center">
+                                {errors?.title?.map((message, idx) => (
+                                    <Alert variant="warning" key={idx}>{message}</Alert>
+                                ))}
                                 <FloatingLabel controlId="floatingTitle" label="Title" className="mb-3">
                                     <Form.Control type="text" name="title" value={title} onChange={handleChange} />
                                 </FloatingLabel>
                                 <div id="editor"></div>
+                                {errors?.content?.map((message, idx) => (
+                                    <Alert variant="warning" key={idx}>{message}</Alert>
+                                ))}
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
