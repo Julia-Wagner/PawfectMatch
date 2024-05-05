@@ -11,6 +11,9 @@ import btnStyles from "../../styles/Button.module.css";
 import {useNavigate} from "react-router-dom";
 import {FloatingLabel} from "react-bootstrap";
 
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
+
 function PostCreateForm() {
 
     const navigate = useNavigate();
@@ -34,8 +37,22 @@ function PostCreateForm() {
         });
     };
 
+    // Initialize Quill editor
+    useEffect(() => {
+        const editor = new Quill("#editor", {
+            theme: "snow",
+            placeholder: "Add content to your post",
+            modules: {
+                clipboard: {
+                    matchVisual: false
+                }
+            }
+        });
+    }, []);
+
     return (
         <Container>
+            <h2 className="text-center my-3">Create a new post</h2>
             <Form>
                 <Row>
                     <Col className="p-0 p-md-2" sm={12} md={6}>
@@ -44,6 +61,7 @@ function PostCreateForm() {
                                 <FloatingLabel controlId="floatingTitle" label="Title" className="mb-3">
                                     <Form.Control type="text" name="title" value={title} onChange={handleChange} />
                                 </FloatingLabel>
+                                <div id="editor"></div>
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
