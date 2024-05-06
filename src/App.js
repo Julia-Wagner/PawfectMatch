@@ -9,6 +9,7 @@ import PostsPage from "./pages/posts/PostsPage";
 import {useCurrentUser} from "./contexts/CurrentUserContext";
 import PrivateRoute from "./components/PrivateRoute";
 import PostCreateForm from "./pages/posts/PostCreateForm";
+import PostPage from "./pages/posts/PostPage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -20,10 +21,13 @@ function App() {
             <main className={styles.Main}>
                 <Routes>
                     <Route exact={true} path="/" element={<h1>Home page</h1>}/>
-                    <Route exact={true} path="/feed" element={<PostsPage/>}/>
                     <Route path="/signin" element={<SignInForm/>}/>
                     <Route path="/signup" element={<SignUpForm/>}/>
                     <Route path="*" element={<p>Page not found!</p>}/>
+
+                    <Route exact={true} path="/feed" element={<PostsPage/>}/>
+                    <Route exact={true} path="/posts/:id" element={<PostPage/>}/>
+
                     <Route exact={true} path="/following" element={
                         <PrivateRoute>
                             <PostsPage filter={`owner__followed__owner__profile=${profile_id}&`} />

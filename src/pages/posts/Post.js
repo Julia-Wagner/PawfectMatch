@@ -22,6 +22,7 @@ const Post = (props) => {
         main_image,
         created_at,
         updated_at,
+        postPage,
     } = props;
 
     const currentUser = useCurrentUser();
@@ -62,6 +63,7 @@ const Post = (props) => {
                 </div>
                 <div className="d-flex align-items-center">
                     <span>{updated_at}</span>
+                    {is_owner && postPage && "..."}
                 </div>
             </Card.Body>
             <Link to={`/posts/${id}`}>
@@ -69,11 +71,14 @@ const Post = (props) => {
             </Link>
             <Card.Body>
                 {title && <h2 className="text-center">{title}</h2>}
-                {sanitizedContent && <Card.Text
+                {sanitizedContent && !postPage && <Card.Text
                     className={styles.Truncate}
                     dangerouslySetInnerHTML={sanitizedContent}
                 />}
-                <Card.Link href={`/posts/${id}`}>View post</Card.Link>
+                {sanitizedContent && postPage && <Card.Text
+                    dangerouslySetInnerHTML={sanitizedContent}
+                />}
+                {!postPage && <Card.Link href={`/posts/${id}`}>View post</Card.Link>}
                 <div className={styles.PostBar}>
                     {/*TODO: add onclick functions*/}
                     {is_owner ? (
