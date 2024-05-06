@@ -10,6 +10,7 @@ import {useCurrentUser} from "./contexts/CurrentUserContext";
 import PrivateRoute from "./components/PrivateRoute";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
+import PostEditForm from "./pages/posts/PostEditForm";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -41,6 +42,11 @@ function App() {
                     <Route exact={true} path="/posts/create" element={
                         <PrivateRoute>
                             <PostCreateForm />
+                        </PrivateRoute>
+                    }/>
+                    <Route exact={true} path="/posts/:id/edit" element={
+                        <PrivateRoute>
+                            <PostEditForm />
                         </PrivateRoute>
                     }/>
                 </Routes>
