@@ -3,7 +3,9 @@ import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
 import {useCurrentUser} from "../../contexts/CurrentUserContext";
 import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {MoreDropdown} from "../../components/MoreDropdown";
+import {axiosRes} from "../../api/axiosDefaults";
 
 const Post = (props) => {
     const {
@@ -26,11 +28,20 @@ const Post = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
+    const navigate = useNavigate();
 
     // Sanitize HTML content to prevent security issues
     const sanitizedContent = React.useMemo(() => {
         return { __html: DOMPurify.sanitize(content) };
     }, [content]);
+
+    const handleEdit = () => {
+        navigate(`/posts/${id}/edit`);
+    };
+
+    const handleDelete = async () => {
+
+    };
 
     return (
         <Card className={styles.Post}>
@@ -61,9 +72,14 @@ const Post = (props) => {
                         )}
                     </div>
                 </div>
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center gap-3">
                     <span>{updated_at}</span>
-                    {is_owner && postPage && "..."}
+                    {is_owner && postPage && (
+                        <MoreDropdown
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    )}
                 </div>
             </Card.Body>
             <Link to={`/posts/${id}`}>
