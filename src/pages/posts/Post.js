@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from "react"
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
 import {useCurrentUser} from "../../contexts/CurrentUserContext";
@@ -6,6 +6,7 @@ import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosRes} from "../../api/axiosDefaults";
+import ConfirmationModal from "../../components/ConfirmationModal";
 
 const Post = (props) => {
     const {
@@ -29,6 +30,7 @@ const Post = (props) => {
 
     const currentUser = useCurrentUser();
     const navigate = useNavigate();
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
     // Sanitize HTML content to prevent security issues
     const sanitizedContent = React.useMemo(() => {
@@ -40,7 +42,16 @@ const Post = (props) => {
     };
 
     const handleDelete = async () => {
+        setShowConfirmation(true);
+    };
 
+    const handleConfirmDelete = async () => {
+        try {
+            await axiosRes.delete(`/posts/${id}/`);
+            navigate(-1);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -117,6 +128,11 @@ const Post = (props) => {
                     <span className="fw-bold">{saves_count}</span>
                 </div>
             </Card.Body>
+            <ConfirmationModal title="Confirm deletion" text="Are you sure you want to delete this post?"
+                show={showConfirmation}
+                onHide={() => setShowConfirmation(false)}
+                onConfirm={handleConfirmDelete}
+            />
         </Card>
     )
 }
