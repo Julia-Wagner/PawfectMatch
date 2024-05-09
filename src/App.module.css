@@ -25,6 +25,10 @@
     object-fit: contain;
 }
 
+.SidebarHeading {
+    font-size: 1.5rem;
+}
+
 * {
     box-sizing: border-box;
 }

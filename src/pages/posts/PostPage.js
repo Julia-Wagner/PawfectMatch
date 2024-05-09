@@ -8,7 +8,6 @@ import appStyles from "../../App.module.css";
 import {useParams} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
-import styles from "../../styles/PostsPage.module.css";
 
 function PostPage() {
     const {id} = useParams();
@@ -37,7 +36,7 @@ function PostPage() {
                 </Col>
                 <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
                     <Container className={`text-center ${appStyles.Content}`}>
-                        <h3 className={styles.SidebarHeading}>Saved Posts</h3>
+                        <h3 className={appStyles.SidebarHeading}>Saved Posts</h3>
                     </Container>
                 </Col>
             </Row>
