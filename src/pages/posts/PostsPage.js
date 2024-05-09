@@ -15,6 +15,7 @@ import NoResults from "../../assets/playground.svg";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {fetchMoreData} from "../../utils/utils";
 import btnStyles from "../../styles/Button.module.css";
+import Asset from "../../components/Asset";
 
 function PostsPage({message, filter = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -59,7 +60,7 @@ function PostsPage({message, filter = ""}) {
                                     ))}
                                     next={() => fetchMoreData(posts, setPosts)}
                                     hasMore={!!posts.next}
-                                    loader={<Spinner animation="border" />}
+                                    loader={<Asset spinner />}
                                     dataLength={posts.results.length}/>
                             ) : (
                                 <Container className={appStyles.Content}>
@@ -70,7 +71,7 @@ function PostsPage({message, filter = ""}) {
                         </>
                     ) : (
                         <Container className={`text-center ${appStyles.Content}`}>
-                            <Spinner animation="border" />
+                            <Asset spinner />
                         </Container>
                     )}
                 </Col>

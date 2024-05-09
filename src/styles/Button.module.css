@@ -11,6 +11,7 @@
     color: #f1f1f2;
     background-color: #0d546f;
     text-decoration: none;
+    display: inline-block;
 }
 
 .ReverseButton {
