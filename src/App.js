@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostEditForm from "./pages/posts/PostEditForm";
+import ProfilePage from "./pages/profiles/ProfilePage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -28,6 +29,7 @@ function App() {
 
                     <Route exact={true} path="/feed" element={<PostsPage/>}/>
                     <Route exact={true} path="/posts/:id" element={<PostPage/>}/>
+                    <Route exact={true} path="/profiles/:id" element={<ProfilePage/>}/>
 
                     <Route exact={true} path="/following" element={
                         <PrivateRoute>

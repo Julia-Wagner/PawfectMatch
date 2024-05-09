@@ -11,7 +11,7 @@ const BottomNavBar = () => {
         <NavLink to="/feed" id={styles.feed} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Feed</NavLink>
         <NavLink to="/following" id={styles.following} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Following</NavLink>
         <NavLink to="/matches" id={styles.matches} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Matches</NavLink>
-        <NavLink to="/profile" id={styles.profile} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Profile</NavLink>
+        <NavLink to={`/profiles/${currentUser?.profile_id}`} id={styles.profile} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Profile</NavLink>
     </>
 
     const loggedOutIcons = (
