@@ -12,6 +12,11 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import {Button, Image, Spinner} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import Asset from "../../components/Asset";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Post from "../posts/Post";
+import {fetchMoreData} from "../../utils/utils";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -20,23 +25,27 @@ function ProfilePage() {
     const [profile, setProfileData] = useState({});
     const is_owner = currentUser?.username === profile?.owner;
 
+    const [profilePosts, setProfilePosts] = useState({ results: [] });
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [{ data: pageProfile }] = await Promise.all([
+                const [{ data: pageProfile }, { data: profilePosts }] = await Promise.all([
                     axiosReq.get(`/profiles/${id}/`),
+                    axiosReq.get(`/posts/?owner__profile=${id}`),
                 ]);
-                setProfileData(pageProfile)
+                setProfileData(pageProfile);
+                setProfilePosts(profilePosts);
                 setHasLoaded(true);
             } catch (err) {
                 console.log(err);
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, setProfileData]);
 
     const mainProfile = (
-        <>
+        <Container>
             <Row className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} />
@@ -61,18 +70,34 @@ function ProfilePage() {
                                 onClick={() => {}}>follow
                             </Button>
                         ))}
+                    {is_owner && (
+                        <Link to={`/profiles/${id}/edit`} className={`m-2 ${btnStyles.Button}`}>edit</Link>
+                    )}
                 </Col>
                 {profile?.content && <Col className="p-3">{profile.content}</Col>}
             </Row>
-        </>
+        </Container>
     );
 
     const mainProfilePosts = (
-        <>
-            <hr />
-            <p className="text-center">{profile?.owner}'s posts</p>
-            <hr />
-        </>
+        <Container>
+            {profilePosts.results && profilePosts.results.length > 0 && (
+                <>
+                    <hr />
+                    <p className="text-center">{profile?.owner}'s posts</p>
+                    <hr />
+                    <InfiniteScroll
+                        children={profilePosts.results.map((post) => (
+                            <Post key={post.id} {...post} setPosts={setProfilePosts} />
+                        ))}
+                        dataLength={profilePosts.results.length}
+                        loader={<Asset spinner />}
+                        hasMore={!!profilePosts.next}
+                        next={() => fetchMoreData(profilePosts, setProfilePosts)}
+                    />
+                </>
+            )}
+        </Container>
     );
 
     return (
@@ -86,7 +111,7 @@ function ProfilePage() {
                                 {mainProfilePosts}
                             </>
                         ) : (
-                            <Spinner animation="border" />
+                            <Asset spinner />
                         )}
                     </Container>
                 </Col>
