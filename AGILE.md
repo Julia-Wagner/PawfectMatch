@@ -109,3 +109,15 @@ For this sprint I added four user stories with a total of **21 story points**. I
 
 ![Sprint 7 start](docs/agile/sprint7_start.png)\
 *Start of Sprint 7*
+
+I underestimated the story points for these user stories. I managed to finish the biggest user story and started on the profile stories. The unfinished user stories are moved to the backlog again.
+
+![Sprint 7 end](docs/agile/sprint7_end.png)\
+*End of Sprint 7*
+
+### **Sprint 8 (11.05. - 17.05.)**
+
+I decided to carry on with the three unfinished user stories for this sprint. They have a total of **13 story points**.
+
+![Sprint 8 start](docs/agile/sprint8_start.png)\
+*Start of Sprint 8*
