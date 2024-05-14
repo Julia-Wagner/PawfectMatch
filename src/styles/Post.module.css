@@ -31,3 +31,9 @@
     -webkit-line-clamp: 3;
     display: -webkit-box;
 }
+
+.ProfileImage {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+}
