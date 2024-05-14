@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import DOMPurify from 'dompurify';
+import appStyles from "../../App.module.css";
 import styles from "../../styles/Post.module.css"
 import {useCurrentUser} from "../../contexts/CurrentUserContext";
 import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
@@ -26,6 +27,7 @@ const Post = (props) => {
         created_at,
         updated_at,
         postPage,
+        setPosts,
     } = props;
 
     const currentUser = useCurrentUser();
@@ -49,6 +51,22 @@ const Post = (props) => {
         try {
             await axiosRes.delete(`/posts/${id}/`);
             navigate(-1);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleSave = async () => {
+        try {
+            const {data} = await axiosRes.post('/saves/', {post: id});
+            setPosts((prevPosts) => ({
+                ...prevPosts,
+                results: prevPosts.results.map((post) => {
+                    return post.id === id
+                    ? {...post, saves_count: post.saves_count + 1, save_id: data.id}
+                        : post;
+                }),
+            }));
         } catch (err) {
             console.log(err);
         }
@@ -107,18 +125,17 @@ const Post = (props) => {
                 />}
                 {!postPage && <Card.Link href={`/posts/${id}`}>View post</Card.Link>}
                 <div className={styles.PostBar}>
-                    {/*TODO: add onclick functions*/}
                     {is_owner ? (
                         <OverlayTrigger placement="top" overlay={<Tooltip>You can´t save your own post!</Tooltip>}>
                             <span>Save <i className="far fa-heart" /></span>
                         </OverlayTrigger>
                     ) : save_id ? (
                         <span onClick={()=>{}}>
-                            <span className={styles.Heart}>Saved <i className="fas fa-heart" /></span>
+                            <span className={`${styles.Heart} ${appStyles.Pointer}`}>Saved <i className="fas fa-heart" /></span>
                         </span>
                     ) : currentUser ? (
-                        <span onClick={()=>{}}>
-                            <span className={styles.HeartOutline}>Save <i className="far fa-heart" /></span>
+                        <span onClick={handleSave}>
+                            <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}>Save <i className="far fa-heart" /></span>
                         </span>
                     ) : (
                         <OverlayTrigger placement="top" overlay={<Tooltip>Log in to save posts!</Tooltip>}>

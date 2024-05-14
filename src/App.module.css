@@ -29,6 +29,10 @@
     font-size: 1.5rem;
 }
 
+.Pointer {
+    cursor: pointer;
+}
+
 * {
     box-sizing: border-box;
 }
