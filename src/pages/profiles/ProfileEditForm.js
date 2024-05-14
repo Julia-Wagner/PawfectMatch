@@ -32,6 +32,7 @@ const ProfileEditForm = () => {
     const [profileData, setProfileData] = useState({
         name: "",
         description: "",
+        phone_number: "",
         address_1: "",
         address_2: "",
         city: "",
@@ -41,6 +42,7 @@ const ProfileEditForm = () => {
     const {
         name,
         description,
+        phone_number,
         address_1,
         address_2,
         city,
@@ -50,6 +52,7 @@ const ProfileEditForm = () => {
     } = profileData;
 
     const [errors, setErrors] = useState({});
+    const [profileType, setType] = useState({});
 
     useEffect(() => {
         const handleMount = async () => {
@@ -59,16 +62,19 @@ const ProfileEditForm = () => {
                     const {
                         name,
                         description,
+                        phone_number,
                         address_1,
                         address_2,
                         city,
                         postcode,
                         country,
-                        image
+                        image,
+                        type
                     } = data;
                     setProfileData({
                         name,
                         description,
+                        phone_number,
                         address_1,
                         address_2,
                         city,
@@ -76,6 +82,7 @@ const ProfileEditForm = () => {
                         country,
                         image
                     });
+                    setType(type)
                 } catch (err) {
                     console.log(err);
                     navigate("/");
@@ -100,14 +107,12 @@ const ProfileEditForm = () => {
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", description);
+        formData.append("phone_number", phone_number);
         formData.append("address_1", address_1);
         formData.append("address_2", address_2);
         formData.append("city", city);
         formData.append("postcode", postcode);
-
-        if (country !== undefined) {
-            formData.append("country", country);
-        }
+        formData.append("country", country);
 
         if (imageFile?.current?.files && imageFile.current.files[0]) {
             formData.append("image", imageFile?.current?.files[0]);
@@ -130,6 +135,46 @@ const ProfileEditForm = () => {
         navigate(-1);
     }
 
+    const shelterFields = (
+        <>
+            <Form.Group className="mb-4">
+                <Form.Label>Phone number</Form.Label>
+                <Form.Control type="text" name="phone_number" value={phone_number} onChange={handleChange} />
+            </Form.Group>
+            {errors?.phone_number?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            <Form.Group className="mb-4">
+                <Form.Label>Address 1</Form.Label>
+                <Form.Control type="text" name="address_1" value={address_1} onChange={handleChange} />
+            </Form.Group>
+            {errors?.address_1?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            <Form.Group className="mb-4">
+                <Form.Label>Address 2</Form.Label>
+                <Form.Control type="text" name="address_2" value={address_2} onChange={handleChange} />
+            </Form.Group>
+            {errors?.address_2?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            <Form.Group className="mb-4">
+                <Form.Label>City</Form.Label>
+                <Form.Control type="text" name="city" value={city} onChange={handleChange} />
+            </Form.Group>
+            {errors?.city?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            <Form.Group className="mb-4">
+                <Form.Label>Postcode</Form.Label>
+                <Form.Control type="text" name="postcode" value={postcode} onChange={handleChange} />
+            </Form.Group>
+            {errors?.postcode?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+        </>
+    );
+
     return (
         <Container>
             <Form onSubmit={handleSubmit}>
@@ -151,34 +196,11 @@ const ProfileEditForm = () => {
                                 {errors?.description?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Address 1</Form.Label>
-                                    <Form.Control type="text" name="address_1" value={address_1} onChange={handleChange} />
-                                </Form.Group>
-                                {errors?.address_1?.map((message, idx) => (
-                                    <Alert variant="warning" key={idx}>{message}</Alert>
-                                ))}
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Address 2</Form.Label>
-                                    <Form.Control type="text" name="address_2" value={address_2} onChange={handleChange} />
-                                </Form.Group>
-                                {errors?.address_2?.map((message, idx) => (
-                                    <Alert variant="warning" key={idx}>{message}</Alert>
-                                ))}
-                                <Form.Group className="mb-4">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control type="text" name="city" value={city} onChange={handleChange} />
-                                </Form.Group>
-                                {errors?.city?.map((message, idx) => (
-                                    <Alert variant="warning" key={idx}>{message}</Alert>
-                                ))}
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Postcode</Form.Label>
-                                    <Form.Control type="text" name="postcode" value={postcode} onChange={handleChange} />
-                                </Form.Group>
-                                {errors?.postcode?.map((message, idx) => (
-                                    <Alert variant="warning" key={idx}>{message}</Alert>
-                                ))}
+                                {profileType === "shelter" && (
+                                    <>
+                                        {shelterFields}
+                                    </>
+                                )}
                                 <Form.Group className="mb-4">
                                     <Form.Label>Country</Form.Label>
                                     <Form.Select name="country" value={country} onChange={handleChange}>
