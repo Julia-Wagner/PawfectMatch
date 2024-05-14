@@ -12,6 +12,7 @@ import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostEditForm from "./pages/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -49,6 +50,11 @@ function App() {
                     <Route exact={true} path="/posts/:id/edit" element={
                         <PrivateRoute>
                             <PostEditForm />
+                        </PrivateRoute>
+                    }/>
+                    <Route exact={true} path="/profiles/:id/edit" element={
+                        <PrivateRoute>
+                            <ProfileEditForm />
                         </PrivateRoute>
                     }/>
                 </Routes>
