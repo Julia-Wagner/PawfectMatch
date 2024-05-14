@@ -72,6 +72,22 @@ const Post = (props) => {
         }
     };
 
+    const handleUnsave = async () => {
+        try {
+            const {data} = await axiosRes.delete(`/saves/${save_id}`);
+            setPosts((prevPosts) => ({
+                ...prevPosts,
+                results: prevPosts.results.map((post) => {
+                    return post.id === id
+                    ? {...post, saves_count: post.saves_count - 1, save_id: null}
+                        : post;
+                }),
+            }));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <Card className={styles.Post}>
             <Card.Body className="d-flex justify-content-between flex-wrap">
@@ -130,7 +146,7 @@ const Post = (props) => {
                             <span>Save <i className="far fa-heart" /></span>
                         </OverlayTrigger>
                     ) : save_id ? (
-                        <span onClick={()=>{}}>
+                        <span onClick={handleUnsave}>
                             <span className={`${styles.Heart} ${appStyles.Pointer}`}>Saved <i className="fas fa-heart" /></span>
                         </span>
                     ) : currentUser ? (
