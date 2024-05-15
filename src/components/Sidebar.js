@@ -51,7 +51,7 @@ const Sidebar = () => {
                                 <p>You have no saved posts yet.</p>
                             )}
                             <div className="mt-4 text-center">
-                                <Link to={"/feed"}>Show all saved posts</Link>
+                                <Link to={"/saves"}>Show all saved posts</Link>
                             </div>
                         </div>
                     </>

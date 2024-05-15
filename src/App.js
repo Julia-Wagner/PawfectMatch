@@ -13,6 +13,7 @@ import PostPage from "./pages/posts/PostPage";
 import PostEditForm from "./pages/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import SavedPostsPage from "./pages/posts/SavedPostsPage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -55,6 +56,11 @@ function App() {
                     <Route exact={true} path="/profiles/:id/edit" element={
                         <PrivateRoute>
                             <ProfileEditForm />
+                        </PrivateRoute>
+                    }/>
+                    <Route exact={true} path="/saves" element={
+                        <PrivateRoute>
+                            <SavedPostsPage />
                         </PrivateRoute>
                     }/>
                 </Routes>
