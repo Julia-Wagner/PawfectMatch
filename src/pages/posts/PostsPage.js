@@ -8,7 +8,7 @@ import appStyles from "../../App.module.css";
 import {Link, useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
-import {Image, Spinner} from "react-bootstrap";
+import {Image} from "react-bootstrap";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/playground.svg";
@@ -16,6 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {fetchMoreData} from "../../utils/utils";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
+import Sidebar from "../../components/Sidebar";
 
 function PostsPage({message, filter = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -75,11 +76,7 @@ function PostsPage({message, filter = ""}) {
                         </Container>
                     )}
                 </Col>
-                <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                    <Container className={`text-center ${appStyles.Content}`}>
-                        <h3 className={appStyles.SidebarHeading}>Saved Posts</h3>
-                    </Container>
-                </Col>
+                <Sidebar/>
             </Row>
         </Container>
     );

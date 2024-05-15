@@ -104,11 +104,11 @@ const Post = (props) => {
                             </OverlayTrigger>
                         ) : is_following ? (
                             <span onClick={()=>{}}>
-                            <span className={styles.Heart}><i className="fa fa-check-circle" /> Following</span>
+                            <span className={`${styles.Heart} ${appStyles.Pointer}`}><i className="fa fa-check-circle" /> Following</span>
                         </span>
                         ) : currentUser ? (
                             <span onClick={()=>{}}>
-                            <span className={styles.HeartOutline}><i className="fa fa-plus-circle" /> Follow</span>
+                            <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}><i className="fa fa-plus-circle" /> Follow</span>
                         </span>
                         ) : (
                             <OverlayTrigger placement="top" overlay={<Tooltip>Log in to follow profiles!</Tooltip>}>

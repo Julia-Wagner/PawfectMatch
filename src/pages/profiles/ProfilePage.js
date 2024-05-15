@@ -11,12 +11,13 @@ import btnStyles from "../../styles/Button.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import {Button, Image, Spinner} from "react-bootstrap";
+import {Button, Image} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import Asset from "../../components/Asset";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import {fetchMoreData} from "../../utils/utils";
+import Sidebar from "../../components/Sidebar";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -115,11 +116,7 @@ function ProfilePage() {
                         )}
                     </Container>
                 </Col>
-                <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                    <Container className={`text-center ${appStyles.Content}`}>
-                        <h3 className={appStyles.SidebarHeading}>Saved Posts</h3>
-                    </Container>
-                </Col>
+                <Sidebar/>
             </Row>
         </Container>
     );

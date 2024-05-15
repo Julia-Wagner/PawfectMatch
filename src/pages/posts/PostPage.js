@@ -4,10 +4,10 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
-import appStyles from "../../App.module.css";
 import {useParams} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
+import Sidebar from "../../components/Sidebar";
 
 function PostPage() {
     const {id} = useParams();
@@ -34,11 +34,7 @@ function PostPage() {
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
                     <Post {...post.results[0]} setPosts={setPost} postPage />
                 </Col>
-                <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-                    <Container className={`text-center ${appStyles.Content}`}>
-                        <h3 className={appStyles.SidebarHeading}>Saved Posts</h3>
-                    </Container>
-                </Col>
+                <Sidebar/>
             </Row>
         </Container>
     );
