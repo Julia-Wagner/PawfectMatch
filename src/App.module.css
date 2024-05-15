@@ -29,6 +29,16 @@
     font-size: 1.5rem;
 }
 
+.SidebarLink {
+    font-weight: bold;
+    text-decoration: none;
+    color: #0d546f;
+}
+
+.SidebarLink:hover {
+    text-decoration: underline;
+}
+
 .Pointer {
     cursor: pointer;
 }
