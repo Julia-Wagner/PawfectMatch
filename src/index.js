@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom";
 import {CurrentUserProvider} from "./contexts/CurrentUserContext";
+import {SavedPostsProvider} from "./contexts/SavedPostsContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Router>
           <CurrentUserProvider>
-              <App />
+              <SavedPostsProvider>
+                  <App />
+              </SavedPostsProvider>
           </CurrentUserProvider>
       </Router>
   </React.StrictMode>

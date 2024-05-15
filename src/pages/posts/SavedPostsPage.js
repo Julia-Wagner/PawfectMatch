@@ -17,6 +17,7 @@ import {fetchMoreData} from "../../utils/utils";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
+import {useSavedPosts} from "../../contexts/SavedPostsContext";
 
 function PostsPage({message = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -24,6 +25,7 @@ function PostsPage({message = ""}) {
     const {pathname} = useLocation();
 
     const currentUser = useCurrentUser();
+    const { shouldUpdate, triggerUpdate } = useSavedPosts();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -43,7 +45,7 @@ function PostsPage({message = ""}) {
 
         setHasLoaded(false);
         fetchPosts();
-    }, [pathname, currentUser]);
+    }, [pathname, currentUser, shouldUpdate]);
 
     return (
         <Container>

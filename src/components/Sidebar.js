@@ -6,6 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import {useCurrentUser} from "../contexts/CurrentUserContext";
 import {axiosReq} from "../api/axiosDefaults";
 import Asset from "./Asset";
+import {useSavedPosts} from "../contexts/SavedPostsContext";
 
 const Sidebar = () => {
     const [posts, setPosts] = useState({results: []});
@@ -13,6 +14,7 @@ const Sidebar = () => {
     const {pathname} = useLocation();
 
     const currentUser = useCurrentUser();
+    const { shouldUpdate, triggerUpdate } = useSavedPosts();
 
     useEffect(() => {
         const fetchSavedPosts = async () => {
@@ -32,7 +34,7 @@ const Sidebar = () => {
 
         setHasLoaded(false);
         fetchSavedPosts();
-    }, [pathname, currentUser]);
+    }, [pathname, currentUser, shouldUpdate]);
 
     return (
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">

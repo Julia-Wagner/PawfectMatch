@@ -8,6 +8,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosRes} from "../../api/axiosDefaults";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import { useSavedPosts } from "../../contexts/SavedPostsContext";
 
 const Post = (props) => {
     const {
@@ -32,6 +33,7 @@ const Post = (props) => {
 
     const currentUser = useCurrentUser();
     const navigate = useNavigate();
+    const { triggerUpdate } = useSavedPosts();
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     // Sanitize HTML content to prevent security issues
@@ -67,6 +69,7 @@ const Post = (props) => {
                         : post;
                 }),
             }));
+            triggerUpdate();
         } catch (err) {
             console.log(err);
         }
@@ -83,6 +86,7 @@ const Post = (props) => {
                         : post;
                 }),
             }));
+            triggerUpdate();
         } catch (err) {
             console.log(err);
         }
