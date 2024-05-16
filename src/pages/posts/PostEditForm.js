@@ -155,7 +155,7 @@ function PostEditForm() {
 
     return (
         <Container>
-            <h2 className="text-center my-3">Create a new post</h2>
+            <h2 className="text-center my-3">Edit post</h2>
             <Form onSubmit={handleSubmit}>
                 <Row>
                     <Col className="p-0 p-md-2" sm={12} md={6}>

@@ -31,6 +31,9 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
     * [**Logo**](#logo)
 * [**Agile Process**](#agile-process)
 * [**Features**](#features)
+  * [**User registration and login**](#user-registration-and-login)
+  * [**Feed**](#feed)
+  * [**Post CRUD**](#post-crud)
 * [**Testing**](#testing)
 * [**Deployment**](#deployment)
 * [**Credits**](#credits)
@@ -265,6 +268,26 @@ For each post the profile that created the post is shown with the profile image 
 
 ![Feed phone](docs/screenshots/feed_phone.png)\
 *Feed on a phone*
+
+## **Post CRUD**
+
+Full CRUD functionality is implemented for posts. Logged-in users can create posts and add a title, content and image to it. For the content I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
+
+![Create post](docs/screenshots/post_create_desktop.png)\
+*Create a post on a desktop*
+
+The owner of a post can edit or delete the post. For deletion, I added a confirm window to avoid unintentional deletion. 
+
+![Update post](docs/screenshots/post_update_phone.png)\
+*Update a post on a phone*
+
+![Delete post](docs/screenshots/post_delete_desktop.png)\
+*Delete a post on a desktop*
+
+The detail page of a post contains the whole content.
+
+![Detail post](docs/screenshots/post_detail.png)\
+*Post detail page*
 
 # **Testing**
 
