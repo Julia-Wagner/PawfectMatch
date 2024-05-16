@@ -49,6 +49,7 @@
 
 main {
     flex-grow: 1;
+    padding: 0 .5rem 0 .5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
