@@ -34,6 +34,8 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
   * [**User registration and login**](#user-registration-and-login)
   * [**Feed**](#feed)
   * [**Post CRUD**](#post-crud)
+  * [**Profile**](#profile)
+  * [**Saved Posts**](#saved-posts)
 * [**Testing**](#testing)
 * [**Deployment**](#deployment)
 * [**Credits**](#credits)
@@ -242,9 +244,9 @@ I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/
 
 ## **User registration and login**
 
-Users can register at **PawfectMatch** by filling out the *sign up form*. A profile is automatically created for the user after registration. If a user selects the **Register as shelter** button, the profile gets the *type shelter*.
+Users can register at **PawfectMatch** by filling out the *sign-up form*. A profile is automatically created for the user after registration. If a user selects the **Register as shelter** button, the profile gets the *type shelter*.
 
-To use **PawfectMatch** as a live platform, a further step would be added to the registration to check if the user really is a shelter. This way I can avoid private breeders or people with bad intentions pretending to be a shelter. However, for this project there will be no real shelters, so I added a simple button to be able to register as both profile types easily.
+To use **PawfectMatch** as a live platform, a further step would be added to the registration to check if the user really is a shelter. This way I can avoid private breeders or people with bad intentions pretending to be a shelter. However, for this project, there will be no real shelters, so I added a simple button to be able to register as both profile types easily.
 
 ![Registration shelter desktop](docs/screenshots/registration_shelter_desktop.png)\
 *Registration as a shelter on a desktop*
@@ -252,7 +254,7 @@ To use **PawfectMatch** as a live platform, a further step would be added to the
 ![Registration adopter phone](docs/screenshots/registration_adopter_phone.png)\
 *Registration as an adopter on a phone*
 
-After successful registration, the user gets redirected to the *sign in form*. If incorrect information is sent, error messages are shown in the forms.
+After successful registration, the user gets redirected to the *sign-in form*. If incorrect information is sent, error messages are shown in the forms.
 
 ![Login error desktop](docs/screenshots/login_error_desktop.png)\
 *Login with error on a desktop*
@@ -261,7 +263,7 @@ After successful registration, the user gets redirected to the *sign in form*. I
 
 After successfully logging in, the users are redirected to the *feed*. This page is also available for unauthorized users. It shows all posts sorted by newest to oldest. Ten posts are loaded, if the user scrolls to the bottom of the page and there are more than ten posts, the next ten are loaded.
 
-For each post the profile that created the post is shown with the profile image and username. Logged-in users can follow and unfollow the profile or save and unsave the post. The content of the post is clipped after three lines and a link to view the full post is shown.
+For each post, the profile that created the post is shown with the profile image and username. Logged-in users can follow and unfollow the profile or save and unsave the post. The content of the post is clipped after three lines and a link to view the full post is shown.
 
 ![Feed unauthorized desktop](docs/screenshots/feed_unauthorized_desktop.png)\
 *Feed for an unauthorized user on a desktop*
@@ -271,7 +273,7 @@ For each post the profile that created the post is shown with the profile image 
 
 ## **Post CRUD**
 
-Full CRUD functionality is implemented for posts. Logged-in users can create posts and add a title, content and image to it. For the content I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
+Full CRUD functionality is implemented for posts. Logged-in users can create posts and add a title, content and image to it. For the content, I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
 
 ![Create post](docs/screenshots/post_create_desktop.png)\
 *Create a post on a desktop*
@@ -291,7 +293,7 @@ The detail page of a post contains the whole content.
 
 ## **Profile**
 
-A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts published by the user. Users can follow and unfollow other profiles.
+A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts published by the user. Users can follow and unfollow other profiles. If the owner of the profile added a name, it is shown at the top of the profile. If not, the username is visible there.
 
 ![Profile](docs/screenshots/profile_desktop.png)\
 *Profile detail on a desktop*
@@ -303,6 +305,15 @@ Each user can change their name, description, country and profile image. Only sh
 
 ![Profile edit adopter](docs/screenshots/profile_edit_adopter_phone.png)\
 *Profile edit adopter on a phone*
+
+## **Saved Posts**
+
+Posts can be saved and unsaved. On bigger screens, the five most recently saved posts are listed and linked in the sidebar. There is also a link to a separate page with all saved posts. For mobile screens, the saved posts can be found on this separate page.
+
+![Saved posts desktop](docs/screenshots/saves_desktop.png)\
+*Saved posts on a desktop*
+
+The number of saved posts is shown on top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.
 
 # **Testing**
 
