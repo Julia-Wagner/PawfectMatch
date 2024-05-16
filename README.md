@@ -254,6 +254,18 @@ After successful registration, the user gets redirected to the *sign in form*. I
 ![Login error desktop](docs/screenshots/login_error_desktop.png)\
 *Login with error on a desktop*
 
+## **Feed**
+
+After successfully logging in, the users are redirected to the *feed*. This page is also available for unauthorized users. It shows all posts sorted by newest to oldest. Ten posts are loaded, if the user scrolls to the bottom of the page and there are more than ten posts, the next ten are loaded.
+
+For each post the profile that created the post is shown with the profile image and username. Logged-in users can follow and unfollow the profile or save and unsave the post. The content of the post is clipped after three lines and a link to view the full post is shown.
+
+![Feed unauthorized desktop](docs/screenshots/feed_unauthorized_desktop.png)\
+*Feed for an unauthorized user on a desktop*
+
+![Feed phone](docs/screenshots/feed_phone.png)\
+*Feed on a phone*
+
 # **Testing**
 
 Please refer to the separate [TESTING.md](TESTING.md) file.
