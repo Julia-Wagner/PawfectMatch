@@ -289,6 +289,21 @@ The detail page of a post contains the whole content.
 ![Detail post](docs/screenshots/post_detail.png)\
 *Post detail page*
 
+## **Profile**
+
+A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts published by the user. Users can follow and unfollow other profiles.
+
+![Profile](docs/screenshots/profile_desktop.png)\
+*Profile detail on a desktop*
+
+Each user can change their name, description, country and profile image. Only shelters are allowed to add an exact address and phone number.
+
+![Profile edit shelter](docs/screenshots/profile_edit_shelter_desktop.png)\
+*Profile edit shelter on a desktop*
+
+![Profile edit adopter](docs/screenshots/profile_edit_adopter_phone.png)\
+*Profile edit adopter on a phone*
+
 # **Testing**
 
 Please refer to the separate [TESTING.md](TESTING.md) file.
