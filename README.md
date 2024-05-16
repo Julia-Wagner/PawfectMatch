@@ -339,6 +339,16 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
    5. Select your created app and open the *Deploy* tab
    6. Connect your GitHub repository and click *Deploy Branch* at the bottom of the page.
 
+# **Packages and Frameworks**
+
+- [react-bootstrap](https://react-bootstrap.netlify.app/) - to use Bootstrap components.
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom) - for routing.
+- [axios](https://www.npmjs.com/package/axios) - to connect the frontend with the API.
+- [react-infinite-scroll-component](https://www.npmjs.com/package/react-infinite-scroll-component) - to implement infinite scrolling for posts.
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for unauthorized errors.
+- [quill](https://quilljs.com/docs/quickstart) - the WYSIWYG editor.
+- [dompurify](https://www.npmjs.com/package/dompurify) - to prevent security issues from HTML in content.
+
 # **Credits**
 
 ## **Content**
@@ -350,3 +360,4 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
 - [Lucidchart](https://lucid.app/lucidchart/82318076-4a7b-4349-b6c6-c66c1f0d098e/edit?viewport_loc=0%2C-7%2C1462%2C1135%2C0_0&invitationId=inv_1c1b2e93-1683-407e-a6be-9134e668b788) was used to create the Database Schema.
 - I used [Balsamiq](https://balsamiq.com/) to create the wireframes.
 - I used [contrast-grid.eightshapes.com](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%23F1F1F2%0D%0A%23312A28%0D%0A%23EEE6D9%0D%0A%2354443A%0D%0A%230D546F%0D%0A%23FF6431%0D%0A%239CC63B%0D%0A%23F7BF3D%0D%0A%23FFA06E%0D%0A%236DCBEC%0D%0A&es-color-form__tile-size=regular&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18&es-color-form__show-contrast=dnp) to check the contrast and possible color combinations.
+- I used [unsplash.com](https://unsplash.com/) for profile and post images.
