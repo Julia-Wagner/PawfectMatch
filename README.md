@@ -237,6 +237,23 @@ I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/
 
 # **Features**
 
+## **User registration and login**
+
+Users can register at **PawfectMatch** by filling out the *sign up form*. A profile is automatically created for the user after registration. If a user selects the **Register as shelter** button, the profile gets the *type shelter*.
+
+To use **PawfectMatch** as a live platform, a further step would be added to the registration to check if the user really is a shelter. This way I can avoid private breeders or people with bad intentions pretending to be a shelter. However, for this project there will be no real shelters, so I added a simple button to be able to register as both profile types easily.
+
+![Registration shelter desktop](docs/screenshots/registration_shelter_desktop.png)\
+*Registration as a shelter on a desktop*
+
+![Registration adopter phone](docs/screenshots/registration_adopter_phone.png)\
+*Registration as an adopter on a phone*
+
+After successful registration, the user gets redirected to the *sign in form*. If incorrect information is sent, error messages are shown in the forms.
+
+![Login error desktop](docs/screenshots/login_error_desktop.png)\
+*Login with error on a desktop*
+
 # **Testing**
 
 Please refer to the separate [TESTING.md](TESTING.md) file.

@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.Button:hover, .Button:active {
+.Button:hover {
     background-color: #eee6d9 !important;
     color: #0d546f !important;
     border-color: #0d546f !important;
@@ -43,7 +43,7 @@
     border-color: #312A28;
 }
 
-.Toggle:hover, .Toggle:active, .Checked {
+.Toggle:hover, .Checked {
     color: #312A28;
     background-color: #9cc63b !important;
     border-color: #9cc63b !important;
