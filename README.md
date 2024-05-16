@@ -8,31 +8,34 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
 * [**PawfectMatch**](#pawfectmatch)
 * [**Table of Contents**](#table-of-contents)
 * [**Planning**](#planning)
-    * [**Strategy Plane**](#strategy-plane)
-        * [**Target Audience**](#target-audience)
-        * [**Site Goals**](#site-goals)
-    * [**Scope Plane**](#scope-plane)
-        * [**Necessary Features:**](#necessary-features)
-        * [**Nice-to-have Features:**](#nice-to-have-features)
-    * [**Structure Plane**](#structure-plane)
-        * [**Epic: User Authentication**](#epic-user-authentication)
-        * [**Epic: General UX**](#epic-general-ux)
-        * [**Epic: Profile**](#epic-profile)
-        * [**Epic: User Interaction**](#epic-user-interaction)
-        * [**Epic: Posts**](#epic-posts)
-        * [**Epic: Dog Posts**](#epic-dog-posts)
-        * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
-    * [**Skeleton Plane**](#skeleton-plane)
-        * [**Wireframes**](#wireframes)
-        * [**Database Schema**](#database-schema)
-    * [**Surface Plane**](#surface-plane)
-        * [**Design**](#design)
-        * [**Colors and Fonts**](#colors-and-fonts)
-        * [**Logo**](#logo)
+  * [**Strategy Plane**](#strategy-plane)
+    * [**Target Audience**](#target-audience)
+    * [**Site Goals**](#site-goals)
+  * [**Scope Plane**](#scope-plane)
+    * [**Necessary Features:**](#necessary-features)
+    * [**Nice-to-have Features:**](#nice-to-have-features)
+  * [**Structure Plane**](#structure-plane)
+    * [**Epic: User Authentication**](#epic-user-authentication)
+    * [**Epic: General UX**](#epic-general-ux)
+    * [**Epic: Profile**](#epic-profile)
+    * [**Epic: User Interaction**](#epic-user-interaction)
+    * [**Epic: Posts**](#epic-posts)
+    * [**Epic: Dog Posts**](#epic-dog-posts)
+    * [**Epic: Notifications and Communication**](#epic-notifications-and-communication)
+  * [**Skeleton Plane**](#skeleton-plane)
+    * [**Wireframes**](#wireframes)
+    * [**Database Schema**](#database-schema)
+  * [**Surface Plane**](#surface-plane)
+    * [**Design**](#design)
+    * [**Colors and Fonts**](#colors-and-fonts)
+    * [**Logo**](#logo)
 * [**Agile Process**](#agile-process)
+* [**Features**](#features)
+* [**Testing**](#testing)
+* [**Deployment**](#deployment)
 * [**Credits**](#credits)
-    * [**Content**](#content)
-    * [**Media and Design**](#media-and-design)
+  * [**Content**](#content)
+  * [**Media and Design**](#media-and-design)
 <!-- TOC -->
 
 # **Planning**
@@ -232,6 +235,12 @@ I created a logo for **PawfectMatch** using the paw print of my dog and the head
 # **Agile Process**
 I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/4) to plan and document my work. The details of my agile approach can be found in the separate [AGILE.md file](AGILE.md).
 
+# **Features**
+
+# **Testing**
+
+Please refer to the separate [TESTING.md](TESTING.md) file.
+
 # **Deployment**
 
 Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.herokuapp.com/). The deployment process for the API can be found [here](https://github.com/Julia-Wagner/PawfectMatch-API?tab=readme-ov-file#deployment).
@@ -245,7 +254,7 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
        - run `npm start` to check the installation
 
 3. **Heroku Setup**
-   1. Log in to your [Heruko](https://www.heroku.com/) account
+   1. Log in to your [Heroku](https://www.heroku.com/) account
    2. On the dashboard click *New* - *Create new app*
    3. Give the app a unique name
    4. Select the region closest to you and click *Create app*
