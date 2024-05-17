@@ -17,11 +17,10 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
-import {useCurrentUser} from "../../contexts/CurrentUserContext";
+import {useIsShelterUser} from "../../contexts/CurrentUserContext";
 
 function PostEditForm() {
-    const currentUser = useCurrentUser();
-    const profile_id = currentUser?.profile_id || '';
+    const isShelterUser = useIsShelterUser();
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -40,8 +39,6 @@ function PostEditForm() {
 
     const [dogs, setDogs] = useState([]);
     const [selectedDogs, setSelectedDogs] = useState([]);
-
-    const [isShelterUser, setIsShelterUser] = useState(false);
 
     const [editor, setEditor] = useState(null);
 
@@ -111,20 +108,6 @@ function PostEditForm() {
         };
 
         fetchUserDogs();
-    }, []);
-
-    useEffect(() => {
-        // Check if user is a shelter user
-        const checkUserType = async () => {
-            try {
-                const response = await axiosReq.get(`/profiles/${profile_id}`);
-                setIsShelterUser(response.data.type === "shelter");
-            } catch (error) {
-                console.error("Error fetching user type:", error);
-            }
-        };
-
-        checkUserType();
     }, []);
 
     const handleSelectChange = (event) => {

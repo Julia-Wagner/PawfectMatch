@@ -6,18 +6,24 @@ import {removeTokenTimestamp, shouldRefreshToken} from "../utils/utils";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
+export const ShelterUserContext = createContext();
 
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
+export const useIsShelterUser = () => useContext(ShelterUserContext);
 
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
+    const [isShelterUser, setIsShelterUser] = useState(false);
     const navigate = useNavigate()
 
     const handleMount = async () => {
         try {
             const { data } = await axiosRes.get("dj-rest-auth/user/");
             setCurrentUser(data);
+
+            const profileResponse = await axiosReq.get(`/profiles/${data.profile_id}`);
+            setIsShelterUser(profileResponse.data.type === "shelter");
         } catch (err) {
             console.log(err);
         }
@@ -76,7 +82,9 @@ export const CurrentUserProvider = ({ children }) => {
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <SetCurrentUserContext.Provider value={setCurrentUser}>
-                {children}
+                <ShelterUserContext.Provider value={isShelterUser}>
+                    {children}
+                </ShelterUserContext.Provider>
             </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>
     )
