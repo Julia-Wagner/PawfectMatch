@@ -38,6 +38,7 @@ PawfectMatch is a platform to connect shelters with loving homes for their dogs.
   * [**Saved Posts**](#saved-posts)
 * [**Testing**](#testing)
 * [**Deployment**](#deployment)
+* [**Packages and Frameworks**](#packages-and-frameworks)
 * [**Credits**](#credits)
   * [**Content**](#content)
   * [**Media and Design**](#media-and-design)

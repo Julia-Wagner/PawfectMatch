@@ -121,3 +121,15 @@ I decided to carry on with the three unfinished user stories for this sprint. Th
 
 ![Sprint 8 start](docs/agile/sprint8_start.png)\
 *Start of Sprint 8*
+
+I finished all of the plannes user stories and added the implemented features to the readme.
+
+![Sprint 8 end](docs/agile/sprint8_end.png)\
+*End of Sprint 8*
+
+### **Sprint 9 (18.05. - 24.05.)**
+
+I added 5 user stories with a total of **19 story points** for this sprint. By the end of this sprint, the MVP with the basic functionality of this project should be done.
+
+![Sprint 9 start](docs/agile/sprint9_start.png)\
+*Start of Sprint 9*
