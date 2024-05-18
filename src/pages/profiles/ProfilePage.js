@@ -18,6 +18,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import {fetchMoreData} from "../../utils/utils";
 import Sidebar from "../../components/Sidebar";
+import useFollow from "../../hooks/useFollow";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -25,6 +26,7 @@ function ProfilePage() {
     const {id} = useParams();
     const [profile, setProfileData] = useState({});
     const is_owner = currentUser?.username === profile?.owner;
+    const {followingId, handleFollow, handleUnfollow} = useFollow(id, profile.following_id);
 
     const [profilePosts, setProfilePosts] = useState({ results: [] });
 
@@ -52,7 +54,7 @@ function ProfilePage() {
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} />
                 </Col>
                 <Col lg={6}>
-                    <h3 className="m-2">{profile?.name ?? profile?.owner}</h3>
+                    <h3 className="m-2">{profile?.name? profile.name : profile.owner}</h3>
                     <Row className="justify-content-center no-gutters">
                         <Col className="my-2">
                             <div>{profile?.posts_count}</div>
@@ -62,14 +64,10 @@ function ProfilePage() {
                 </Col>
                 <Col lg={3} className="text-lg-right">
                     {currentUser && !is_owner &&
-                        (profile?.following_id ? (
-                            <Button className={`m-2 ${btnStyles.Button}`}
-                                onClick={() => {}}>unfollow
-                            </Button>
+                        (followingId ? (
+                            <Button className={`m-2 ${btnStyles.Button}`} onClick={handleUnfollow}>unfollow</Button>
                         ) : (
-                            <Button className={`m-2 ${btnStyles.Button}`}
-                                onClick={() => {}}>follow
-                            </Button>
+                            <Button className={`m-2 ${btnStyles.Button}`} onClick={handleFollow}>follow</Button>
                         ))}
                     {is_owner && (
                         <Link to={`/profiles/${id}/edit`} className={`m-2 ${btnStyles.Button}`}>edit</Link>
@@ -85,7 +83,7 @@ function ProfilePage() {
             {profilePosts.results && profilePosts.results.length > 0 && (
                 <>
                     <hr />
-                    <p className="text-center">{profile?.name ?? profile?.owner}'s posts</p>
+                    <p className="text-center">{profile?.name? profile.name : profile.owner}'s posts</p>
                     <hr />
                     <InfiniteScroll
                         children={profilePosts.results.map((post) => (

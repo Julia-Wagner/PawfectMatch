@@ -8,7 +8,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosRes} from "../../api/axiosDefaults";
 import ConfirmationModal from "../../components/ConfirmationModal";
-import { useSavedPosts } from "../../contexts/SavedPostsContext";
+import {useSavedPosts} from "../../contexts/SavedPostsContext";
+import useFollow from "../../hooks/useFollow";
 
 const Post = (props) => {
     const {
@@ -35,6 +36,8 @@ const Post = (props) => {
     const navigate = useNavigate();
     const { triggerUpdate } = useSavedPosts();
     const [showConfirmation, setShowConfirmation] = useState(false);
+
+    const {followingId, handleFollow, handleUnfollow} = useFollow(profile_id, is_following);
 
     // Sanitize HTML content to prevent security issues
     const sanitizedContent = React.useMemo(() => {
@@ -101,17 +104,16 @@ const Post = (props) => {
                         {owner}
                     </Link>
                     <div className={styles.PostBar}>
-                        {/*TODO: add onclick functions*/}
                         {is_owner ? (
                             <OverlayTrigger placement="top" overlay={<Tooltip>You can´t follow yourself!</Tooltip>}>
                                 <span><i className="fa fa-plus-circle" /> Follow</span>
                             </OverlayTrigger>
-                        ) : is_following ? (
-                            <span onClick={()=>{}}>
+                        ) : followingId ? (
+                            <span onClick={handleUnfollow}>
                             <span className={`${styles.Heart} ${appStyles.Pointer}`}><i className="fa fa-check-circle" /> Following</span>
                         </span>
                         ) : currentUser ? (
-                            <span onClick={()=>{}}>
+                            <span onClick={handleFollow}>
                             <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}><i className="fa fa-plus-circle" /> Follow</span>
                         </span>
                         ) : (
