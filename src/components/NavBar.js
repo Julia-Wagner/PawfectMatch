@@ -24,11 +24,18 @@ const NavBar = () => {
     }
 
     const loggedInIcons = <>
-        <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
-        <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
-        <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
-        <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
-        <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
+        <div className="d-none d-md-flex">
+            <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
+            <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
+            <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
+            <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
+            <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
+        </div>
+        <div className="d-flex d-md-none flex-column">
+            <NavLink to="/saves" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Saved Posts</NavLink>
+            <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
+        </div>
+
     </>
 
     const loggedOutIcons = (
