@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -17,13 +17,12 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
-import {useCurrentUser} from "../../contexts/CurrentUserContext";
+import {useIsShelterUser} from "../../contexts/CurrentUserContext";
 
 function PostCreateForm() {
-    const currentUser = useCurrentUser();
-    const profile_id = currentUser?.profile_id || '';
-
+    const isShelterUser = useIsShelterUser();
     const navigate = useNavigate();
+    const quillRef = useRef(null);
 
     const handleGoBack = () => {
         navigate(-1);
@@ -40,8 +39,6 @@ function PostCreateForm() {
     const [dogs, setDogs] = useState([]);
     const [selectedDogs, setSelectedDogs] = useState([]);
 
-    const [isShelterUser, setIsShelterUser] = useState(false);
-
     const handleChange = (event) => {
         setPostData({
             ...postData,
@@ -50,26 +47,29 @@ function PostCreateForm() {
     };
 
     useEffect(() => {
-        // Initialize Quill editor
-        const editor = new Quill("#editor", {
-            theme: "snow",
-            modules: {
-                toolbar: [
-                    ['bold', 'italic', 'underline'],
-                    [{'list': 'ordered'}, {'list': 'bullet'}],
-                    ['link']
-                ]
-            },
-            placeholder: "Add content to your post",
-        });
-
-        editor.on("text-change", () => {
-            setPostData({
-                ...postData,
-                content: editor.root.innerHTML,
+        if (!quillRef.current) {
+            quillRef.current = new Quill("#editor", {
+                theme: "snow",
+                modules: {
+                    toolbar: [
+                        ["bold", "italic", "underline"],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        ["link"],
+                    ],
+                },
+                placeholder: "Add content to your post",
             });
-        });
 
+            quillRef.current.on("text-change", () => {
+                setPostData((prevPostData) => ({
+                    ...prevPostData,
+                    content: quillRef.current.root.innerHTML,
+                }));
+            });
+        }
+    }, []);
+
+    useEffect(() => {
         // Fetch the current user's dogs
         const fetchUserDogs = async () => {
             try {
@@ -81,18 +81,7 @@ function PostCreateForm() {
             }
         };
 
-        // Check if user is a shelter user
-        const checkUserType = async () => {
-            try {
-                const response = await axiosReq.get(`/profiles/${profile_id}`);
-                setIsShelterUser(response.data.type === "shelter");
-            } catch (error) {
-                console.error("Error fetching user type:", error);
-            }
-        };
-
         fetchUserDogs();
-        checkUserType();
     }, []);
 
     const handleSelectChange = (event) => {
@@ -107,7 +96,7 @@ function PostCreateForm() {
         formData.append("title", title)
         formData.append("content", content)
 
-        if (selectedDogs.length > 0) {
+        if (selectedDogs.length > 0 && selectedDogs[0] !== "") {
             formData.append("dogs", selectedDogs);
         }
 
@@ -147,7 +136,7 @@ function PostCreateForm() {
                                     <Form.Group className="mt-4">
                                         <Form.Label>Link dogs to the post</Form.Label>
                                         <Form.Select multiple onChange={handleSelectChange}>
-                                            <option selected value="">No dogs</option>
+                                            <option value="">No dogs</option>
                                             {dogs.map((dog) => (
                                                 <option key={dog.id} value={dog.id}>{dog.name}</option>
                                             ))}

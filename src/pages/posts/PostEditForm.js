@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -24,6 +24,7 @@ function PostEditForm() {
     const {id} = useParams();
 
     const navigate = useNavigate();
+    const quillRef = useRef(null);
 
     const handleGoBack = () => {
         navigate(-1);
@@ -55,7 +56,7 @@ function PostEditForm() {
                 const {data} = await axiosReq.get(`/posts/${id}`)
                 const {title, content, dogs, is_owner} = data;
 
-                is_owner ? setPostData({title, content, dogs}) : navigate("/feed");
+                is_owner ? setPostData({title, content}) : navigate("/feed");
                 is_owner ? setSelectedDogs(dogs) : navigate("/feed");
             } catch (err) {
                 console.log(err);
@@ -66,34 +67,31 @@ function PostEditForm() {
     }, [navigate, id]);
 
     useEffect(() => {
-        // Initialize Quill editor
-        const quill = new Quill("#editor", {
-            theme: "snow",
-            modules: {
-                toolbar: [
-                    ['bold', 'italic', 'underline'],
-                    [{'list': 'ordered'}, {'list': 'bullet'}],
-                    ['link']
-                ]
-            },
-            placeholder: "Add content to your post",
-        });
+        if (!quillRef.current) {
+            quillRef.current = new Quill("#editor", {
+                theme: "snow",
+                modules: {
+                    toolbar: [
+                        ["bold", "italic", "underline"],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        ["link"],
+                    ],
+                },
+                placeholder: "Add content to your post",
+            });
 
-        quill.on("text-change", () => {
-            const updatedContent = quill.root.innerHTML;
-            setPostData((prevData) => ({
-                ...prevData,
-                content: updatedContent,
-            }));
-        });
-        setEditor(quill);
-    }, []);
-
-    useEffect(() => {
-        if (editor && content) {
-            editor.root.innerHTML = content;
+            quillRef.current.on("text-change", () => {
+                setPostData((prevPostData) => ({
+                    ...prevPostData,
+                    content: quillRef.current.root.innerHTML,
+                }));
+            });
         }
-    }, [editor, content]);
+
+        if (quillRef.current && postData.content) {
+            quillRef.current.root.innerHTML = postData.content;
+        }
+    }, [postData.content]);
 
     useEffect(() => {
         // Fetch the current user's dogs
