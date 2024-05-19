@@ -41,7 +41,7 @@ function PostsPage({message, filter = ""}) {
 
         setHasLoaded(false);
         fetchPosts();
-    }, [filter, pathname, currentUser, shouldUpdate]);
+    }, [filter, pathname, currentUser, shouldUpdate, isShelterUser]);
 
     return (
         <Container>

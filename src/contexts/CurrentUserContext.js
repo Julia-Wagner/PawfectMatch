@@ -22,8 +22,10 @@ export const CurrentUserProvider = ({ children }) => {
             const { data } = await axiosRes.get("dj-rest-auth/user/");
             setCurrentUser(data);
 
-            const profileResponse = await axiosReq.get(`/profiles/${data.profile_id}`);
-            setIsShelterUser(profileResponse.data.type === "shelter");
+            if (data.profile_id) {
+                const profileResponse = await axiosReq.get(`/profiles/${data.profile_id}`);
+                setIsShelterUser(profileResponse.data.type === "shelter");
+            }
         } catch (err) {
             console.log(err);
         }
@@ -32,6 +34,22 @@ export const CurrentUserProvider = ({ children }) => {
     useEffect(() => {
         handleMount();
     }, []);
+
+    useEffect(() => {
+        if (currentUser && currentUser.profile_id) {
+            const checkShelterUser = async () => {
+                try {
+                    const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}`);
+                    setIsShelterUser(profileResponse.data.type === "shelter");
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+            checkShelterUser();
+        } else {
+            setIsShelterUser(false);
+        }
+    }, [currentUser]);
 
     useMemo(() => {
         axiosReq.interceptors.request.use(
