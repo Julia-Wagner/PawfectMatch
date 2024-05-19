@@ -136,14 +136,8 @@ const SignUpForm = () => {
                 </Col>
             </Row>
             <Row>
-                <Col
-                    md={12}
-                    className={`my-auto p-2`}
-                >
-                    <Image
-                        className={`${appStyles.FillerImage}`}
-                        src={playground}
-                    />
+                <Col className={`my-auto p-2`}>
+                    <Image className={`${appStyles.FillerImage}`} src={playground} />
                 </Col>
             </Row>
         </Container>

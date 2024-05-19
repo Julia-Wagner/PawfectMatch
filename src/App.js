@@ -14,6 +14,7 @@ import PostEditForm from "./pages/posts/PostEditForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import SavedPostsPage from "./pages/posts/SavedPostsPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -24,7 +25,7 @@ function App() {
             <NavBar />
             <main className={styles.Main}>
                 <Routes>
-                    <Route exact={true} path="/" element={<h1>Home page</h1>}/>
+                    <Route exact={true} path="/" element={<AboutPage/>}/>
                     <Route path="/signin" element={<SignInForm/>}/>
                     <Route path="/signup" element={<SignUpForm/>}/>
                     <Route path="*" element={<p>Page not found!</p>}/>

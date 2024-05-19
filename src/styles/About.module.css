@@ -1,0 +1,25 @@
+.UnorderedList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.ListItem {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+.SocialIcon {
+    fill: #ff6431;
+    height: 3rem;
+    width: 100%;
+}
+
+.SocialIcon:hover {
+    fill: #54443a;
+}
+
+.StepItem {
+    margin-top: .8rem;
+}
