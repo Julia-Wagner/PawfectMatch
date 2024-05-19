@@ -14,7 +14,7 @@ const Sidebar = () => {
     const {pathname} = useLocation();
 
     const currentUser = useCurrentUser();
-    const { shouldUpdate, triggerUpdate } = useSavedPosts();
+    const {shouldUpdate} = useSavedPosts();
 
     useEffect(() => {
         const fetchSavedPosts = async () => {

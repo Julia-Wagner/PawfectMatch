@@ -34,10 +34,10 @@ const Post = (props) => {
 
     const currentUser = useCurrentUser();
     const navigate = useNavigate();
-    const { triggerUpdate } = useSavedPosts();
+    const {triggerUpdate} = useSavedPosts();
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const {followingId, handleFollow, handleUnfollow} = useFollow(profile_id, is_following);
+    const {handleFollow, handleUnfollow} = useFollow(profile_id);
 
     // Sanitize HTML content to prevent security issues
     const sanitizedContent = React.useMemo(() => {
@@ -108,12 +108,12 @@ const Post = (props) => {
                             <OverlayTrigger placement="top" overlay={<Tooltip>You can´t follow yourself!</Tooltip>}>
                                 <span><i className="fa fa-plus-circle" /> Follow</span>
                             </OverlayTrigger>
-                        ) : followingId ? (
-                            <span onClick={handleUnfollow}>
+                        ) : is_following ? (
+                            <span onClick={() => handleUnfollow(profile_id)}>
                             <span className={`${styles.Heart} ${appStyles.Pointer}`}><i className="fa fa-check-circle" /> Following</span>
                         </span>
                         ) : currentUser ? (
-                            <span onClick={handleFollow}>
+                            <span onClick={() => handleFollow(profile_id)}>
                             <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}><i className="fa fa-plus-circle" /> Follow</span>
                         </span>
                         ) : (

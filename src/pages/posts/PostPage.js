@@ -8,10 +8,12 @@ import {useParams} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
 import Sidebar from "../../components/Sidebar";
+import {useFollowers} from "../../contexts/FollowersContext";
 
 function PostPage() {
     const {id} = useParams();
     const [post, setPost] = useState({results: []});
+    const {shouldUpdate} = useFollowers();
 
     useEffect(() => {
         const handleMount = async () => {
@@ -26,7 +28,7 @@ function PostPage() {
         };
 
         handleMount();
-    }, [id]);
+    }, [id, shouldUpdate]);
 
     return (
         <Container>

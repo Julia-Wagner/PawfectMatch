@@ -19,14 +19,17 @@ import Post from "../posts/Post";
 import {fetchMoreData} from "../../utils/utils";
 import Sidebar from "../../components/Sidebar";
 import useFollow from "../../hooks/useFollow";
+import {useFollowers} from "../../contexts/FollowersContext";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
     const currentUser = useCurrentUser();
+    const {shouldUpdate} = useFollowers();
+
     const {id} = useParams();
     const [profile, setProfileData] = useState({});
     const is_owner = currentUser?.username === profile?.owner;
-    const {followingId, handleFollow, handleUnfollow} = useFollow(id, profile.following_id);
+    const {handleFollow, handleUnfollow} = useFollow(id);
 
     const [profilePosts, setProfilePosts] = useState({ results: [] });
 
@@ -45,7 +48,7 @@ function ProfilePage() {
             }
         };
         fetchData();
-    }, [id, setProfileData]);
+    }, [id, setProfileData, shouldUpdate]);
 
     const mainProfile = (
         <Container>
@@ -64,10 +67,10 @@ function ProfilePage() {
                 </Col>
                 <Col lg={3} className="text-lg-right">
                     {currentUser && !is_owner &&
-                        (followingId ? (
-                            <Button className={`m-2 ${btnStyles.Button}`} onClick={handleUnfollow}>unfollow</Button>
+                        (profile?.following_id ? (
+                            <Button className={`m-2 ${btnStyles.Button}`} onClick={() => handleUnfollow(profile?.id)}>unfollow</Button>
                         ) : (
-                            <Button className={`m-2 ${btnStyles.Button}`} onClick={handleFollow}>follow</Button>
+                            <Button className={`m-2 ${btnStyles.Button}`} onClick={() => handleFollow(profile?.id)}>follow</Button>
                         ))}
                     {is_owner && (
                         <Link to={`/profiles/${id}/edit`} className={`m-2 ${btnStyles.Button}`}>edit</Link>

@@ -17,6 +17,7 @@ import {fetchMoreData} from "../../utils/utils";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
+import {useFollowers} from "../../contexts/FollowersContext";
 
 function PostsPage({message, filter = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -25,6 +26,7 @@ function PostsPage({message, filter = ""}) {
 
     const currentUser = useCurrentUser();
     const isShelterUser = useIsShelterUser();
+    const {shouldUpdate} = useFollowers();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -39,7 +41,7 @@ function PostsPage({message, filter = ""}) {
 
         setHasLoaded(false);
         fetchPosts();
-    }, [filter, pathname, currentUser]);
+    }, [filter, pathname, currentUser, shouldUpdate]);
 
     return (
         <Container>

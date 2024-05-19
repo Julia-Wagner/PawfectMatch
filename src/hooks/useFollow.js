@@ -1,28 +1,29 @@
-import { useState } from "react";
-import { axiosReq } from "../api/axiosDefaults";
+import {axiosReq, axiosRes} from "../api/axiosDefaults";
+import {useFollowers} from "../contexts/FollowersContext";
 
-const useFollow = (profileId, oldFollowingId = null) => {
-    const [followingId, setFollowingId] = useState(oldFollowingId);
+const useFollow = (clickedId = null) => {
+    const {triggerUpdate} = useFollowers();
 
-    const handleFollow = async () => {
+    const handleFollow = async (clickedId) => {
         try {
-            const {data} = await axiosReq.post("/followers/", {followed: profileId});
-            setFollowingId(data.id);
+            await axiosReq.post("/followers/", {followed: clickedId});
+            triggerUpdate();
         } catch (err) {
             console.log(err);
         }
     };
 
-    const handleUnfollow = async () => {
+    const handleUnfollow = async (clickedId) => {
         try {
-            await axiosReq.delete(`/followers/${followingId}/`);
-            setFollowingId(null);
+            const clickedProfile = await axiosReq.get(`/profiles/${clickedId}`);
+            await axiosRes.delete(`/followers/${clickedProfile.data.following_id}/`);
+            triggerUpdate();
         } catch (err) {
             console.log(err);
         }
     };
 
-    return {followingId, handleFollow, handleUnfollow};
+    return {handleFollow, handleUnfollow};
 };
 
 export default useFollow;

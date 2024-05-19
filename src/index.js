@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom";
 import {CurrentUserProvider} from "./contexts/CurrentUserContext";
 import {SavedPostsProvider} from "./contexts/SavedPostsContext";
+import {FollowersProvider} from "./contexts/FollowersContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
       <Router>
           <CurrentUserProvider>
               <SavedPostsProvider>
-                  <App />
+                  <FollowersProvider>
+                      <App />
+                  </FollowersProvider>
               </SavedPostsProvider>
           </CurrentUserProvider>
       </Router>
