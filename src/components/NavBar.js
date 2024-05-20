@@ -1,15 +1,17 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import logo from "../assets/logo.webp";
 import styles from "../styles/NavBar.module.css"
-import { NavLink } from "react-router-dom";
-import {useCurrentUser, useSetCurrentUser} from "../contexts/CurrentUserContext";
+import {NavLink} from "react-router-dom";
+import {useCurrentUser, useIsShelterUser, useSetCurrentUser} from "../contexts/CurrentUserContext";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import {removeTokenTimestamp} from "../utils/utils";
+import React from "react";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
+    const isShelterUser = useIsShelterUser();
 
     const {expanded, setExpanded, ref} = useClickOutsideToggle();
 
@@ -27,7 +29,11 @@ const NavBar = () => {
         <div className="d-none d-md-flex">
             <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
             <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
-            <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
+            {isShelterUser ? (
+                <NavLink to="/dogs" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Dogs</NavLink>
+            ) : (
+                <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
+            )}
             <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
             <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
         </div>
