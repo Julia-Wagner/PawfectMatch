@@ -31,7 +31,7 @@ function DogsPage({message, filter = ""}) {
     useEffect(() => {
         const fetchDogs = async () => {
             try {
-                const {data} = await axiosReq.get("/dogs");
+                const {data} = await axiosReq.get("/dogs/");
                 const userDogs = data.results.filter(dog => dog.is_owner);
                 setDogs(userDogs)
                 setHasLoaded(true)

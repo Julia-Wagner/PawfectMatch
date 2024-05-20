@@ -112,7 +112,7 @@ function DogCreateForm() {
         // Fetch available dog characteristics
         const fetchDogCharacteristics = async () => {
             try {
-                const {data} = await axiosReq.get("/dogs/characteristics");
+                const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
             } catch (error) {
                 console.error("Error fetching dog characteristics:", error);
@@ -157,7 +157,7 @@ function DogCreateForm() {
 
     const handleSubmitMedia = async (dog_id) => {
         if (image.length < 1) {
-            navigate(`/dogs/${dog_id}`)
+            navigate(`/dogs/${dog_id}/`)
         }
 
         const formData = new FormData();
@@ -171,7 +171,7 @@ function DogCreateForm() {
         console.log("Form Data:", formData);
 
         try {
-            const {data} = await axiosReq.post(`/medias/dog/${dog_id}`, formData);
+            const {data} = await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
             console.log("Media upload response:", data);
             navigate(`/dogs/${dog_id}`)
         } catch (err) {

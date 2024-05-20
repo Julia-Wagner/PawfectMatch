@@ -101,7 +101,7 @@ function PostCreateForm() {
         // Fetch the current user's dogs
         const fetchUserDogs = async () => {
             try {
-                const response = await axiosReq.get("/dogs");
+                const response = await axiosReq.get("/dogs/");
                 const userDogs = response.data.results.filter(dog => dog.is_owner);
                 setDogs(userDogs);
             } catch (error) {
@@ -142,7 +142,7 @@ function PostCreateForm() {
 
     const handleSubmitMedia = async (post_id) => {
         if (image.length < 1) {
-            navigate(`/posts/${post_id}`)
+            navigate(`/posts/${post_id}/`)
         }
 
         const formData = new FormData();
@@ -156,7 +156,7 @@ function PostCreateForm() {
         console.log("Form Data:", formData);
 
         try {
-            const {data} = await axiosReq.post(`/medias/post/${post_id}`, formData);
+            const {data} = await axiosReq.post(`/medias/post/${post_id}/`, formData);
             console.log("Media upload response:", data);
             navigate(`/posts/${post_id}`)
         } catch (err) {

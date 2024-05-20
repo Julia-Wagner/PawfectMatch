@@ -31,7 +31,7 @@ function PostsPage({message, filter = ""}) {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const {data} = await axiosReq.get(`/posts/?${filter}`)
+                const {data} = await axiosReq.get(`/posts/?${filter}/`)
                 setPosts(data)
                 setHasLoaded(true)
             } catch (err) {

@@ -19,10 +19,10 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchSavedPosts = async () => {
             try {
-                const {data} = await axiosReq.get("/saves");
+                const {data} = await axiosReq.get("/saves/");
                 const postIds = data.results.map((save) => save.post).slice(0, 5);
                 const postItems = await Promise.all(postIds.map(async (postId) => {
-                    const { data: post } = await axiosReq.get(`/posts/${postId}`);
+                    const { data: post } = await axiosReq.get(`/posts/${postId}/`);
                     return post;
                 }));
                 setPosts(postItems)

@@ -30,10 +30,10 @@ function PostsPage({message = ""}) {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const {data} = await axiosReq.get("/saves")
+                const {data} = await axiosReq.get("/saves/")
                 const postIds = data.results.map((save) => save.post);
                 const postItems = await Promise.all(postIds.map(async (postId) => {
-                    const { data: post } = await axiosReq.get(`/posts/${postId}`);
+                    const { data: post } = await axiosReq.get(`/posts/${postId}/`);
                     return post;
                 }));
                 setPosts({ results: postItems })

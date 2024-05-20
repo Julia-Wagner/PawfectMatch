@@ -53,7 +53,7 @@ function PostEditForm() {
     useEffect(() => {
         const handleMount = async () => {
             try {
-                const {data} = await axiosReq.get(`/posts/${id}`)
+                const {data} = await axiosReq.get(`/posts/${id}/`)
                 const {title, content, dogs, is_owner} = data;
 
                 is_owner ? setPostData({title, content}) : navigate("/feed");
@@ -97,7 +97,7 @@ function PostEditForm() {
         // Fetch the current user's dogs
         const fetchUserDogs = async () => {
             try {
-                const response = await axiosReq.get("/dogs");
+                const response = await axiosReq.get("/dogs/");
                 const userDogs = response.data.results.filter(dog => dog.is_owner);
                 setDogs(userDogs);
             } catch (error) {
@@ -127,7 +127,7 @@ function PostEditForm() {
         }
 
         try {
-            await axiosReq.put(`/posts/${id}`, formData);
+            await axiosReq.put(`/posts/${id}/`, formData);
             navigate(`/posts/${id}`)
         } catch (err) {
             if (err.response?.status !== 401) {

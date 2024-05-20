@@ -15,7 +15,7 @@ const useFollow = (clickedId = null) => {
 
     const handleUnfollow = async (clickedId) => {
         try {
-            const clickedProfile = await axiosReq.get(`/profiles/${clickedId}`);
+            const clickedProfile = await axiosReq.get(`/profiles/${clickedId}/`);
             await axiosRes.delete(`/followers/${clickedProfile.data.following_id}/`);
             triggerUpdate();
         } catch (err) {

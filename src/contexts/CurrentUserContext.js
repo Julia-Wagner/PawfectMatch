@@ -23,7 +23,7 @@ export const CurrentUserProvider = ({ children }) => {
             setCurrentUser(data);
 
             if (data.profile_id) {
-                const profileResponse = await axiosReq.get(`/profiles/${data.profile_id}`);
+                const profileResponse = await axiosReq.get(`/profiles/${data.profile_id}/`);
                 setIsShelterUser(profileResponse.data.type === "shelter");
             }
         } catch (err) {
@@ -39,7 +39,7 @@ export const CurrentUserProvider = ({ children }) => {
         if (currentUser && currentUser.profile_id) {
             const checkShelterUser = async () => {
                 try {
-                    const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}`);
+                    const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}/`);
                     setIsShelterUser(profileResponse.data.type === "shelter");
                 } catch (err) {
                     console.log(err);
