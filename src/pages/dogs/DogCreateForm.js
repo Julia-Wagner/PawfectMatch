@@ -181,6 +181,8 @@ function DogCreateForm() {
         }
     }
 
+    const today = new Date().toISOString().split("T")[0];
+
     return (
         <Container>
             <h2 className="text-center my-3">Create a new dog</h2>
@@ -212,7 +214,7 @@ function DogCreateForm() {
                                 ))}
                                 <Form.Group className="mb-4">
                                     <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="date" name="birthday" value={birthday} onChange={handleChange} />
+                                    <Form.Control type="date" name="birthday" value={birthday} onChange={handleChange} max={today} />
                                 </Form.Group>
                                 {errors?.birthday?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
