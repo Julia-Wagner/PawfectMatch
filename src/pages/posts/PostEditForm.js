@@ -88,7 +88,7 @@ function PostEditForm() {
             });
         }
 
-        if (quillRef.current && postData.content) {
+        if (quillRef.current && quillRef.current.root.innerHTML !== postData.content) {
             quillRef.current.root.innerHTML = postData.content;
         }
     }, [postData.content]);
