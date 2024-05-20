@@ -140,7 +140,9 @@ function DogCreateForm() {
         formData.append("is_adopted", is_adopted)
 
         if (selectedCharacteristics.length > 0 && selectedCharacteristics[0] !== "") {
-            formData.append("characteristics", selectedCharacteristics);
+            selectedCharacteristics.forEach((characteristic) => {
+                formData.append("characteristics", characteristic);
+            });
         }
 
         try {

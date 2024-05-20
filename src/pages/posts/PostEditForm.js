@@ -121,7 +121,9 @@ function PostEditForm() {
         formData.append("content", content)
 
         if (selectedDogs.length > 0 && selectedDogs[0] !== "") {
-            formData.append("dogs", selectedDogs);
+            selectedDogs.forEach((dog) => {
+                formData.append("dogs", dog);
+            });
         }
 
         try {
