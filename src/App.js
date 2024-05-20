@@ -16,6 +16,7 @@ import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import SavedPostsPage from "./pages/posts/SavedPostsPage";
 import AboutPage from "./pages/AboutPage";
 import DogsPage from "./pages/dogs/DogsPage";
+import DogCreateForm from "./pages/dogs/DogCreateForm";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -48,6 +49,11 @@ function App() {
                     <Route exact={true} path="/dogs" element={
                         <PrivateRoute>
                             <DogsPage />
+                        </PrivateRoute>
+                    }/>
+                    <Route exact={true} path="/dogs/create" element={
+                        <PrivateRoute>
+                            <DogCreateForm />
                         </PrivateRoute>
                     }/>
                     <Route exact={true} path="/posts/create" element={
