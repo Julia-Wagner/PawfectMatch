@@ -78,7 +78,9 @@ const Dog = (props) => {
                 </div>
             </Card.Body>
             <Link to={`/dogs/${id}`}>
-                <Image src={main_image} width="100%" alt={name} />
+                <div className={styles.SquareContainer}>
+                    <Image className={styles.SquareImage} src={main_image} width="100%" alt={name} />
+                </div>
             </Link>
             <Card.Body>
                 {name && <h2 className="text-center">{name}</h2>}

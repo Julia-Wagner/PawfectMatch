@@ -148,7 +148,7 @@ function PostCreateForm() {
         const formData = new FormData();
 
         formData.append("image", postMediaData.file)
-        formData.append("name", name)
+        formData.append("name", title)
         formData.append("description", description)
         formData.append("type", type)
         formData.append("is_main_image", is_main_image)

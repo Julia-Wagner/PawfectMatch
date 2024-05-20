@@ -70,7 +70,6 @@ function DogCreateForm() {
     };
 
     const handleChangeMedia = (event) => {
-        console.log("change media")
         if (event.target.files.length) {
             const selectedMedia = event.target.files[0];
             URL.revokeObjectURL(image);
@@ -80,9 +79,6 @@ function DogCreateForm() {
                 file: selectedMedia,
             })
         }
-        console.log(dogMediaData)
-        console.log(dogMediaData.file)
-        console.log(image)
     }
 
     useEffect(() => {
@@ -163,7 +159,7 @@ function DogCreateForm() {
         const formData = new FormData();
 
         formData.append("image", dogMediaData.file)
-        formData.append("name", media_name)
+        formData.append("name", name)
         formData.append("description", media_description)
         formData.append("type", type)
         formData.append("is_main_image", is_main_image)

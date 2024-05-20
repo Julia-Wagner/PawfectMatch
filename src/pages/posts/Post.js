@@ -134,7 +134,9 @@ const Post = (props) => {
                 </div>
             </Card.Body>
             <Link to={`/posts/${id}`}>
-                <Image src={main_image} width="100%" alt={title} />
+                <div className={styles.SquareContainer}>
+                    <Image className={styles.SquareImage} src={main_image} width="100%" alt={title} />
+                </div>
             </Link>
             <Card.Body>
                 {title && <h2 className="text-center">{title}</h2>}
