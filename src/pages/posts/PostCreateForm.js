@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate} from "react-router-dom";
-import {Alert} from "react-bootstrap";
+import {Alert, Figure, Image} from "react-bootstrap";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
@@ -30,6 +30,18 @@ function PostCreateForm() {
 
     const [errors, setErrors] = useState({});
 
+    const [postMediaData, setPostMediaData] = useState({
+        image: "",
+        video: "",
+        name: "",
+        description: "",
+        type: "image",
+        is_main_image: true,
+    });
+    const {image, name, description, type, is_main_image} = postMediaData;
+
+    const imageInput = useRef(null);
+
     const [postData, setPostData] = useState({
         title: "",
         content: "",
@@ -45,6 +57,22 @@ function PostCreateForm() {
             [event.target.name]: event.target.value,
         });
     };
+
+    const handleChangeMedia = (event) => {
+        console.log("change media")
+        if (event.target.files.length) {
+            const selectedMedia = event.target.files[0];
+            URL.revokeObjectURL(image);
+            setPostMediaData({
+                ...postMediaData,
+                image: URL.createObjectURL(selectedMedia),
+                file: selectedMedia,
+            })
+        }
+        console.log(postMediaData)
+        console.log(postMediaData.file)
+        console.log(image)
+    }
 
     useEffect(() => {
         if (!quillRef.current) {
@@ -102,7 +130,33 @@ function PostCreateForm() {
 
         try {
             const {data} = await axiosReq.post('/posts/', formData);
-            navigate(`/posts/${data.id}`)
+            handleSubmitMedia(data.id);
+        } catch (err) {
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data)
+            }
+        }
+    }
+
+    const handleSubmitMedia = async (post_id) => {
+        if (image.length < 1) {
+            navigate(`/posts/${post_id}`)
+        }
+
+        const formData = new FormData();
+
+        formData.append("image", postMediaData.file)
+        formData.append("name", name)
+        formData.append("description", description)
+        formData.append("type", type)
+        formData.append("is_main_image", is_main_image)
+
+        console.log("Form Data:", formData);
+
+        try {
+            const {data} = await axiosReq.post(`/medias/post/${post_id}`, formData);
+            console.log("Media upload response:", data);
+            navigate(`/posts/${post_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
@@ -161,15 +215,31 @@ function PostCreateForm() {
                             className={`${appStyles.Content} d-flex flex-column justify-content-center`}
                         >
                             <Form.Group className="text-center">
-
-                                <Form.Label
-                                    className="d-flex justify-content-center"
-                                    htmlFor="image-upload"
-                                >
-                                    <Asset src={Upload} message="Click or tap to upload an image" />
-                                </Form.Label>
-
+                                {image ? (
+                                    <>
+                                        <Figure>
+                                            <Image className={appStyles.Image} src={image} rounded />
+                                        </Figure>
+                                        <div>
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
+                                                Change the image
+                                            </Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label
+                                        className="d-flex justify-content-center"
+                                        htmlFor="media-upload"
+                                    >
+                                        <Asset src={Upload} message="Click or tap to upload an image" />
+                                    </Form.Label>
+                                )}
+                                <Form.Control id="media-upload" type="file"
+                                              onChange={handleChangeMedia} ref={imageInput} />
                             </Form.Group>
+                            {errors?.image?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
                         </Container>
                     </Col>
                 </Row>
