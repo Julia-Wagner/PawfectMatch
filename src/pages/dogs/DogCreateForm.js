@@ -62,9 +62,10 @@ function DogCreateForm() {
     const [selectedCharacteristics, setSelectedCharacteristics] = useState([]);
 
     const handleChange = (event) => {
+        const {name, value, type, checked} = event.target;
         setDogData({
             ...dogData,
-            [event.target.name]: event.target.value,
+            [name]: type === "checkbox" ? checked : value,
         });
     };
 
@@ -138,6 +139,10 @@ function DogCreateForm() {
         formData.append("gender", gender)
         formData.append("is_adopted", is_adopted)
 
+        if (selectedCharacteristics.length > 0 && selectedCharacteristics[0] !== "") {
+            formData.append("characteristics", selectedCharacteristics);
+        }
+
         try {
             const {data} = await axiosReq.post('/dogs/', formData);
             handleSubmitMedia(data.id);
@@ -156,8 +161,8 @@ function DogCreateForm() {
         const formData = new FormData();
 
         formData.append("image", dogMediaData.file)
-        formData.append("media_name", name)
-        formData.append("media_description", description)
+        formData.append("name", media_name)
+        formData.append("description", media_description)
         formData.append("type", type)
         formData.append("is_main_image", is_main_image)
 
@@ -212,7 +217,7 @@ function DogCreateForm() {
                                 ))}
                                 <Form.Group className="mb-4">
                                     <Form.Label>Size</Form.Label>
-                                    <Form.Select value={size} onChange={handleChange}>
+                                    <Form.Select value={size} name="size" onChange={handleChange}>
                                         <option key="small" value="small">Small</option>
                                         <option key="medium" value="medium">Medium</option>
                                         <option key="big" value="big">Big</option>
@@ -223,7 +228,7 @@ function DogCreateForm() {
                                 ))}
                                 <Form.Group className="mb-4">
                                     <Form.Label>Gender</Form.Label>
-                                    <Form.Select value={gender} onChange={handleChange}>
+                                    <Form.Select value={gender} name="gender" onChange={handleChange}>
                                         <option key="male" value="male">Male</option>
                                         <option key="female" value="female">Female</option>
                                     </Form.Select>
