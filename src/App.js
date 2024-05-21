@@ -17,6 +17,7 @@ import SavedPostsPage from "./pages/posts/SavedPostsPage";
 import AboutPage from "./pages/AboutPage";
 import DogsPage from "./pages/dogs/DogsPage";
 import DogCreateForm from "./pages/dogs/DogCreateForm";
+import DogPage from "./pages/dogs/DogPage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -34,6 +35,7 @@ function App() {
 
                     <Route exact={true} path="/feed" element={<PostsPage/>}/>
                     <Route exact={true} path="/posts/:id" element={<PostPage/>}/>
+                    <Route exact={true} path="/dogs/:id" element={<DogPage/>}/>
                     <Route exact={true} path="/profiles/:id" element={<ProfilePage/>}/>
 
                     <Route exact={true} path="/following" element={
