@@ -164,11 +164,8 @@ function DogCreateForm() {
         formData.append("type", type)
         formData.append("is_main_image", is_main_image)
 
-        console.log("Form Data:", formData);
-
         try {
             const {data} = await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
-            console.log("Media upload response:", data);
             navigate(`/dogs/${dog_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {

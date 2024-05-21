@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate, useParams} from "react-router-dom";
-import {Alert} from "react-bootstrap";
+import {Alert, Figure, Image} from "react-bootstrap";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
@@ -17,10 +17,8 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
-import {useIsShelterUser} from "../../contexts/CurrentUserContext";
 
 function DogEditForm() {
-    const isShelterUser = useIsShelterUser();
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -31,6 +29,18 @@ function DogEditForm() {
     }
 
     const [errors, setErrors] = useState({});
+
+    const [dogMediaData, setDogMediaData] = useState({
+        image: "",
+        video: "",
+        media_name: "",
+        media_description: "",
+        type: "image",
+        is_main_image: true,
+    });
+    const {image, media_name, media_description, type, is_main_image} = dogMediaData;
+
+    const imageInput = useRef(null);
 
     const [dogData, setDogData] = useState({
         name: "",
@@ -61,6 +71,18 @@ function DogEditForm() {
         });
     };
 
+    const handleChangeMedia = (event) => {
+        if (event.target.files.length) {
+            const selectedMedia = event.target.files[0];
+            URL.revokeObjectURL(image);
+            setDogMediaData({
+                ...dogMediaData,
+                image: URL.createObjectURL(selectedMedia),
+                file: selectedMedia,
+            })
+        }
+    }
+
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -75,16 +97,26 @@ function DogEditForm() {
                     is_adopted,
                     characteristics,
                     is_owner} = data;
+                const image = data.main_image.url;
 
-                is_owner ? setDogData({name,
-                    description,
-                    breed,
-                    birthday,
-                    size,
-                    gender,
-                    is_adopted,
-                    characteristics}) : navigate("/feed");
-                is_owner ? setSelectedCharacteristics(characteristics) : navigate("/feed");
+                if (is_owner) {
+                    setDogData({name,
+                        description,
+                        breed,
+                        birthday,
+                        size,
+                        gender,
+                        is_adopted,
+                        characteristics});
+                    setSelectedCharacteristics(characteristics);
+                    setDogMediaData({
+                        ...dogMediaData,
+                        image: image,
+                        file: image,
+                    })
+                } else {
+                    navigate("/feed");
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -158,8 +190,43 @@ function DogEditForm() {
         }
 
         try {
-            await axiosReq.put(`/dogs/${id}/`, formData);
-            navigate(`/dogs/${id}`)
+            const {data} = await axiosReq.put(`/dogs/${id}/`, formData);
+            // check if an image was uploaded
+            if (image.length > 1 || data.main_image.id !== null) {
+                // check if the image changed
+                if (image !== data.main_image.url) {
+                    handleSubmitMedia(id, data.main_image.id);
+                } else {
+                    navigate(`/dogs/${id}/`)
+                }
+            } else {
+                navigate(`/dogs/${id}/`)
+            }
+        } catch (err) {
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data)
+            }
+        }
+    }
+
+    const handleSubmitMedia = async (dog_id, image_id) => {
+        const formData = new FormData();
+
+        formData.append("image", dogMediaData.file)
+        formData.append("name", name)
+        formData.append("description", media_description)
+        formData.append("type", type)
+        formData.append("is_main_image", is_main_image)
+
+        try {
+            if (image_id) {
+                // change the media if another image was uploaded before
+                await axiosReq.put(`/medias/${image_id}/`, formData);
+            } else {
+                // create a new media if no image was uploaded before
+                await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
+            }
+            navigate(`/dogs/${dog_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
@@ -260,15 +327,31 @@ function DogEditForm() {
                             className={`${appStyles.Content} d-flex flex-column justify-content-center`}
                         >
                             <Form.Group className="text-center">
-
-                                <Form.Label
-                                    className="d-flex justify-content-center"
-                                    htmlFor="image-upload"
-                                >
-                                    <Asset src={Upload} message="Click or tap to upload an image" />
-                                </Form.Label>
-
+                                {image ? (
+                                    <>
+                                        <Figure>
+                                            <Image className={appStyles.Image} src={image} rounded />
+                                        </Figure>
+                                        <div>
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
+                                                Change the image
+                                            </Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label
+                                        className="d-flex justify-content-center"
+                                        htmlFor="media-upload"
+                                    >
+                                        <Asset src={Upload} message="Click or tap to upload an image" />
+                                    </Form.Label>
+                                )}
+                                <Form.Control id="media-upload" type="file"
+                                              onChange={handleChangeMedia} ref={imageInput} />
                             </Form.Group>
+                            {errors?.image?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
                         </Container>
                     </Col>
                 </Row>
