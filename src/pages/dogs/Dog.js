@@ -12,6 +12,7 @@ const Dog = (props) => {
         id,
         owner,
         is_owner,
+        owner_name,
         birthday,
         age,
         breed,
@@ -26,6 +27,9 @@ const Dog = (props) => {
         updated_at,
         dogPage,
         setDogs,
+        profile_id,
+        owner_phone,
+        owner_address,
     } = props;
 
     const navigate = useNavigate();
@@ -118,12 +122,34 @@ const Dog = (props) => {
                             </Col>
                         </Row>
                         {characteristics && characteristics.length > 0 &&
-                            <div className="mt-4 d-flex gap-3">
+                            <div className="mt-4 mb-5 d-flex gap-3">
                                 {characteristics.map((char, index) => (
                                     <div className={styles.Characteristic} key={index}>{char.characteristic}</div>
                                 ))}
                             </div>
                         }
+                        <hr/>
+                        <div className="mb-5 mt-4">
+                            {owner &&
+                                <Link to={`/profiles/${profile_id}`}>
+                                    <h3 className="text-center">{owner_name}</h3>
+                                </Link>
+                            }
+                            <Row>
+                                {owner_phone &&
+                                    <Col className="py-2 p-0 p-lg-2">
+                                        <i className={`fa-solid fa-phone ${styles.Icon} ${styles.BlueIcon}`}/> {owner_phone}
+                                    </Col>
+                                }
+                            </Row>
+                            <Row>
+                                {owner_address &&
+                                    <Col className="py-2 p-0 p-lg-2">
+                                        <i className={`fa-solid fa-location-dot ${styles.Icon} ${styles.BlueIcon}`}/> {owner_address}
+                                    </Col>
+                                }
+                            </Row>
+                        </div>
                     </Container>
                 }
             </Card.Body>

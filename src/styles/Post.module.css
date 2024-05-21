@@ -71,6 +71,10 @@
     text-align: center;
 }
 
+.BlueIcon {
+    background-color: #6dcbec;
+}
+
 .Characteristic {
     background-color: #f7bf3d;
     padding: .3rem .6rem;
