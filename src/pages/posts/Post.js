@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import DOMPurify from 'dompurify';
 import appStyles from "../../App.module.css";
 import styles from "../../styles/Post.module.css"
@@ -36,6 +36,13 @@ const Post = (props) => {
     const navigate = useNavigate();
     const {triggerUpdate} = useSavedPosts();
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        if (main_image && main_image.url) {
+            setImageUrl(main_image.url);
+        }
+    }, [main_image]);
 
     const {handleFollow, handleUnfollow} = useFollow(profile_id);
 
@@ -135,7 +142,7 @@ const Post = (props) => {
             </Card.Body>
             <Link to={`/posts/${id}`}>
                 <div className={styles.SquareContainer}>
-                    <Image className={styles.SquareImage} src={main_image} width="100%" alt={title} />
+                    <Image className={styles.SquareImage} src={imageUrl} width="100%" alt={title} />
                 </div>
             </Link>
             <Card.Body>

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
 import {Badge, Card, Image} from "react-bootstrap";
@@ -29,6 +29,13 @@ const Dog = (props) => {
 
     const navigate = useNavigate();
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+
+    useEffect(() => {
+        if (main_image && main_image.url) {
+            setImageUrl(main_image.url);
+        }
+    }, [main_image]);
 
     // Sanitize HTML content to prevent security issues
     const sanitizedDescription = React.useMemo(() => {
@@ -78,7 +85,7 @@ const Dog = (props) => {
             </Card.Body>
             <Link to={`/dogs/${id}`}>
                 <div className={styles.SquareContainer}>
-                    <Image className={styles.SquareImage} src={main_image} width="100%" alt={name} />
+                    <Image className={styles.SquareImage} src={imageUrl} width="100%" alt={name} />
                 </div>
             </Link>
             <Card.Body>
