@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate, useParams} from "react-router-dom";
-import {Alert} from "react-bootstrap";
+import {Alert, Figure, Image} from "react-bootstrap";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
@@ -17,10 +17,8 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
-import {useIsShelterUser} from "../../contexts/CurrentUserContext";
 
 function PostEditForm() {
-    const isShelterUser = useIsShelterUser();
     const {id} = useParams();
 
     const navigate = useNavigate();
@@ -31,6 +29,18 @@ function PostEditForm() {
     }
 
     const [errors, setErrors] = useState({});
+
+    const [postMediaData, setPostMediaData] = useState({
+        image: "",
+        video: "",
+        media_name: "",
+        media_description: "",
+        type: "image",
+        is_main_image: true,
+    });
+    const {image, media_name, media_description, type, is_main_image} = postMediaData;
+
+    const imageInput = useRef(null);
 
     const [postData, setPostData] = useState({
         title: "",
@@ -50,14 +60,36 @@ function PostEditForm() {
         });
     };
 
+    const handleChangeMedia = (event) => {
+        if (event.target.files.length) {
+            const selectedMedia = event.target.files[0];
+            URL.revokeObjectURL(image);
+            setPostMediaData({
+                ...postMediaData,
+                image: URL.createObjectURL(selectedMedia),
+                file: selectedMedia,
+            })
+        }
+    }
+
     useEffect(() => {
         const handleMount = async () => {
             try {
                 const {data} = await axiosReq.get(`/posts/${id}/`)
                 const {title, content, dogs, is_owner} = data;
+                const image = data.main_image.url;
 
-                is_owner ? setPostData({title, content}) : navigate("/feed");
-                is_owner ? setSelectedDogs(dogs) : navigate("/feed");
+                if (is_owner) {
+                    setPostData({title, content});
+                    setSelectedDogs(dogs);
+                    setPostMediaData({
+                        ...postMediaData,
+                        image: image,
+                        file: image,
+                    })
+                } else {
+                    navigate("/feed");
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -127,14 +159,51 @@ function PostEditForm() {
         }
 
         try {
-            await axiosReq.put(`/posts/${id}/`, formData);
-            navigate(`/posts/${id}`)
+            const {data} = await axiosReq.put(`/posts/${id}/`, formData);
+            // check if an image was uploaded
+            if (image.length > 1 || data.main_image.id !== null) {
+                // check if the image changed
+                if (image !== data.main_image.url) {
+                    handleSubmitMedia(id, data.main_image.id);
+                } else {
+                    navigate(`/posts/${id}/`)
+                }
+            } else {
+                navigate(`/posts/${id}/`)
+            }
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
             }
         }
     }
+
+    const handleSubmitMedia = async (post_id, image_id) => {
+        const formData = new FormData();
+
+        formData.append("image", postMediaData.file)
+        formData.append("name", title)
+        formData.append("description", media_description)
+        formData.append("type", type)
+        formData.append("is_main_image", is_main_image)
+
+        try {
+            if (image_id) {
+                // change the media if another image was uploaded before
+                await axiosReq.put(`/medias/${image_id}/`, formData);
+            } else {
+                // create a new media if no image was uploaded before
+                await axiosReq.post(`/medias/post/${post_id}/`, formData);
+            }
+            navigate(`/posts/${post_id}`)
+        } catch (err) {
+            if (err.response?.status !== 401) {
+                setErrors(err.response?.data)
+            }
+        }
+    }
+
+    const today = new Date().toISOString().split("T")[0];
 
     return (
         <Container>
@@ -158,17 +227,15 @@ function PostEditForm() {
                                 {errors?.content?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                {isShelterUser && (
-                                    <Form.Group className="mt-4">
-                                        <Form.Label>Link dogs to the post</Form.Label>
-                                        <Form.Select multiple value={selectedDogs} onChange={handleSelectChange}>
-                                            <option value="">No dogs</option>
-                                            {dogs.map((dog) => (
-                                                <option key={dog.id} value={dog.id}>{dog.name}</option>
-                                            ))}
-                                        </Form.Select>
-                                    </Form.Group>
-                                )}
+                                <Form.Group className="mt-4">
+                                    <Form.Label>Link dogs to the post</Form.Label>
+                                    <Form.Select multiple value={selectedDogs} onChange={handleSelectChange}>
+                                        <option value="">No dogs</option>
+                                        {dogs.map((dog) => (
+                                            <option key={dog.id} value={dog.id}>{dog.name}</option>
+                                        ))}
+                                    </Form.Select>
+                                </Form.Group>
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
@@ -187,15 +254,31 @@ function PostEditForm() {
                             className={`${appStyles.Content} d-flex flex-column justify-content-center`}
                         >
                             <Form.Group className="text-center">
-
-                                <Form.Label
-                                    className="d-flex justify-content-center"
-                                    htmlFor="image-upload"
-                                >
-                                    <Asset src={Upload} message="Click or tap to upload an image" />
-                                </Form.Label>
-
+                                {image ? (
+                                    <>
+                                        <Figure>
+                                            <Image className={appStyles.Image} src={image} rounded />
+                                        </Figure>
+                                        <div>
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
+                                                Change the image
+                                            </Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label
+                                        className="d-flex justify-content-center"
+                                        htmlFor="media-upload"
+                                    >
+                                        <Asset src={Upload} message="Click or tap to upload an image" />
+                                    </Form.Label>
+                                )}
+                                <Form.Control id="media-upload" type="file"
+                                              onChange={handleChangeMedia} ref={imageInput} />
                             </Form.Group>
+                            {errors?.image?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
                         </Container>
                     </Col>
                 </Row>
