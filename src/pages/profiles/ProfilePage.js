@@ -8,7 +8,7 @@ import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import {useCurrentUser} from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import {Button, Image} from "react-bootstrap";
@@ -38,7 +38,7 @@ function ProfilePage() {
             try {
                 const [{ data: pageProfile }, { data: profilePosts }] = await Promise.all([
                     axiosReq.get(`/profiles/${id}/`),
-                    axiosReq.get(`/posts/?owner__profile=${id}/`),
+                    axiosReq.get(`/posts/?owner__profile=${id}`),
                 ]);
                 setProfileData(pageProfile);
                 setProfilePosts(profilePosts);
@@ -63,6 +63,12 @@ function ProfilePage() {
                             <div>{profile?.posts_count}</div>
                             <div>posts</div>
                         </Col>
+                        {profile && profile.type === "shelter" && (
+                            <Col className="my-2">
+                                <div>{profile?.dogs_count}</div>
+                                <div>dogs</div>
+                            </Col>
+                        )}
                     </Row>
                 </Col>
                 <Col lg={3} className="text-lg-right">
