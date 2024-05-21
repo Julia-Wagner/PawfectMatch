@@ -1,8 +1,7 @@
 import React, {useState} from "react"
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
-import {useCurrentUser} from "../../contexts/CurrentUserContext";
-import {Badge, Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
+import {Badge, Card, Image} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosRes} from "../../api/axiosDefaults";

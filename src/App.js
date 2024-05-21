@@ -18,6 +18,7 @@ import AboutPage from "./pages/AboutPage";
 import DogsPage from "./pages/dogs/DogsPage";
 import DogCreateForm from "./pages/dogs/DogCreateForm";
 import DogPage from "./pages/dogs/DogPage";
+import DogEditForm from "./pages/dogs/DogEditForm";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -56,6 +57,11 @@ function App() {
                     <Route exact={true} path="/dogs/create" element={
                         <PrivateRoute>
                             <DogCreateForm />
+                        </PrivateRoute>
+                    }/>
+                    <Route exact={true} path="/dogs/:id/edit" element={
+                        <PrivateRoute>
+                            <DogEditForm />
                         </PrivateRoute>
                     }/>
                     <Route exact={true} path="/posts/create" element={
