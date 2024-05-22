@@ -19,6 +19,7 @@ import DogsPage from "./pages/dogs/DogsPage";
 import DogCreateForm from "./pages/dogs/DogCreateForm";
 import DogPage from "./pages/dogs/DogPage";
 import DogEditForm from "./pages/dogs/DogEditForm";
+import MatchesPage from "./pages/dogs/MatchesPage";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -46,7 +47,7 @@ function App() {
                     }/>
                     <Route exact={true} path="/matches" element={
                         <PrivateRoute>
-                            <PostsPage filter="has_dogs=true&" />
+                            <MatchesPage />
                         </PrivateRoute>
                     }/>
                     <Route exact={true} path="/dogs" element={
