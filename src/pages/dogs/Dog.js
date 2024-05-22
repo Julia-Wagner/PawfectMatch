@@ -173,21 +173,20 @@ const Dog = (props) => {
                             </Row>
                         </div>
                         {dogPosts.results && dogPosts.results.length > 0 && (
-                            <>
-                                <hr/>
-                                <div className="mb-5 mt-4">
-                                    <h3 className="text-center">Posts linked to {name}</h3>
-                                    <InfiniteScroll
-                                        children={dogPosts.results.map((post) => (
-                                            <Post key={post.id} {...post} setPosts={setDogPosts} />
-                                        ))}
-                                        dataLength={dogPosts.results.length}
-                                        loader={<Asset spinner />}
-                                        hasMore={!!dogPosts.next}
-                                        next={() => fetchMoreData(dogPosts, setDogPosts)}
-                                    />
-                                </div>
-                            </>
+                            <div className="mb-5 mt-4">
+                                <hr />
+                                <h3 className={styles.LinkHeading}>Posts linked to {name}</h3>
+                                <hr />
+                                <InfiniteScroll
+                                    children={dogPosts.results.map((post) => (
+                                        <Post key={post.id} {...post} setPosts={setDogPosts} />
+                                    ))}
+                                    dataLength={dogPosts.results.length}
+                                    loader={<Asset spinner />}
+                                    hasMore={!!dogPosts.next}
+                                    next={() => fetchMoreData(dogPosts, setDogPosts)}
+                                />
+                            </div>
                         )}
                     </Container>
                 }

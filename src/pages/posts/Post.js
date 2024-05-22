@@ -6,10 +6,14 @@ import {useCurrentUser} from "../../contexts/CurrentUserContext";
 import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
-import {axiosRes} from "../../api/axiosDefaults";
+import {axiosReq, axiosRes} from "../../api/axiosDefaults";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import {useSavedPosts} from "../../contexts/SavedPostsContext";
 import useFollow from "../../hooks/useFollow";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
+import {fetchMoreData} from "../../utils/utils";
+import Dog from "../dogs/Dog";
 
 const Post = (props) => {
     const {
@@ -37,6 +41,24 @@ const Post = (props) => {
     const {triggerUpdate} = useSavedPosts();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
+
+    const [postDogs, setPostDogs] = useState({ results: [] });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (id) {
+                try {
+                    const [{ data: postDogs }] = await Promise.all([
+                        axiosReq.get(`/dogs/?posts__id=${id}`),
+                    ]);
+                    setPostDogs(postDogs);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        };
+        fetchData();
+    }, [id]);
 
     useEffect(() => {
         if (main_image && main_image.url) {
@@ -175,6 +197,22 @@ const Post = (props) => {
                     )}
                     <span className="fw-bold">{saves_count}</span>
                 </div>
+                {postPage && postDogs.results && postDogs.results.length > 0 && (
+                    <div className="mb-5 mt-4">
+                        <hr />
+                        <h3 className={styles.LinkHeading}>Dogs linked to this post</h3>
+                        <hr />
+                        <InfiniteScroll
+                            children={postDogs.results.map((dog) => (
+                                <Dog key={dog.id} {...dog} setDogs={setPostDogs} />
+                            ))}
+                            dataLength={postDogs.results.length}
+                            loader={<Asset spinner />}
+                            hasMore={!!postDogs.next}
+                            next={() => fetchMoreData(postDogs, setPostDogs)}
+                        />
+                    </div>
+                )}
             </Card.Body>
             <ConfirmationModal title="Confirm deletion" text="Are you sure you want to delete this post?"
                 show={showConfirmation}
