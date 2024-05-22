@@ -22,6 +22,7 @@ import {useFollowers} from "../../contexts/FollowersContext";
 function MatchesPage({message, filter = ""}) {
     const [dogs, setDogs] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [characteristics, setCharacteristics] = useState([]);
     const {pathname} = useLocation();
 
     const currentUser = useCurrentUser();
@@ -31,6 +32,7 @@ function MatchesPage({message, filter = ""}) {
     const initialFilters = {
         gender: "",
         size: "",
+        characteristics: []
     };
 
     const [filters, setFilters] = useState(initialFilters);
@@ -41,6 +43,9 @@ function MatchesPage({message, filter = ""}) {
         if (type === "checkbox") {
             setFilters((prevFilters) => ({
                 ...prevFilters,
+                characteristics: checked
+                    ? [...prevFilters.characteristics, value]
+                    : prevFilters.characteristics.filter((c) => c !== value)
             }));
         } else {
             setFilters({
@@ -51,12 +56,30 @@ function MatchesPage({message, filter = ""}) {
     };
 
     useEffect(() => {
+        const fetchCharacteristics = async () => {
+            try {
+                const {data} = await axiosReq.get("/dogs/characteristics/");
+                setCharacteristics(data.results);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchCharacteristics();
+    }, []);
+
+    useEffect(() => {
         const fetchDogs = async () => {
             try {
                 // add set filters to url query
                 const params = new URLSearchParams();
                 if (filters.gender) params.append('gender', filters.gender);
                 if (filters.size) params.append('size', filters.size);
+                if (filters.characteristics.length > 0) {
+                    filters.characteristics.forEach(characteristic => {
+                        params.append('characteristics', characteristic);
+                    });
+                }
 
                 const { data } = await axiosReq.get(`/dogs/?${params.toString()}`);
 
@@ -114,6 +137,22 @@ function MatchesPage({message, filter = ""}) {
                                             <option value="medium">Medium</option>
                                             <option value="big">Big</option>
                                         </Form.Select>
+                                    </Form.Group>
+                                    <Form.Group controlId="characteristics" className="mt-4">
+                                        <Form.Label>Characteristics</Form.Label>
+                                        <div>
+                                            {characteristics.map((characteristic) => (
+                                                <Form.Check
+                                                    key={characteristic.id}
+                                                    type="checkbox"
+                                                    name="characteristics"
+                                                    value={characteristic.id}
+                                                    label={characteristic.characteristic}
+                                                    onChange={handleFilterChange}
+                                                    checked={filters.characteristics.includes(characteristic.id.toString())}
+                                                />
+                                            ))}
+                                        </div>
                                     </Form.Group>
                                 </Form>
                                 <div className="d-flex justify-content-end">
