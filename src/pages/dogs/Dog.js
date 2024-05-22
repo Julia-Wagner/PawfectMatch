@@ -4,8 +4,12 @@ import styles from "../../styles/Post.module.css"
 import {Badge, Card, Col, Container, Image, Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
-import {axiosRes} from "../../api/axiosDefaults";
+import {axiosReq, axiosRes} from "../../api/axiosDefaults";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Post from "../posts/Post";
+import Asset from "../../components/Asset";
+import {fetchMoreData} from "../../utils/utils";
 
 const Dog = (props) => {
     const {
@@ -35,6 +39,24 @@ const Dog = (props) => {
     const navigate = useNavigate();
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
+
+    const [dogPosts, setDogPosts] = useState({ results: [] });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (id) {
+                try {
+                    const [{ data: dogPosts }] = await Promise.all([
+                        axiosReq.get(`/posts/?dogs__id=${id}`),
+                    ]);
+                    setDogPosts(dogPosts);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        };
+        fetchData();
+    }, [id]);
 
     useEffect(() => {
         if (main_image && main_image.url) {
@@ -150,6 +172,23 @@ const Dog = (props) => {
                                 }
                             </Row>
                         </div>
+                        {dogPosts.results && dogPosts.results.length > 0 && (
+                            <>
+                                <hr/>
+                                <div className="mb-5 mt-4">
+                                    <h3 className="text-center">Posts linked to {name}</h3>
+                                    <InfiniteScroll
+                                        children={dogPosts.results.map((post) => (
+                                            <Post key={post.id} {...post} setPosts={setDogPosts} />
+                                        ))}
+                                        dataLength={dogPosts.results.length}
+                                        loader={<Asset spinner />}
+                                        hasMore={!!dogPosts.next}
+                                        next={() => fetchMoreData(dogPosts, setDogPosts)}
+                                    />
+                                </div>
+                            </>
+                        )}
                     </Container>
                 }
             </Card.Body>
