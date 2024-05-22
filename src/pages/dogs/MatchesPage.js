@@ -28,10 +28,13 @@ function MatchesPage({message, filter = ""}) {
     const isShelterUser = useIsShelterUser();
     const {shouldUpdate} = useFollowers();
 
-    const [filters, setFilters] = useState({
+    const initialFilters = {
         gender: "",
         size: "",
-    });
+    };
+
+    const [filters, setFilters] = useState(initialFilters);
+    const [accordionOpen, setAccordionOpen] = useState(false);
 
     const handleFilterChange = (event) => {
         const {name, value, type, checked} = event.target;
@@ -68,13 +71,31 @@ function MatchesPage({message, filter = ""}) {
         fetchDogs();
     }, [pathname, currentUser, shouldUpdate, isShelterUser, filters]);
 
+    const resetFilters = () => {
+        setFilters(initialFilters);
+        setAccordionOpen(false)
+        setHasLoaded(false);
+        const fetchDogs = async () => {
+            try {
+                const {data} = await axiosReq.get(`/dogs/`);
+                setDogs(data.results);
+                setHasLoaded(true);
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        setHasLoaded(false);
+        fetchDogs();
+    }
+
     return (
         <Container>
             <Row className="h-100 mt-4">
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
-                    <Accordion className={`mb-4 ${appStyles.Content}`} flush>
+                    <Accordion className={`mb-4 ${appStyles.Content}`} flush activeKey={accordionOpen ? "0" : null}>
                         <Accordion.Item eventKey="0">
-                            <Accordion.Header>Filter your matches</Accordion.Header>
+                            <Accordion.Header onClick={() => setAccordionOpen(!accordionOpen)}>Filter your matches</Accordion.Header>
                             <Accordion.Body>
                                 <Form>
                                     <Form.Group controlId="gender">
@@ -85,7 +106,7 @@ function MatchesPage({message, filter = ""}) {
                                             <option value="female">Female</option>
                                         </Form.Select>
                                     </Form.Group>
-                                    <Form.Group controlId="size">
+                                    <Form.Group controlId="size" className="mt-4">
                                         <Form.Label>Size</Form.Label>
                                         <Form.Select name="size" value={filters.size} onChange={handleFilterChange}>
                                             <option value="">All</option>
@@ -95,6 +116,11 @@ function MatchesPage({message, filter = ""}) {
                                         </Form.Select>
                                     </Form.Group>
                                 </Form>
+                                <div className="d-flex justify-content-end">
+                                    <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`} onClick={resetFilters}>
+                                        Reset all filters
+                                    </Button>
+                                </div>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
