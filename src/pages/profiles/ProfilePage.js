@@ -57,7 +57,7 @@ function ProfilePage() {
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} alt={profile.owner} />
                 </Col>
                 <Col lg={6}>
-                    <h3 className="m-2">{profile?.name? profile.name : profile.owner}</h3>
+                    <h2 className="m-2">{profile?.name? profile.name : profile.owner}</h2>
                     <Row className="justify-content-center no-gutters">
                         <Col className="my-2">
                             <div>{profile?.posts_count}</div>

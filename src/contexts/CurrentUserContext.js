@@ -3,6 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import {removeTokenTimestamp, shouldRefreshToken} from "../utils/utils";
+import Asset from "../components/Asset";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -15,6 +16,7 @@ export const useIsShelterUser = () => useContext(ShelterUserContext);
 export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [isShelterUser, setIsShelterUser] = useState(false);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
 
     const handleMount = async () => {
@@ -28,6 +30,8 @@ export const CurrentUserProvider = ({ children }) => {
             }
         } catch (err) {
             console.log(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -101,7 +105,7 @@ export const CurrentUserProvider = ({ children }) => {
         <CurrentUserContext.Provider value={currentUser}>
             <SetCurrentUserContext.Provider value={setCurrentUser}>
                 <ShelterUserContext.Provider value={isShelterUser}>
-                    {children}
+                    {loading ? <Asset spinner /> : children}
                 </ShelterUserContext.Provider>
             </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>
