@@ -36,15 +36,3 @@
     padding: 10px 50px;
     width: 100%;
 }
-
-.Toggle {
-    background-color: #f1f1f2;
-    color: #312A28;
-    border-color: #312A28;
-}
-
-.Toggle:hover, .Checked {
-    color: #312A28;
-    background-color: #9cc63b !important;
-    border-color: #9cc63b !important;
-}

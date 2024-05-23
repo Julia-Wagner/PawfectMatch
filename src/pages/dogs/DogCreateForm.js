@@ -242,9 +242,9 @@ function DogCreateForm() {
                                         ))}
                                     </Form.Select>
                                 </Form.Group>
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Adopted?</Form.Label>
-                                    <Form.Check type="checkbox" name="is_adopted" value={is_adopted} onChange={handleChange} />
+                                <Form.Group className="mb-4 d-flex justify-content-center gap-2">
+                                    <Form.Label htmlFor="adopted">Adopted?</Form.Label>
+                                    <Form.Check type="checkbox" name="is_adopted" id="adopted" value={is_adopted} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.is_adopted?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>

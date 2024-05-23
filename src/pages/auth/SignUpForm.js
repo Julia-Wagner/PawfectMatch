@@ -6,7 +6,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 import playground from "../../assets/playground.svg"
 
-import {Form, Button, Image, Col, Row, Container, Alert, ToggleButton, ButtonGroup} from "react-bootstrap";
+import {Form, Button, Image, Col, Row, Container, Alert} from "react-bootstrap";
 import axios from "axios";
 import {useRedirect} from "../../hooks/useRedirect";
 
@@ -109,18 +109,11 @@ const SignUpForm = () => {
                                 <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
                             )}
 
-                            <ButtonGroup className="mb-4 d-flex justify-content-center">
-                                <ToggleButton
-                                    className={checked ? `${btnStyles.Checked}` : `${btnStyles.Toggle}`}
-                                    id="toggle-check"
-                                    type="checkbox"
-                                    checked={checked}
-                                    value="1"
-                                    onChange={(e) => setChecked(e.currentTarget.checked)}
-                                >
-                                    Register as shelter
-                                </ToggleButton>
-                            </ButtonGroup>
+                            <Form.Group className="mb-4 d-flex justify-content-center gap-2">
+                                <Form.Check type="checkbox" name="shelter" id="shelterCheckbox"
+                                            onChange={(e) => setChecked(e.currentTarget.checked)} />
+                                <Form.Label htmlFor="shelterCheckbox">Register as shelter</Form.Label>
+                            </Form.Group>
 
                             <Button className={`${btnStyles.Button} ${btnStyles.Wide}`} type="submit">
                                 Sign up
