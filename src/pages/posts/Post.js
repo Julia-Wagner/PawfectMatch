@@ -129,7 +129,7 @@ const Post = (props) => {
             <Card.Body className="d-flex justify-content-between flex-wrap">
                 <div className="d-flex gap-4 flex-wrap">
                     <Link className="d-flex align-items-center gap-2" to={`/profiles/${profile_id}`}>
-                        <Image className={styles.ProfileImage} src={profile_image} roundedCircle />
+                        <Image className={styles.ProfileImage} src={profile_image} alt={owner} roundedCircle />
                         {owner}
                     </Link>
                     <div className={styles.PostBar}>

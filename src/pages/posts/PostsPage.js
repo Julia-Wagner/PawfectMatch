@@ -69,7 +69,7 @@ function PostsPage({message, filter = ""}) {
                             ) : (
                                 <Container className={appStyles.Content}>
                                     <h2 className="mt-3 mb-5 text-center">No posts to display.</h2>
-                                    <Image src={NoResults} />
+                                    <Image src={NoResults} alt="Dogs on a playground" />
                                 </Container>
                             )}
                         </>

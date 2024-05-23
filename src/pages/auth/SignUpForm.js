@@ -137,7 +137,7 @@ const SignUpForm = () => {
             </Row>
             <Row>
                 <Col className={`my-auto p-2`}>
-                    <Image className={`${appStyles.FillerImage}`} src={playground} />
+                    <Image className={`${appStyles.FillerImage}`} src={playground} alt="Dogs on a playground" />
                 </Col>
             </Row>
         </Container>

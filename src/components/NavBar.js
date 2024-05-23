@@ -59,7 +59,7 @@ const NavBar = () => {
                     <NavLink to="/">
                         <h1>
                             <span className="sr-only">PawfectMatch</span>
-                            <img className={styles.Logo} src={logo} alt="logo" height="45" />
+                            <img className={styles.Logo} src={logo} alt="PawfectMatch Logo" height="45" />
                         </h1>
                     </NavLink>
                     <Navbar.Toggle

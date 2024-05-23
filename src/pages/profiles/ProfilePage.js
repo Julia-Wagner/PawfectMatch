@@ -54,7 +54,7 @@ function ProfilePage() {
         <Container>
             <Row className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
-                    <Image className={styles.ProfileImage} roundedCircle src={profile?.image} />
+                    <Image className={styles.ProfileImage} roundedCircle src={profile?.image} alt={profile.owner} />
                 </Col>
                 <Col lg={6}>
                     <h3 className="m-2">{profile?.name? profile.name : profile.owner}</h3>
