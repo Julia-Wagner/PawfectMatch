@@ -22,8 +22,8 @@ const BottomNavBar = () => {
     const loggedOutIcons = (
         <>
             <NavLink to="/feed" id={styles.feed} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Feed</NavLink>
-            <NavLink to="/signin" id={styles.sign} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign in</NavLink>
-            <NavLink to="/signup" id={styles.sign} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign up</NavLink>
+            <NavLink to="/signin" id={styles.signin} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign in</NavLink>
+            <NavLink to="/signup" id={styles.signup} className={({ isActive }) => isActive ? styles.BottomActive : styles.BottomNavLink}>Sign up</NavLink>
         </>
     )
 
