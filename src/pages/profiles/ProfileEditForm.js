@@ -137,35 +137,35 @@ const ProfileEditForm = () => {
 
     const shelterFields = (
         <>
-            <Form.Group className="mb-4">
+            <Form.Group controlId="phone_number" className="mb-4">
                 <Form.Label>Phone number</Form.Label>
                 <Form.Control type="text" name="phone_number" value={phone_number} onChange={handleChange} />
             </Form.Group>
             {errors?.phone_number?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
-            <Form.Group className="mb-4">
+            <Form.Group controlId="address_1" className="mb-4">
                 <Form.Label>Address 1</Form.Label>
                 <Form.Control type="text" name="address_1" value={address_1} onChange={handleChange} />
             </Form.Group>
             {errors?.address_1?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
-            <Form.Group className="mb-4">
+            <Form.Group controlId="address_2" className="mb-4">
                 <Form.Label>Address 2</Form.Label>
                 <Form.Control type="text" name="address_2" value={address_2} onChange={handleChange} />
             </Form.Group>
             {errors?.address_2?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
-            <Form.Group className="mb-4">
+            <Form.Group controlId="city" className="mb-4">
                 <Form.Label>City</Form.Label>
                 <Form.Control type="text" name="city" value={city} onChange={handleChange} />
             </Form.Group>
             {errors?.city?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
-            <Form.Group className="mb-4">
+            <Form.Group controlId="postcode" className="mb-4">
                 <Form.Label>Postcode</Form.Label>
                 <Form.Control type="text" name="postcode" value={postcode} onChange={handleChange} />
             </Form.Group>
@@ -182,14 +182,14 @@ const ProfileEditForm = () => {
                     <Col className="p-0 p-md-2" sm={12} md={6}>
                         <Container className={appStyles.Content}>
                             <div className="text-center">
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="name" className="mb-4">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control type="text" name="name" value={name} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.name?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="description" className="mb-4">
                                     <Form.Label>Description</Form.Label>
                                     <Form.Control as="textarea" name="description" value={description} onChange={handleChange} rows={7} />
                                 </Form.Group>
@@ -201,7 +201,7 @@ const ProfileEditForm = () => {
                                         {shelterFields}
                                     </>
                                 )}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="country" className="mb-4">
                                     <Form.Label>Country</Form.Label>
                                     <Form.Select name="country" value={country} onChange={handleChange}>
                                         <option key="" value="">Select a country</option>

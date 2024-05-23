@@ -138,12 +138,13 @@ function MatchesPage({message, filter = ""}) {
                                             <option value="big">Big</option>
                                         </Form.Select>
                                     </Form.Group>
-                                    <Form.Group controlId="characteristics" className="mt-4">
+                                    <Form.Group className="mt-4">
                                         <Form.Label>Characteristics</Form.Label>
                                         <div>
                                             {characteristics.map((characteristic) => (
                                                 <Form.Check
                                                     key={characteristic.id}
+                                                    id={`characteristic-${characteristic.id}`}
                                                     type="checkbox"
                                                     name="characteristics"
                                                     value={characteristic.id}

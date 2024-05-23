@@ -109,10 +109,10 @@ const SignUpForm = () => {
                                 <Alert variant="warning" className="mt-3" key={idx}>{message}</Alert>
                             )}
 
-                            <Form.Group className="mb-4 d-flex justify-content-center gap-2">
-                                <Form.Check type="checkbox" name="shelter" id="shelterCheckbox"
+                            <Form.Group controlId="shelterCheckbox" className="mb-4 d-flex justify-content-center gap-2">
+                                <Form.Check type="checkbox" name="shelter"
                                             onChange={(e) => setChecked(e.currentTarget.checked)} />
-                                <Form.Label htmlFor="shelterCheckbox">Register as shelter</Form.Label>
+                                <Form.Label>Register as shelter</Form.Label>
                             </Form.Group>
 
                             <Button className={`${btnStyles.Button} ${btnStyles.Wide}`} type="submit">

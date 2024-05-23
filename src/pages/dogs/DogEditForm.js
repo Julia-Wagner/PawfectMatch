@@ -244,35 +244,35 @@ function DogEditForm() {
                     <Col className="p-0 p-md-2" sm={12} md={6}>
                         <Container className={appStyles.Content}>
                             <div className="text-center">
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="name" className="mb-4">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control type="text" name="name" value={name} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.name?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="editor" className="mb-4">
                                     <Form.Label>Description</Form.Label>
                                     <div id="editor"></div>
                                 </Form.Group>
                                 {errors?.description?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="breed" className="mb-4">
                                     <Form.Label>Breed</Form.Label>
                                     <Form.Control type="text" name="breed" value={breed} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.breed?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="birthday" className="mb-4">
                                     <Form.Label>Birthday</Form.Label>
                                     <Form.Control type="date" name="birthday" value={birthday} onChange={handleChange} max={today} />
                                 </Form.Group>
                                 {errors?.birthday?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="size" className="mb-4">
                                     <Form.Label>Size</Form.Label>
                                     <Form.Select value={size} name="size" onChange={handleChange}>
                                         <option key="small" value="small">Small</option>
@@ -283,7 +283,7 @@ function DogEditForm() {
                                 {errors?.gender?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="gender" className="mb-4">
                                     <Form.Label>Gender</Form.Label>
                                     <Form.Select value={gender} name="gender" onChange={handleChange}>
                                         <option key="male" value="male">Male</option>
@@ -293,7 +293,7 @@ function DogEditForm() {
                                 {errors?.gender?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="characteristics" className="mb-4">
                                     <Form.Label>Add characteristics of the dog</Form.Label>
                                     <Form.Select multiple value={selectedCharacteristics} onChange={handleSelectChange}>
                                         <option value="">No characteristics</option>
@@ -302,9 +302,9 @@ function DogEditForm() {
                                         ))}
                                     </Form.Select>
                                 </Form.Group>
-                                <Form.Group className="mb-4 d-flex justify-content-center gap-2">
-                                    <Form.Label htmlFor="adopted">Adopted?</Form.Label>
-                                    <Form.Check type="checkbox" name="is_adopted" id="adopted" value={is_adopted} onChange={handleChange} />
+                                <Form.Group controlId="adopted" className="mb-4 d-flex justify-content-center gap-2">
+                                    <Form.Label >Adopted?</Form.Label>
+                                    <Form.Check type="checkbox" name="is_adopted" value={is_adopted} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.is_adopted?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>

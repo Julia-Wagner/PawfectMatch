@@ -213,21 +213,21 @@ function PostEditForm() {
                     <Col className="p-0 p-md-2" sm={12} md={6}>
                         <Container className={appStyles.Content}>
                             <div className="text-center">
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="title" className="mb-4">
                                     <Form.Label>Title</Form.Label>
                                     <Form.Control type="text" name="title" value={title} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.title?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mb-4">
+                                <Form.Group controlId="content" className="mb-4">
                                     <Form.Label>Content</Form.Label>
                                     <div id="editor"></div>
                                 </Form.Group>
                                 {errors?.content?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
-                                <Form.Group className="mt-4">
+                                <Form.Group controlId="dogs" className="mt-4">
                                     <Form.Label>Link dogs to the post</Form.Label>
                                     <Form.Select multiple value={selectedDogs} onChange={handleSelectChange}>
                                         <option value="">No dogs</option>
