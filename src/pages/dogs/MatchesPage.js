@@ -81,7 +81,7 @@ function MatchesPage({message, filter = ""}) {
                     });
                 }
 
-                const { data } = await axiosReq.get(`/dogs/?${params.toString()}`);
+                const { data } = await axiosReq.get(`/dogs/?is_adopted=false&${params.toString()}`);
 
                 setDogs(data.results);
                 setHasLoaded(true);
