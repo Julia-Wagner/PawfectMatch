@@ -39,6 +39,7 @@ function App() {
                     <Route exact={true} path="/posts/:id" element={<PostPage/>}/>
                     <Route exact={true} path="/dogs/:id" element={<DogPage/>}/>
                     <Route exact={true} path="/profiles/:id" element={<ProfilePage/>}/>
+                    <Route exact={true} path="/adopted" element={<DogsPage filter="is_adopted=true"/>}/>
 
                     <Route exact={true} path="/following" element={
                         <PrivateRoute>

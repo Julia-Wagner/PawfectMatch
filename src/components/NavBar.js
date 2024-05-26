@@ -39,6 +39,7 @@ const NavBar = () => {
         </div>
         <div className="d-flex d-md-none flex-column">
             <NavLink to="/saves" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Saved Posts</NavLink>
+            <NavLink to="/adopted" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Adopted Dogs</NavLink>
             <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
         </div>
 

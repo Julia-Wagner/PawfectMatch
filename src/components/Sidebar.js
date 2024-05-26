@@ -10,6 +10,7 @@ import {useSavedPosts} from "../contexts/SavedPostsContext";
 
 const Sidebar = () => {
     const [posts, setPosts] = useState({results: []});
+    const [dogs, setDogs] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
     const {pathname} = useLocation();
 
@@ -26,6 +27,14 @@ const Sidebar = () => {
                     return post;
                 }));
                 setPosts(postItems)
+
+                const dogsResponse = await axiosReq.get("/dogs/?is_adopted=true");
+                const dogIds = dogsResponse.data.results.map((dog) => dog.id).slice(0, 5);
+                const dogItems = await Promise.all(dogIds.map(async (dogId) => {
+                    const { data: dog } = await axiosReq.get(`/dogs/${dogId}/`);
+                    return dog;
+                }));
+                setDogs(dogItems)
                 setHasLoaded(true)
             } catch (err) {
                 console.log(err)
@@ -66,6 +75,32 @@ const Sidebar = () => {
                 ) : (
                     <p>Please sign in to see your saved posts.</p>
                 )}
+                <div className="mt-5">
+                    <h3 className={`text-center ${appStyles.SidebarHeading}`}>Recent adoptions</h3>
+                    {hasLoaded ? (
+                        <>
+                            <div className="mt-4 text-left">
+                                {dogs.length ? (
+                                    dogs.map((dog) => (
+                                        <p key={dog.id}>
+                                            <Link to={`/dogs/${dog.id}`} className={appStyles.SidebarLink}>{dog.name}</Link>
+                                            {dog.breed && (
+                                                <span> ({dog.breed})</span>
+                                            )}
+                                        </p>
+                                    ))
+                                ) : (
+                                    <p>No dogs adopted yet.</p>
+                                )}
+                                <div className="mt-4 text-center">
+                                    <Link to={"/adopted"}>Show all adopted dogs</Link>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <Asset spinner />
+                    )}
+                </div>
             </Container>
         </Col>
     );
