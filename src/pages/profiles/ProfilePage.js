@@ -17,6 +17,7 @@ import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import useFollow from "../../hooks/useFollow";
 import {useFollowers} from "../../contexts/FollowersContext";
+import CommentCreateForm from "../comments/CommentCreateForm";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -27,6 +28,8 @@ function ProfilePage() {
     const [profile, setProfileData] = useState({});
     const is_owner = currentUser?.username === profile?.owner;
     const {handleFollow, handleUnfollow} = useFollow(id);
+
+    const [comments, setComments] = useState({ results: [] });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,7 +53,7 @@ function ProfilePage() {
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} alt={profile.owner} />
                 </Col>
                 <Col lg={6}>
-                    <h2 className="m-2">{profile?.name? profile.name : profile.owner}</h2>
+                    <h2 className="m-2 text-center">{profile?.name? profile.name : profile.owner}</h2>
                     {profile && profile.type === "shelter" && (
                         <Row className="justify-content-center no-gutters text-center">
                             <Col className="my-2">
@@ -79,7 +82,16 @@ function ProfilePage() {
             {profile?.description && (
                 <Row className="p-3 text-center">{profile.description}</Row>
             )}
-            <hr/>
+            {profile && profile.type === "shelter" && profile.posts_count > 0 && (
+                <>
+                    <hr />
+                    <p className="text-center">
+                        <Link to={`/posts/profile/${profile.id}`}>{profile?.name? profile.name : profile.owner}'s posts</Link>
+                    </p>
+                    <hr />
+                </>
+            )}
+            <h3 className="mt-4 text-center">Contact details</h3>
             <Row className="mt-3">
                 {profile?.phone_number && profile.type === "shelter" &&
                     <Col className="py-2 p-0 p-lg-2">
@@ -94,20 +106,24 @@ function ProfilePage() {
                     </Col>
                 }
             </Row>
+            <hr/>
         </Container>
     );
 
-    const mainProfilePosts = (
+    const mainProfileComments = (
         <Container>
-            {profile && profile.type === "shelter" && profile.posts_count > 0 && (
-                <>
-                    <hr />
-                    <p className="text-center">
-                        <Link to={`/posts/profile/${profile.id}`}>{profile?.name? profile.name : profile.owner}'s posts</Link>
-                    </p>
-                    <hr />
-                </>
-            )}
+            <h3 className="mt-4 text-center">Comments</h3>
+            {currentUser ? (
+                <CommentCreateForm
+                    commenter_id={currentUser?.profile_id}
+                    commenter_image={currentUser?.profile_image}
+                    profile={id}
+                    setProfile={setProfileData}
+                    setComments={setComments}
+                />
+            ) : comments.results.length ? (
+                "Comments"
+            ) : null}
         </Container>
     );
 
@@ -115,11 +131,11 @@ function ProfilePage() {
         <Container>
             <Row className="h-100 mt-4">
                 <Col className="py-2 p-0 p-lg-2" lg={8}>
-                    <Container className={appStyles.Content}>
+                    <Container className={`py-4 ${appStyles.Content}`}>
                         {hasLoaded ? (
                             <>
                                 {mainProfile}
-                                {mainProfilePosts}
+                                {mainProfileComments}
                             </>
                         ) : (
                             <Asset spinner />
