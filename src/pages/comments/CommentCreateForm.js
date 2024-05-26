@@ -51,8 +51,8 @@ function CommentCreateForm(props) {
     return (
         <Form className="mt-2" onSubmit={handleSubmit}>
             <Form.Group>
-                <InputGroup>
-                    <Link className="d-flex align-items-center gap-2" to={`/profiles/${commenter_id}`}>
+                <InputGroup className="d-flex align-items-center gap-2">
+                    <Link to={`/profiles/${commenter_id}`}>
                         <Image className={styles.CommentImage} src={commenter_image} alt={commenter_id} roundedCircle />
                     </Link>
                     <Form.Control
@@ -67,10 +67,10 @@ function CommentCreateForm(props) {
             </Form.Group>
             <div className="d-flex justify-content-end">
                 <Button
-                    className={`${btnStyles.ReverseButton} ${btnStyles.Button} mt-3`}
+                    className={`${btnStyles.Button} mt-3`}
                     disabled={!content.trim()}
                     type="submit">
-                    post
+                    add comment
                 </Button>
             </div>
         </Form>
