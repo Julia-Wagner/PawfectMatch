@@ -122,7 +122,7 @@ I decided to carry on with the three unfinished user stories for this sprint. Th
 ![Sprint 8 start](docs/agile/sprint8_start.png)\
 *Start of Sprint 8*
 
-I finished all of the plannes user stories and added the implemented features to the readme.
+I finished all planned user stories and added the implemented features to the readme.
 
 ![Sprint 8 end](docs/agile/sprint8_end.png)\
 *End of Sprint 8*
@@ -133,3 +133,15 @@ I added 5 user stories with a total of **19 story points** for this sprint. By t
 
 ![Sprint 9 start](docs/agile/sprint9_start.png)\
 *Start of Sprint 9*
+
+All planned user stories are finished and apart from testing and documentation the most important parts of the project are finished.
+
+![Sprint 9 end](docs/agile/sprint9_end.png)\
+*End of Sprint 9*
+
+### **Sprint 10 (25.05. - 31.05.)**
+
+I added 4 user stories with a total of **26 story points** for this sprint.
+
+![Sprint 10 start](docs/agile/sprint10_start.png)\
+*Start of Sprint 10*
