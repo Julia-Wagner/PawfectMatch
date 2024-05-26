@@ -28,14 +28,20 @@ function CommentCreateForm(props) {
                 ...prevComments,
                 results: [data, ...prevComments.results],
             }));
-            setProfile((prevProfile) => ({
-                results: [
-                    {
-                        ...prevProfile.results[0],
-                        comments_count: prevProfile.results[0].comments_count + 1,
-                    },
-                ],
-            }));
+            setProfile((prevProfile) => {
+                if (prevProfile.results && prevProfile.results.length > 0) {
+                    return {
+                        results: [
+                            {
+                                ...prevProfile.results[0],
+                                comments_count: prevProfile.results[0].comments_count + 1,
+                            },
+                        ],
+                    };
+                } else {
+                    return prevProfile;
+                }
+            });
             setContent("");
         } catch (err) {
             console.log(err);

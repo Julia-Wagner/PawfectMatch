@@ -17,6 +17,17 @@
     margin-right: 1.5rem;
 }
 
+.Owner {
+    font-weight: bold;
+    color: #2142b2;
+    margin-right: 8px;
+}
+
+.Date {
+    font-weight: lighter;
+    color: #c1c1c5;
+}
+
 @media screen and (max-width: 991px) {
     .ProfileImage {
         width: 250px;

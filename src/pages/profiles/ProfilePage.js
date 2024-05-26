@@ -25,7 +25,7 @@ function ProfilePage() {
     const {shouldUpdate} = useFollowers();
 
     const {id} = useParams();
-    const [profile, setProfileData] = useState({});
+    const [profile, setProfileData] = useState({ results: [{}] });
     const is_owner = currentUser?.username === profile?.owner;
     const {handleFollow, handleUnfollow} = useFollow(id);
 
@@ -34,10 +34,12 @@ function ProfilePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [{ data: pageProfile }] = await Promise.all([
+                const [{ data: pageProfile }, { data: comments }] = await Promise.all([
                     axiosReq.get(`/profiles/${id}/`),
+                    axiosReq.get(`/comments/?profile=${id}`),
                 ]);
                 setProfileData(pageProfile);
+                setComments(comments);
                 setHasLoaded(true);
             } catch (err) {
                 console.log(err);
@@ -124,6 +126,17 @@ function ProfilePage() {
             ) : comments.results.length ? (
                 "Comments"
             ) : null}
+            {comments.results.length ? (
+                comments.results.map(comment => (
+                    <p key={comment.id}>
+                        {comment.owner}: {comment.content}
+                    </p>
+                ))
+            ) : currentUser ? (
+                <span>No comments yet, be the first to comment!</span>
+            ) : (
+                <span>No comments yet</span>
+            )}
         </Container>
     );
 
