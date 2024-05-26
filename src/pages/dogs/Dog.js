@@ -10,6 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import Asset from "../../components/Asset";
 import {fetchMoreData} from "../../utils/utils";
+import appStyles from "../../App.module.css";
 
 const Dog = (props) => {
     const {
@@ -129,24 +130,24 @@ const Dog = (props) => {
                     <Container className={styles.DogDetails}>
                         <Row>
                             <Col className="py-2 p-0 p-lg-2" md={4}>
-                                <i className={`fa-solid fa-dog ${styles.Icon}`}/> {breed}
+                                <i className={`fa-solid fa-dog ${appStyles.Icon}`}/> {breed}
                             </Col>
                             <Col className="py-2 p-0 p-lg-2" md={4}>
-                                <i className={`fa-solid fa-weight-scale ${styles.Icon}`}/> {size}
+                                <i className={`fa-solid fa-weight-scale ${appStyles.Icon}`}/> {size}
                             </Col>
                             <Col className="py-2 p-0 p-lg-2" md={4}>
-                                <i className={`fa-solid fa-venus-mars ${styles.Icon}`}/> {gender}
+                                <i className={`fa-solid fa-venus-mars ${appStyles.Icon}`}/> {gender}
                             </Col>
                         </Row>
                         <Row>
                             <Col className="py-2 p-0 p-lg-2">
-                                <i className={`fa-solid fa-cake-candles ${styles.Icon}`}/> {birthday} ({age})
+                                <i className={`fa-solid fa-cake-candles ${appStyles.Icon}`}/> {birthday} ({age})
                             </Col>
                         </Row>
                         {characteristics && characteristics.length > 0 &&
                             <div className="mt-4 mb-5 d-flex gap-3">
                                 {characteristics.map((char, index) => (
-                                    <div className={styles.Characteristic} key={index}>{char.characteristic}</div>
+                                    <div className={appStyles.Characteristic} key={index}>{char.characteristic}</div>
                                 ))}
                             </div>
                         }
@@ -160,14 +161,14 @@ const Dog = (props) => {
                             <Row>
                                 {owner_phone &&
                                     <Col className="py-2 p-0 p-lg-2">
-                                        <i className={`fa-solid fa-phone ${styles.Icon} ${styles.BlueIcon}`}/> {owner_phone}
+                                        <i className={`fa-solid fa-phone ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {owner_phone}
                                     </Col>
                                 }
                             </Row>
                             <Row>
                                 {owner_address &&
                                     <Col className="py-2 p-0 p-lg-2">
-                                        <i className={`fa-solid fa-location-dot ${styles.Icon} ${styles.BlueIcon}`}/> {owner_address}
+                                        <i className={`fa-solid fa-location-dot ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {owner_address}
                                     </Col>
                                 }
                             </Row>

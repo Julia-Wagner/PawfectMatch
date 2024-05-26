@@ -58,30 +58,6 @@
     text-align: left;
 }
 
-.Icon {
-    color: #312a28;
-    font-size: 1.3rem;
-    margin-right: .3rem;
-    background-color: #ffa06e;
-    padding: inherit;
-    border-radius: 50%;
-    width: 2.8rem;
-    height: 2.8rem;
-    line-height: inherit;
-    text-align: center;
-}
-
-.BlueIcon {
-    background-color: #6dcbec;
-}
-
-.Characteristic {
-    background-color: #f7bf3d;
-    padding: .3rem .6rem;
-    border-radius: .3rem;
-    font-weight: bold;
-}
-
 .LinkHeading {
     text-align: center;
     font-size: 1.3rem;

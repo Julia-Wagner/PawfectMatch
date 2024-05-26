@@ -44,23 +44,23 @@ function ProfilePage() {
     }, [id, setProfileData, shouldUpdate]);
 
     const mainProfile = (
-        <Container>
-            <Row className="px-3 text-center">
+        <Container className="px-3">
+            <Row className="mb-3">
                 <Col lg={3} className="text-lg-left">
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} alt={profile.owner} />
                 </Col>
                 <Col lg={6}>
                     <h2 className="m-2">{profile?.name? profile.name : profile.owner}</h2>
                     {profile && profile.type === "shelter" && (
-                        <Row className="justify-content-center no-gutters">
-                        <Col className="my-2">
-                            <div>{profile?.posts_count}</div>
-                            <div>posts</div>
-                        </Col>
-                        <Col className="my-2">
-                            <div>{profile?.dogs_count}</div>
-                            <div>dogs</div>
-                        </Col>
+                        <Row className="justify-content-center no-gutters text-center">
+                            <Col className="my-2">
+                                <div>{profile?.posts_count}</div>
+                                <div>posts</div>
+                            </Col>
+                            <Col className="my-2">
+                                <div>{profile?.dogs_count}</div>
+                                <div>dogs</div>
+                            </Col>
                         </Row>
                     )}
                 </Col>
@@ -72,10 +72,27 @@ function ProfilePage() {
                             <Button className={`m-2 ${btnStyles.Button}`} onClick={() => handleFollow(profile?.id)}>follow</Button>
                         ))}
                     {is_owner && (
-                        <Link to={`/profiles/${id}/edit`} className={`m-2 ${btnStyles.Button}`}>edit</Link>
+                        <Link to={`/profiles/${id}/edit`} className={`m-2 text-center ${btnStyles.Button}`}>edit</Link>
                     )}
                 </Col>
-                {profile?.content && <Col className="p-3">{profile.content}</Col>}
+            </Row>
+            {profile?.description && (
+                <Row className="p-3 text-center">{profile.description}</Row>
+            )}
+            <hr/>
+            <Row className="mt-3">
+                {profile?.phone_number && profile.type === "shelter" &&
+                    <Col className="py-2 p-0 p-lg-2">
+                        <i className={`fa-solid fa-phone ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {profile.phone_number}
+                    </Col>
+                }
+            </Row>
+            <Row>
+                {profile?.address &&
+                    <Col className="py-2 p-0 p-lg-2">
+                        <i className={`fa-solid fa-location-dot ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {profile.address}
+                    </Col>
+                }
             </Row>
         </Container>
     );
