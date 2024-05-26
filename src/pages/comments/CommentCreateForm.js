@@ -6,12 +6,14 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import styles from "../../styles/ProfilePage.module.css";
 import {axiosRes} from "../../api/axiosDefaults";
-import {Button, Image} from "react-bootstrap";
+import {Alert, Button, Image} from "react-bootstrap";
 import btnStyles from "../../styles/Button.module.css";
 
 function CommentCreateForm(props) {
     const { profile, setProfile, setComments, commenter_image, commenter_id } = props;
     const [content, setContent] = useState("");
+
+    const [errors, setErrors] = useState({});
 
     const handleChange = (event) => {
         setContent(event.target.value);
@@ -43,15 +45,16 @@ function CommentCreateForm(props) {
                 }
             });
             setContent("");
+            setErrors({});
         } catch (err) {
-            console.log(err);
+            setErrors(err.response?.data);
         }
     };
 
     return (
         <Form className="mt-2" onSubmit={handleSubmit}>
             <Form.Group>
-                <InputGroup className="d-flex align-items-center gap-2">
+                <InputGroup className="d-flex align-items-center gap-2 mb-2">
                     <Link to={`/profiles/${commenter_id}`}>
                         <Image className={styles.CommentImage} src={commenter_image} alt={commenter_id} roundedCircle />
                     </Link>
@@ -64,6 +67,9 @@ function CommentCreateForm(props) {
                         rows={2}
                     />
                 </InputGroup>
+                {errors.content?.map((message, idx) =>
+                    <Alert variant="warning" key={idx}>{message}</Alert>
+                )}
             </Form.Group>
             <div className="d-flex justify-content-end">
                 <Button
