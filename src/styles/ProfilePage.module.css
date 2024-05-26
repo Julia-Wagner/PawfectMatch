@@ -8,6 +8,7 @@
 .Form {
     border: none;
     border-bottom: 2px #ff6431 solid;
+    border-radius: 0;
 }
 
 .CommentImage {

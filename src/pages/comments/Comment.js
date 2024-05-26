@@ -27,14 +27,20 @@ const Comment = (props) => {
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/comments/${id}/`);
-            setProfile((prevProfile) => ({
-                results: [
-                    {
-                        ...prevProfile.results[0],
-                        comments_count: prevProfile.results[0].comments_count - 1,
-                    },
-                ],
-            }));
+            setProfile((prevProfile) => {
+                if (prevProfile.results && prevProfile.results.length > 0) {
+                    return {
+                        results: [
+                            {
+                                ...prevProfile.results[0],
+                                comments_count: prevProfile.results[0].comments_count + 1,
+                            },
+                        ],
+                    };
+                } else {
+                    return prevProfile;
+                }
+            });
 
             setComments((prevComments) => ({
                 ...prevComments,
@@ -47,7 +53,7 @@ const Comment = (props) => {
         <>
             <hr />
             <Container>
-                <div className="d-flex align-items-center gap-3 justify-content-between">
+                <div className="d-flex gap-3 justify-content-between">
                     <Link to={`/profiles/${profile_id}`}>
                         <Image className={styles.CommentImage} src={profile_image} alt={profile_id} roundedCircle />
                     </Link>

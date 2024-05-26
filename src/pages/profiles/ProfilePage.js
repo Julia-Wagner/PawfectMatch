@@ -19,6 +19,8 @@ import useFollow from "../../hooks/useFollow";
 import {useFollowers} from "../../contexts/FollowersContext";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import Comment from "../comments/Comment";
+import InfiniteScroll from "react-infinite-scroll-component";
+import {fetchMoreData} from "../../utils/utils";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -47,7 +49,7 @@ function ProfilePage() {
             }
         };
         fetchData();
-    }, [id, setProfileData, shouldUpdate, comments]);
+    }, [id, setProfileData, shouldUpdate]);
 
     const mainProfile = (
         <Container className="px-3">
@@ -57,24 +59,18 @@ function ProfilePage() {
                 </Col>
                 <Col lg={6}>
                     <h2 className="m-2 text-center">{profile?.name? profile.name : profile.owner}</h2>
-                    <Row className="justify-content-center no-gutters text-center">
-                        {profile && profile.type === "shelter" && (
-                        <Col className="my-2">
-                            <div>{profile?.posts_count}</div>
-                            <div>posts</div>
-                        </Col>
-                        )}
-                        {profile && profile.type === "shelter" && (
-                        <Col className="my-2">
-                            <div>{profile?.dogs_count}</div>
-                            <div>dogs</div>
-                        </Col>
-                        )}
-                        <Col className="my-2">
-                            <div>{profile?.comments_count}</div>
-                            <div>comments</div>
-                        </Col>
-                    </Row>
+                    {profile && profile.type === "shelter" && (
+                        <Row className="justify-content-center no-gutters text-center">
+                            <Col className="my-2">
+                                <div>{profile?.posts_count}</div>
+                                <div>posts</div>
+                            </Col>
+                            <Col className="my-2">
+                                <div>{profile?.dogs_count}</div>
+                                <div>dogs</div>
+                            </Col>
+                        </Row>
+                    )}
                 </Col>
                 <Col lg={3} className="text-lg-right">
                     {currentUser && !is_owner &&
@@ -134,9 +130,20 @@ function ProfilePage() {
                 "Comments"
             ) : null}
             {comments.results.length ? (
-                comments.results.map(comment => (
-                    <Comment key={comment.id} {...comment} />
-                ))
+                    <InfiniteScroll
+                        children={comments.results.map((comment) => (
+                            <Comment
+                                key={comment.id}
+                                {...comment}
+                                setProfile={setProfileData}
+                                setComments={setComments}
+                            />
+                        ))}
+                        dataLength={comments.results.length}
+                        loader={<Asset spinner />}
+                        hasMore={!!comments.next}
+                        next={() => fetchMoreData(comments, setComments)}
+                    />
             ) : currentUser ? (
                 <span>No comments yet, be the first to comment!</span>
             ) : (
