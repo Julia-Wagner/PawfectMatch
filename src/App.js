@@ -75,6 +75,11 @@ function App() {
                             <PostEditForm />
                         </PrivateRoute>
                     }/>
+                    <Route exact={true} path="/posts/profile/:id" element={
+                        <PrivateRoute>
+                            <PostsPage />
+                        </PrivateRoute>
+                    }/>
                     <Route exact={true} path="/profiles/:id/edit" element={
                         <PrivateRoute>
                             <ProfileEditForm />

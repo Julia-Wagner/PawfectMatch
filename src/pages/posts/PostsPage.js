@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useParams} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
 import {Image} from "react-bootstrap";
@@ -28,10 +28,19 @@ function PostsPage({message, filter = ""}) {
     const isShelterUser = useIsShelterUser();
     const {shouldUpdate} = useFollowers();
 
+    const {id} = useParams();
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const {data} = await axiosReq.get(`/posts/?${filter}/`)
+                let data;
+                if (id) {
+                    const response = await axiosReq.get(`/posts/?owner__profile=${id}`);
+                    data = response.data;
+                } else {
+                    const response = await axiosReq.get(`/posts/?${filter}`);
+                    data = response.data;
+                }
                 setPosts(data)
                 setHasLoaded(true)
             } catch (err) {
@@ -41,7 +50,7 @@ function PostsPage({message, filter = ""}) {
 
         setHasLoaded(false);
         fetchPosts();
-    }, [filter, pathname, currentUser, shouldUpdate, isShelterUser]);
+    }, [filter, pathname, currentUser, shouldUpdate, isShelterUser, id]);
 
     return (
         <Container>
