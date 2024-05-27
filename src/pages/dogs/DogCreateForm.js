@@ -28,16 +28,6 @@ function DogCreateForm() {
 
     const [errors, setErrors] = useState({});
 
-    const [dogMediaData, setDogMediaData] = useState({
-        image: "",
-        video: "",
-        media_name: "",
-        media_description: "",
-        type: "image",
-        is_main_image: true,
-    });
-    const {image, media_name, media_description, type, is_main_image} = dogMediaData;
-
     const imageInput = useRef(null);
 
     const [dogData, setDogData] = useState({
@@ -45,8 +35,8 @@ function DogCreateForm() {
         description: "",
         breed: "",
         birthday: "",
-        size: "",
-        gender: "",
+        size: "medium",
+        gender: "male",
         is_adopted: false
     });
     const {
@@ -69,17 +59,60 @@ function DogCreateForm() {
         });
     };
 
+    const [dogMediaData, setDogMediaData] = useState({
+        main_image: null,
+        additional_images: [],
+    });
+    const { main_image, additional_images } = dogMediaData;
+
     const handleChangeMedia = (event) => {
         if (event.target.files.length) {
-            const selectedMedia = event.target.files[0];
-            URL.revokeObjectURL(image);
-            setDogMediaData({
-                ...dogMediaData,
-                image: URL.createObjectURL(selectedMedia),
-                file: selectedMedia,
-            })
+            const selectedFiles = Array.from(event.target.files);
+            const selectedImages = selectedFiles.map(file => ({
+                file,
+                url: URL.createObjectURL(file),
+                media_name: "",
+                media_description: "",
+            }));
+
+            if (!main_image) {
+                setDogMediaData({
+                    main_image: selectedImages[0],
+                    additional_images: selectedImages.slice(1),
+                });
+            } else {
+                setDogMediaData((prevState) => ({
+                    ...prevState,
+                    additional_images: [...prevState.additional_images, ...selectedImages],
+                }));
+            }
         }
     }
+
+    const handleRemoveImage = (index) => {
+        setDogMediaData((prevState) => {
+            const newImages = [...prevState.additional_images];
+            newImages.splice(index, 1);
+            return {
+                ...prevState,
+                additional_images: newImages
+            };
+        });
+    };
+
+    const handleMediaDataChange = (index, field, value) => {
+        setDogMediaData((prevState) => {
+            const newImages = [...prevState.additional_images];
+            newImages[index] = {
+                ...newImages[index],
+                [field]: value,
+            };
+            return {
+                ...prevState,
+                additional_images: newImages
+            };
+        });
+    };
 
     useEffect(() => {
         if (!quillRef.current) {
@@ -152,26 +185,41 @@ function DogCreateForm() {
     }
 
     const handleSubmitMedia = async (dog_id) => {
-        if (image.length < 1) {
-            navigate(`/dogs/${dog_id}/`)
-        }
+        if (main_image) {
+            const formData = new FormData();
+            formData.append("image", main_image.file);
+            formData.append("name", name);
+            formData.append("description", "");
+            formData.append("type", "image");
+            formData.append("is_main_image", true);
 
-        const formData = new FormData();
-
-        formData.append("image", dogMediaData.file)
-        formData.append("name", name)
-        formData.append("description", media_description)
-        formData.append("type", type)
-        formData.append("is_main_image", is_main_image)
-
-        try {
-            const {data} = await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
-            navigate(`/dogs/${dog_id}`)
-        } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
+            try {
+                await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data);
+                }
             }
         }
+
+        for (let image of additional_images) {
+            const formData = new FormData();
+            formData.append("image", image.file);
+            formData.append("name", image.media_name);
+            formData.append("description", image.media_description);
+            formData.append("type", "image");
+            formData.append("is_main_image", false);
+
+            try {
+                await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data);
+                }
+            }
+        }
+
+        navigate(`/dogs/${dog_id}`);
     }
 
     const today = new Date().toISOString().split("T")[0];
@@ -185,7 +233,7 @@ function DogCreateForm() {
                         <Container className={appStyles.Content}>
                             <div className="text-center">
                                 <Form.Group controlId="name" className="mb-4">
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label>Name *</Form.Label>
                                     <Form.Control type="text" name="name" value={name} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.name?.map((message, idx) => (
@@ -199,21 +247,21 @@ function DogCreateForm() {
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="breed" className="mb-4">
-                                    <Form.Label>Breed</Form.Label>
+                                    <Form.Label>Breed *</Form.Label>
                                     <Form.Control type="text" name="breed" value={breed} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.breed?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="birthday" className="mb-4">
-                                    <Form.Label>Birthday</Form.Label>
+                                    <Form.Label>Birthday *</Form.Label>
                                     <Form.Control type="date" name="birthday" value={birthday} onChange={handleChange} max={today} />
                                 </Form.Group>
                                 {errors?.birthday?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="size" className="mb-4">
-                                    <Form.Label>Size</Form.Label>
+                                    <Form.Label>Size *</Form.Label>
                                     <Form.Select value={size} name="size" onChange={handleChange}>
                                         <option key="small" value="small">Small</option>
                                         <option key="medium" value="medium">Medium</option>
@@ -224,7 +272,7 @@ function DogCreateForm() {
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="gender" className="mb-4">
-                                    <Form.Label>Gender</Form.Label>
+                                    <Form.Label>Gender *</Form.Label>
                                     <Form.Select value={gender} name="gender" onChange={handleChange}>
                                         <option key="male" value="male">Male</option>
                                         <option key="female" value="female">Female</option>
@@ -267,13 +315,14 @@ function DogCreateForm() {
                             className={`${appStyles.Content} d-flex flex-column justify-content-center`}
                         >
                             <Form.Group className="text-center">
-                                {image ? (
+                                <h3 className="mt-3">Main image</h3>
+                                {main_image ? (
                                     <>
                                         <Figure>
-                                            <Image className={appStyles.Image} src={image} rounded />
+                                            <Image className={appStyles.Image} src={main_image.url} rounded />
                                         </Figure>
                                         <div>
-                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="main-image-upload">
                                                 Change the image
                                             </Form.Label>
                                         </div>
@@ -281,15 +330,58 @@ function DogCreateForm() {
                                 ) : (
                                     <Form.Label
                                         className="d-flex justify-content-center"
-                                        htmlFor="media-upload"
+                                        htmlFor="main-image-upload"
                                     >
                                         <Asset src={Upload} message="Click or tap to upload an image" />
                                     </Form.Label>
                                 )}
-                                <Form.Control id="media-upload" type="file"
-                                              onChange={handleChangeMedia} ref={imageInput} />
+                                <Form.Control id="main-image-upload" type="file" onChange={handleChangeMedia} ref={imageInput} />
                             </Form.Group>
-                            {errors?.image?.map((message, idx) => (
+                            {errors?.main_image?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
+                            <Form.Group className="text-center">
+                                <h4 className="mt-5">Additional images</h4>
+                                <Form.Label className="d-flex justify-content-center" htmlFor="additional-image-upload">
+                                    <Asset src={Upload} message="Click or tap to upload images" />
+                                </Form.Label>
+                                <div>
+                                    <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="additional-image-upload">
+                                        Add another image
+                                    </Form.Label>
+                                </div>
+                                <Form.Control id="additional-image-upload" type="file" multiple onChange={handleChangeMedia} />
+
+                                <div className="mt-3">
+                                    {additional_images.map((image, index) => (
+                                        <div key={index} className="mt-5 position-relative">
+                                            <Figure>
+                                                <Image className={appStyles.Image} src={image.url} rounded />
+                                            </Figure>
+                                            <Button variant="danger" className="position-absolute top-0 end-0" onClick={() => handleRemoveImage(index)}>
+                                                Remove
+                                            </Button>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Media Name</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    value={image.media_name}
+                                                    onChange={(e) => handleMediaDataChange(index, 'media_name', e.target.value)}
+                                                />
+                                            </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Media Description</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    value={image.media_description}
+                                                    onChange={(e) => handleMediaDataChange(index, 'media_description', e.target.value)}
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                    ))}
+                                </div>
+                            </Form.Group>
+                            {errors?.additional_images?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Container>
