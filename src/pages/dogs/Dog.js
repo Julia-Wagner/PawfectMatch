@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
-import {Badge, Card, Col, Container, Image, Row} from "react-bootstrap";
+import {Badge, Card, Carousel, Col, Container, Image, Row} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosReq, axiosRes} from "../../api/axiosDefaults";
@@ -36,6 +36,7 @@ const Dog = (props) => {
         profile_id,
         owner_phone,
         owner_address,
+        additional_images,
     } = props;
 
     const navigate = useNavigate();
@@ -43,6 +44,11 @@ const Dog = (props) => {
     const [imageUrl, setImageUrl] = useState('');
 
     const [dogPosts, setDogPosts] = useState({ results: [] });
+    const [additionalImages, setAdditionalImages] = useState([]);
+
+    useEffect(() => {
+        setAdditionalImages(additional_images || []);
+    }, [additional_images]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -153,6 +159,23 @@ const Dog = (props) => {
                             </div>
                         }
                         <hr/>
+
+                        {additionalImages.length > 0 && (
+                            <Carousel className="my-3">
+                                <h3 className="text-center">Additional images for {name}</h3>
+                                {additional_images.map((imageData) => (
+                                    <Carousel.Item key={imageData.id} interval={5000}>
+                                        <Image src={imageData.image} alt={imageData.name} fluid />
+                                        <Carousel.Caption className={styles.CarouselCaption}>
+                                            <h4 className={styles.CarouselHeading}>{imageData.name}</h4>
+                                            <p className={styles.CarouselParagraph}>{imageData.description}</p>
+                                        </Carousel.Caption>
+                                    </Carousel.Item>
+                                ))}
+                            </Carousel>
+                        )}
+                        <hr/>
+
                         <div className="mb-5 mt-4">
                             {owner &&
                                 <Link to={`/profiles/${profile_id}`}>
