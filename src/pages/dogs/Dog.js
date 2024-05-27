@@ -19,6 +19,7 @@ const Dog = (props) => {
         is_owner,
         owner_name,
         birthday,
+        birthday_formatted,
         age,
         breed,
         characteristics,
@@ -141,7 +142,7 @@ const Dog = (props) => {
                         </Row>
                         <Row>
                             <Col className="py-2 p-0 p-lg-2">
-                                <i className={`fa-solid fa-cake-candles ${appStyles.Icon}`}/> {birthday} ({age})
+                                <i className={`fa-solid fa-cake-candles ${appStyles.Icon}`}/> {birthday_formatted} ({age})
                             </Col>
                         </Row>
                         {characteristics && characteristics.length > 0 &&
