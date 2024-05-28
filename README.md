@@ -349,6 +349,20 @@ The number of saved posts is shown on top of the page. The page as well as the s
 
 Recently adopted dogs are also shown in the sticky sidebar on bigger screens and on an additional page for smaller screens. The page includes all dogs that are marked as adopted.
 
+## **About Page**
+
+When clicking the logo in the navbar, the user is redirected to the about page. This includes information about **PawfectMatch** and contact details.
+
+![About page](docs/screenshots/about_page.png)\
+*About page*
+
+## **Not found Page**
+
+If a page that does not exist is opened, the *Not found page* is shown.
+
+![Not found page](docs/screenshots/not_found.png)\
+*Not found page*
+
 # **Testing**
 
 Please refer to the separate [TESTING.md](TESTING.md) file.
