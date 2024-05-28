@@ -249,11 +249,11 @@ Users can register at **PawfectMatch** by filling out the *sign-up form*. A prof
 
 To use **PawfectMatch** as a live platform, a further step would be added to the registration to check if the user really is a shelter. This way I can avoid private breeders or people with bad intentions pretending to be a shelter. However, for this project, there will be no real shelters, so I added a simple button to be able to register as both profile types easily.
 
-![Registration shelter desktop](docs/screenshots/registration_shelter_desktop.png)\
-*Registration as a shelter on a desktop*
+![Registration desktop](docs/screenshots/registration_desktop.png)\
+*Registration on a desktop*
 
-![Registration adopter phone](docs/screenshots/registration_adopter_phone.png)\
-*Registration as an adopter on a phone*
+![Registration phone](docs/screenshots/registration_phone.png)\
+*Registration as an shelter on a phone*
 
 After successful registration, the user gets redirected to the *sign-in form*. If incorrect information is sent, error messages are shown in the forms.
 
@@ -272,9 +272,16 @@ For each post, the profile that created the post is shown with the profile image
 ![Feed phone](docs/screenshots/feed_phone.png)\
 *Feed on a phone*
 
+## **Following**
+
+The *Following* page is shown only for logged-in users. It renders posts like the feed, but only from profiles the user follows.
+
+![Following](docs/screenshots/following.png)\
+*Following page on a desktop*
+
 ## **Post CRUD**
 
-Full CRUD functionality is implemented for posts. Logged-in users can create posts and add a title, content and image to it. For the content, I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
+Full CRUD functionality is implemented for posts. Logged-in shelter users can create posts and add a title, content and image to it. For the content, I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
 
 ![Create post](docs/screenshots/post_create_desktop.png)\
 *Create a post on a desktop*
@@ -287,17 +294,38 @@ The owner of a post can edit or delete the post. For deletion, I added a confirm
 ![Delete post](docs/screenshots/post_delete_desktop.png)\
 *Delete a post on a desktop*
 
-The detail page of a post contains the whole content.
+The detail page of a post contains the whole content. If there are dogs linked to the post, they are shown underneath the content of the post.
 
 ![Detail post](docs/screenshots/post_detail.png)\
 *Post detail page*
 
 ## **Profile**
 
-A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts published by the user. Users can follow and unfollow other profiles. If the owner of the profile added a name, it is shown at the top of the profile. If not, the username is visible there.
+A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts details added by the user. Users can follow and unfollow other profiles. If the owner of the profile added a name, it is shown at the top of the profile. If not, the username is visible there.
 
-![Profile](docs/screenshots/profile_desktop.png)\
-*Profile detail on a desktop*
+![Profile](docs/screenshots/profile_phone.png)\
+*Profile detail page on a phone*
+
+A link to all created posts is added if the user is a shelter. 
+
+### **Comments**
+
+Comments can be added to profiles and are shown at the bottom of the profile page.
+
+![Profile shelter](docs/screenshots/profile_shelter.png)\
+*Profile detail page of a shelter*
+
+A comment can be edited or deleted by the person who created it.
+
+![Edit comment](docs/screenshots/comment_edit.png)\
+*Edit a comment on a phone*
+
+Banned words can be defined in the admin panel. Comments are checked before posting them to ensure they do not contain a banned word.
+
+![Banned comment](docs/screenshots/banned_comment.png)\
+*Trying to comment a banned word*
+
+### **Edit profile**
 
 Each user can change their name, description, country and profile image. Only shelters are allowed to add an exact address and phone number.
 
@@ -307,14 +335,19 @@ Each user can change their name, description, country and profile image. Only sh
 ![Profile edit adopter](docs/screenshots/profile_edit_adopter_phone.png)\
 *Profile edit adopter on a phone*
 
-## **Saved Posts**
+## **Saved Posts and Recent Adoptions**
 
 Posts can be saved and unsaved. On bigger screens, the five most recently saved posts are listed and linked in the sidebar. There is also a link to a separate page with all saved posts. For mobile screens, the saved posts can be found on this separate page.
 
-![Saved posts desktop](docs/screenshots/saves_desktop.png)\
+![Saved posts desktop](docs/screenshots/feed_sticky_sidebar.png)\
 *Saved posts on a desktop*
 
 The number of saved posts is shown on top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.
+
+![Saved posts phone](docs/screenshots/saves_phone.png)\
+*Saved posts on a phone*
+
+Recently adopted dogs are also shown in the sticky sidebar on bigger screens and on an additional page for smaller screens. The page includes all dogs that are marked as adopted.
 
 # **Testing**
 

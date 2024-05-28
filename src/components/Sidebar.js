@@ -77,28 +77,34 @@ const Sidebar = () => {
                 )}
                 <div className="mt-5">
                     <h3 className={`text-center ${appStyles.SidebarHeading}`}>Recent adoptions</h3>
-                    {hasLoaded ? (
+                    {currentUser ? (
                         <>
-                            <div className="mt-4 text-left">
-                                {dogs.length ? (
-                                    dogs.map((dog) => (
-                                        <p key={dog.id}>
-                                            <Link to={`/dogs/${dog.id}`} className={appStyles.SidebarLink}>{dog.name}</Link>
-                                            {dog.breed && (
-                                                <span> ({dog.breed})</span>
-                                            )}
-                                        </p>
-                                    ))
-                                ) : (
-                                    <p>No dogs adopted yet.</p>
-                                )}
-                                <div className="mt-4 text-center">
-                                    <Link to={"/adopted"}>Show all adopted dogs</Link>
-                                </div>
-                            </div>
+                            {hasLoaded ? (
+                                <>
+                                    <div className="mt-4 text-left">
+                                        {dogs.length ? (
+                                            dogs.map((dog) => (
+                                                <p key={dog.id}>
+                                                    <Link to={`/dogs/${dog.id}`} className={appStyles.SidebarLink}>{dog.name}</Link>
+                                                    {dog.breed && (
+                                                        <span> ({dog.breed})</span>
+                                                    )}
+                                                </p>
+                                            ))
+                                        ) : (
+                                            <p>No dogs adopted yet.</p>
+                                        )}
+                                        <div className="mt-4 text-center">
+                                            <Link to={"/adopted"}>Show all adopted dogs</Link>
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <Asset spinner />
+                            )}
                         </>
                     ) : (
-                        <Asset spinner />
+                        <p>Please sign in to see adoptions.</p>
                     )}
                 </div>
             </Container>
