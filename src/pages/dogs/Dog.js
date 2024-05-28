@@ -132,7 +132,7 @@ const Dog = (props) => {
                 {sanitizedDescription && dogPage && <Card.Text
                     dangerouslySetInnerHTML={sanitizedDescription}
                 />}
-                {!dogPage && <Card.Link href={`/dogs/${id}`}>View dog</Card.Link>}
+                {!dogPage && <div className="text-center"><Card.Link href={`/dogs/${id}`}>View dog</Card.Link></div>}
                 {dogPage &&
                     <Container className={styles.DogDetails}>
                         <Row>

@@ -47,7 +47,7 @@ const Sidebar = () => {
 
     return (
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-            <Container className={`p-4 ${appStyles.Content}`}>
+            <Container className={`p-4 ${appStyles.Content} ${appStyles.Sidebar}`}>
                 <h3 className={`text-center ${appStyles.SidebarHeading}`}>Saved Posts</h3>
                 {currentUser ? (
                     <>

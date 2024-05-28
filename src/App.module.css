@@ -109,3 +109,8 @@ a:hover span {
     border-radius: .3rem;
     font-weight: bold;
 }
+
+.Sidebar {
+    position: sticky;
+    top: 1rem;
+}

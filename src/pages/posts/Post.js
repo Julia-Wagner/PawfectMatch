@@ -176,7 +176,7 @@ const Post = (props) => {
                 {sanitizedContent && postPage && <Card.Text
                     dangerouslySetInnerHTML={sanitizedContent}
                 />}
-                {!postPage && <Card.Link href={`/posts/${id}`}>View post</Card.Link>}
+                {!postPage && <div className="text-center"><Card.Link href={`/posts/${id}`}>View post</Card.Link></div>}
                 <div className={styles.PostBar}>
                     {is_owner ? (
                         <OverlayTrigger placement="top" overlay={<Tooltip>You can´t save your own post!</Tooltip>}>
