@@ -23,6 +23,7 @@ const Dog = (props) => {
         age,
         breed,
         characteristics,
+        characteristics_names,
         gender,
         is_adopted,
         name,
@@ -151,10 +152,10 @@ const Dog = (props) => {
                                 <i className={`fa-solid fa-cake-candles ${appStyles.Icon}`}/> {birthday_formatted} ({age})
                             </Col>
                         </Row>
-                        {characteristics && characteristics.length > 0 &&
+                        {characteristics_names && characteristics_names.length > 0 &&
                             <div className="mt-4 mb-5 d-flex gap-3">
-                                {characteristics.map((char, index) => (
-                                    <div className={appStyles.Characteristic} key={index}>{char.characteristic}</div>
+                                {characteristics_names.map((char, index) => (
+                                    <div className={appStyles.Characteristic} key={index}>{char}</div>
                                 ))}
                             </div>
                         }
