@@ -253,7 +253,7 @@ To use **PawfectMatch** as a live platform, a further step would be added to the
 *Registration on a desktop*
 
 ![Registration phone](docs/screenshots/registration_phone.png)\
-*Registration as an shelter on a phone*
+*Registration as a shelter on a phone*
 
 After successful registration, the user gets redirected to the *sign-in form*. If incorrect information is sent, error messages are shown in the forms.
 
@@ -301,7 +301,7 @@ The detail page of a post contains the whole content. If there are dogs linked t
 
 ## **Profile**
 
-A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all posts details added by the user. Users can follow and unfollow other profiles. If the owner of the profile added a name, it is shown at the top of the profile. If not, the username is visible there.
+A profile is automatically created for a user after registration. User profiles can be viewed by everyone, but only the owner of a profile can edit it. The profile detail page contains all details added by the user. Users can follow and unfollow other profiles. If the owner of the profile added a name, it is shown at the top of the profile. If not, the username is visible there.
 
 ![Profile](docs/screenshots/profile_phone.png)\
 *Profile detail page on a phone*
@@ -335,6 +335,35 @@ Each user can change their name, description, country and profile image. Only sh
 ![Profile edit adopter](docs/screenshots/profile_edit_adopter_phone.png)\
 *Profile edit adopter on a phone*
 
+## **Dogs**
+
+Only shelters can create dogs. They have a link in the navbar that takes them to the *Dogs* page. There all dogs that the logged-in shelter created are shown and they see a button to create a new dog.
+
+![Dogs page](docs/screenshots/dogs_page.png)\
+*Dogs page on a desktop*
+
+To create a dog, the name, breed, birthday, size and gender of the dog have to be added. Additionally, a description can be added using the WYSIWYG editor and characteristics can be chosen for the dog. A main image and additional images can be uploaded for dogs.
+
+![Create a dog](docs/screenshots/create_dog.png)\
+*Create a do on a desktop*
+
+The detail page of a dog includes the main image, name and description of the dog. Additional information and characteristics of the dog are rendered using icons and colorful tags. If additional images have been uploaded, they are shown in a slideshow. At the bottom of the dog detail page, the contact information of the shelter and posts where this dog is linked are shown.
+
+![Dog detail phone](docs/screenshots/dog_detail_phone.png)\
+*Dog detail page on a phone*
+
+![Dog detail page](docs/screenshots/dog_detail.png)\
+*Dog detail page on a desktop*
+
+### **Matches**
+
+Adopters do not see the *Dogs* page, instead they have the *Matches* page. This page includes all dogs that are available for adoption. On top of the page, there is a filter to filter the matches by size, gender or characteristics of the dog.
+
+The results load immediately after changing the filter. The button *Reset all filters* closes the filter and shows all dogs again.
+
+![Matches page](docs/screenshots/matches_filter.png)\
+*Matches page with filter on a desktop*
+
 ## **Saved Posts and Recent Adoptions**
 
 Posts can be saved and unsaved. On bigger screens, the five most recently saved posts are listed and linked in the sidebar. There is also a link to a separate page with all saved posts. For mobile screens, the saved posts can be found on this separate page.
@@ -342,7 +371,7 @@ Posts can be saved and unsaved. On bigger screens, the five most recently saved 
 ![Saved posts desktop](docs/screenshots/feed_sticky_sidebar.png)\
 *Saved posts on a desktop*
 
-The number of saved posts is shown on top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.
+The number of saved posts is shown at the top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.
 
 ![Saved posts phone](docs/screenshots/saves_phone.png)\
 *Saved posts on a phone*
