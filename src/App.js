@@ -20,6 +20,7 @@ import DogCreateForm from "./pages/dogs/DogCreateForm";
 import DogPage from "./pages/dogs/DogPage";
 import DogEditForm from "./pages/dogs/DogEditForm";
 import MatchesPage from "./pages/dogs/MatchesPage";
+import NotFound from "./components/NotFound";
 
 function App() {
     const currentUser = useCurrentUser();
@@ -33,7 +34,7 @@ function App() {
                     <Route exact={true} path="/" element={<AboutPage/>}/>
                     <Route path="/signin" element={<SignInForm/>}/>
                     <Route path="/signup" element={<SignUpForm/>}/>
-                    <Route path="*" element={<p>Page not found!</p>}/>
+                    <Route path="*" element={<NotFound/>}/>
 
                     <Route exact={true} path="/feed" element={<PostsPage/>}/>
                     <Route exact={true} path="/posts/:id" element={<PostPage/>}/>

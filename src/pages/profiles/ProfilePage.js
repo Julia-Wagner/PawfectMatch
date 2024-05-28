@@ -54,7 +54,7 @@ function ProfilePage() {
     const mainProfile = (
         <Container className="px-3">
             <Row className="mb-3">
-                <Col lg={3} className="text-lg-left">
+                <Col lg={3} className="text-center">
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} alt={profile.owner} />
                 </Col>
                 <Col lg={6}>
@@ -72,7 +72,7 @@ function ProfilePage() {
                         </Row>
                     )}
                 </Col>
-                <Col lg={3} className="text-lg-right">
+                <Col lg={3} className="text-center">
                     {currentUser && !is_owner &&
                         (profile?.following_id ? (
                             <Button className={`m-2 ${btnStyles.Button}`} onClick={() => handleUnfollow(profile?.id)}>unfollow</Button>
