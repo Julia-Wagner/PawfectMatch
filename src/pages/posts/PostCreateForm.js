@@ -59,7 +59,6 @@ function PostCreateForm() {
     };
 
     const handleChangeMedia = (event) => {
-        console.log("change media")
         if (event.target.files.length) {
             const selectedMedia = event.target.files[0];
             URL.revokeObjectURL(image);
@@ -69,9 +68,6 @@ function PostCreateForm() {
                 file: selectedMedia,
             })
         }
-        console.log(postMediaData)
-        console.log(postMediaData.file)
-        console.log(image)
     }
 
     useEffect(() => {
@@ -153,11 +149,9 @@ function PostCreateForm() {
         formData.append("type", type)
         formData.append("is_main_image", is_main_image)
 
-        console.log("Form Data:", formData);
 
         try {
             const {data} = await axiosReq.post(`/medias/post/${post_id}/`, formData);
-            console.log("Media upload response:", data);
             navigate(`/posts/${post_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {
