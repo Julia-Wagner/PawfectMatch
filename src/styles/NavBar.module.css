@@ -83,15 +83,3 @@
 #signin, #signup {
     background-color: #eee6d9;
 }
-
-@media (max-width: 1000px) {
-    .NavContainer {
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 767px) and (max-width: 850px) {
-    .Logo {
-        max-width: 29vw;
-    }
-}

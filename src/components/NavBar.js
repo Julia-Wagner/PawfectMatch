@@ -26,7 +26,7 @@ const NavBar = () => {
     }
 
     const loggedInIcons = <>
-        <div className="d-none d-md-flex">
+        <div className="d-none d-lg-flex">
             <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
             <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
             {isShelterUser ? (
@@ -37,7 +37,7 @@ const NavBar = () => {
             <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
             <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
         </div>
-        <div className="d-flex d-md-none flex-column">
+        <div className="d-flex d-lg-none flex-column">
             <NavLink to="/saves" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Saved Posts</NavLink>
             <NavLink to="/adopted" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Adopted Dogs</NavLink>
             <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
@@ -55,8 +55,8 @@ const NavBar = () => {
 
     return (
         <header>
-            <Navbar expanded={expanded} className={styles.NavBar} expand="md" sticky="top">
-                <Container className={styles.NavContainer}>
+            <Navbar expanded={expanded} className={styles.NavBar} expand="lg" sticky="top">
+                <Container>
                     <NavLink to="/">
                         <h1>
                             <span className="sr-only">PawfectMatch</span>
