@@ -11,6 +11,8 @@
     * [**iPhone Testing**](#iphone-testing)
   * [**User Story Testing**](#user-story-testing)
   * [**Accessibility Testing**](#accessibility-testing)
+  * [**Validation**](#validation)
+    * [**CSS Validation**](#css-validation)
 <!-- TOC -->
 
 ## **Manual Testing**
@@ -87,3 +89,12 @@ The returned alerts are because of *redundant alternative text* and *redundant l
 
 ![Accessibility Testing WAVE result](docs/testing/wave_check.png)\
 *WAVE result for Stock Items*
+
+## **Validation**
+
+### **CSS Validation**
+
+I used the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) to validate my custom CSS code, the CSS created by Bootstrap was not tested. My custom CSS code was validated without errors.
+
+![CSS validation](docs/testing/css_validation.png)\
+*CSS validation result for custom CSS*

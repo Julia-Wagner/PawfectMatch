@@ -1,3 +1,35 @@
+/* GENERAL STYLING */
+* {
+    box-sizing: border-box;
+}
+
+main {
+    flex-grow: 1;
+    padding: 0 .5rem 0 .5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Shrikhand", serif;
+    letter-spacing: 0.05rem;
+    color: #54443a;
+}
+
+a {
+    color: #54443a;
+    transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:hover span {
+    color: #ff6431;
+    transition: color ease-in-out 0.3s;
+}
+
+/* CONTENT CLASSES */
+
 .App {
     font-family: "Montserrat", sans-serif;
     background-color: #f1f1f2;
@@ -43,36 +75,7 @@
     cursor: pointer;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-main {
-    flex-grow: 1;
-    padding: 0 .5rem 0 .5rem;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Shrikhand", serif;
-    letter-spacing: 0.05rem;
-    color: #54443a;
-}
-
-a {
-    color: #54443a;
-    transition: color ease-in-out 0.3s;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-a:hover span {
-    color: #ff6431;
-    transition: color ease-in-out 0.3s;
-}
-
-/* scrollbar */
+/* SCROLLBAR */
 *::-webkit-scrollbar {
     width: 5px;
 }
@@ -85,6 +88,8 @@ a:hover span {
 *::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+/* ICON STYLING */
 
 .Icon {
     color: #312a28;
