@@ -25,10 +25,12 @@
 
 .Truncate {
     /*https://blog.logrocket.com/ways-truncate-text-css/*/
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
     display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    max-height: calc(4 * 1.2 * 1em);
+    line-height: 1.2;
 }
 
 .ProfileImage {
