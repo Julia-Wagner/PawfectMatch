@@ -12,6 +12,7 @@
   * [**User Story Testing**](#user-story-testing)
   * [**Accessibility Testing**](#accessibility-testing)
   * [**Validation**](#validation)
+    * [**HTML Validation**](#html-validation)
     * [**CSS Validation**](#css-validation)
 <!-- TOC -->
 
@@ -91,6 +92,15 @@ The returned alerts are because of *redundant alternative text* and *redundant l
 *WAVE result for Stock Items*
 
 ## **Validation**
+
+### **HTML Validation**
+
+I used the [HTML W3C Validator](https://validator.w3.org/) to validate my HTML code. However, that only valdiates the content of the *index.html* file. As the rest of the application is generated dynamically by React.
+
+Therefore, I also validated the **JSX code** to ensure valid HTML.
+
+![HTML validation](docs/testing/html_validation.png)\
+*HTML validation result*
 
 ### **CSS Validation**
 
