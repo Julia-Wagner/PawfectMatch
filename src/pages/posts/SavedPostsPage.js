@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
 import {Image} from "react-bootstrap";
@@ -14,7 +14,6 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import NoResults from "../../assets/playground.svg";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {fetchMoreData} from "../../utils/utils";
-import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useSavedPosts} from "../../contexts/SavedPostsContext";

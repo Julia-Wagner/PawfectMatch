@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
 import appStyles from "../../App.module.css";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Dog from "./Dog";
 import {Accordion, Button, Form, Image} from "react-bootstrap";

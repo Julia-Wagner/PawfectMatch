@@ -6,7 +6,7 @@ import CommentEditForm from "./CommentEditForm";
 import styles from "../../styles/ProfilePage.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
-import {Col, Container, Image, Row} from "react-bootstrap";
+import {Container, Image} from "react-bootstrap";
 
 const Comment = (props) => {
     const {

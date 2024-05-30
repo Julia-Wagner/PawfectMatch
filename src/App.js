@@ -1,7 +1,7 @@
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import BottomNavBar from "./components/BottomNavBar";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import "./api/axiosDefaults"
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
