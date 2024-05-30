@@ -162,20 +162,22 @@ const Dog = (props) => {
                         <hr/>
 
                         {additionalImages.length > 0 && (
-                            <Carousel className="my-3">
+                            <>
                                 <h3 className="text-center">Additional images for {name}</h3>
-                                {additional_images.map((imageData) => (
-                                    <Carousel.Item key={imageData.id} interval={5000}>
-                                        <Image src={imageData.image} alt={imageData.name} fluid />
-                                        <Carousel.Caption className={styles.CarouselCaption}>
-                                            <h4 className={styles.CarouselHeading}>{imageData.name}</h4>
-                                            <p className={styles.CarouselParagraph}>{imageData.description}</p>
-                                        </Carousel.Caption>
-                                    </Carousel.Item>
-                                ))}
-                            </Carousel>
+                                <Carousel className="my-3">
+                                    {additional_images.map((imageData) => (
+                                        <Carousel.Item key={imageData.id} interval={5000}>
+                                            <Image src={imageData.image} alt={imageData.name} fluid />
+                                            <Carousel.Caption className={styles.CarouselCaption}>
+                                                <h4 className={styles.CarouselHeading}>{imageData.name}</h4>
+                                                <p className={styles.CarouselParagraph}>{imageData.description}</p>
+                                            </Carousel.Caption>
+                                        </Carousel.Item>
+                                    ))}
+                                </Carousel>
+                                <hr/>
+                            </>
                         )}
-                        <hr/>
 
                         <div className="mb-5 mt-4">
                             {owner &&
