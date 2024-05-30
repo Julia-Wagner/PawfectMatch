@@ -58,6 +58,7 @@ function CommentCreateForm(props) {
                     <Link to={`/profiles/${commenter_id}`}>
                         <Image className={styles.CommentImage} src={commenter_image} alt={commenter_id} roundedCircle />
                     </Link>
+                    <Form.Label className="sr-only">Add a comment</Form.Label>
                     <Form.Control
                         className={styles.Form}
                         placeholder="add a comment..."
