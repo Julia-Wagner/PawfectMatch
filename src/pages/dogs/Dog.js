@@ -155,7 +155,7 @@ const Dog = (props) => {
                         {characteristics_names && characteristics_names.length > 0 &&
                             <div className="mt-4 mb-5 d-flex gap-3 flex-wrap">
                                 {characteristics_names.map((char, index) => (
-                                    <div className={appStyles.Characteristic} key={index}>{char}</div>
+                                    <div className={appStyles.Characteristic} key={index}>{char.characteristic}</div>
                                 ))}
                             </div>
                         }
