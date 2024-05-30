@@ -56,7 +56,7 @@ const NavBar = () => {
     return (
         <header>
             <Navbar expanded={expanded} className={styles.NavBar} expand="md" sticky="top">
-                <Container>
+                <Container className={styles.NavContainer}>
                     <NavLink to="/">
                         <h1>
                             <span className="sr-only">PawfectMatch</span>
