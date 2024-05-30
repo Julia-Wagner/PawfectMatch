@@ -10,6 +10,7 @@
   * [**Manual Testing**](#manual-testing)
     * [**iPhone Testing**](#iphone-testing)
   * [**User Story Testing**](#user-story-testing)
+  * [**Accessibility Testing**](#accessibility-testing)
 <!-- TOC -->
 
 ## **Manual Testing**
@@ -77,3 +78,12 @@ In order for the **Acceptance Criteria met** to be ticked, every criterion speci
 | As an **adopter**, I want to **define my housing situation**, so that I can **match with dogs based on requirements**.                  | [link](https://github.com/Julia-Wagner/pawfect-match/issues/38) | Feature not included for first release |
 | As a **site user**, I want to **receive notifications**, so that I can **stay up-to-date**.                                             | [link](https://github.com/Julia-Wagner/pawfect-match/issues/39) | Feature not included for first release |
 | As a **site user**, I want to **be able to use a chat**, so that I can **easily communicate with shelters/adopters**.                   | [link](https://github.com/Julia-Wagner/pawfect-match/issues/40) | Feature not included for first release |
+
+## **Accessibility Testing**
+
+I tested my application using the [WAVE tool](https://wave.webaim.org/) to ensure good accessibility. It returned no errors for all pages of the application.
+
+The returned alerts are because of *redundant alternative text* and *redundant links*. That is the case, because all posts include the profile picture and link to the profile and these are the same if multiple posts are shown from the same profile.
+
+![Accessibility Testing WAVE result](docs/testing/wave_check.png)\
+*WAVE result for Stock Items*
