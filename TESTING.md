@@ -15,6 +15,7 @@
     * [**HTML Validation**](#html-validation)
     * [**CSS Validation**](#css-validation)
     * [**JavaScript and JSX Validation**](#javascript-and-jsx-validation)
+  * [**Bugs and Fixes**](#bugs-and-fixes)
 <!-- TOC -->
 
 ## **Manual Testing**
@@ -117,3 +118,18 @@ I used the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) to validate
 On the first run I got quite a few errors. However, most of them where because of missing prop-types. After defining them and fixing some other smaller issues, I have **no errors or warnings**.
 
 The pretty-printed JSON result can be found [here](/docs/testing/eslint-results.pdf).
+
+## **Bugs and Fixes**
+
+When testing the application on my phone, or when I encountered bugs outside the current sprints' scope, I opened a **Bug issue** on my Kanban board.
+
+Besides the adaptions and fixes already mentioned in the documentation, here are the Bugs I found. There are no known bugs that are not solved.
+
+| Bug                                                                                                                         | Solved  | Bug Issue                                                                                   | Fix Commit                                                                                                                              | Solution                                                                                                        |
+|-----------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| The sticky bottom nav is not at the bottom at the sign up page.                                                             | &check; | [Bug #1: Sticky bottom nav](https://github.com/Julia-Wagner/pawfect-match/issues/46)        | [ac59356](https://github.com/Julia-Wagner/pawfect-match/commit/ac593569728112f62cf6c2c19ed223173c84a2dc)                                | I had to adapt the container height so the nav is pushed to the bottom of the page.                             |
+| After logging in, the navbar doesn´t immediately update. Only after reloading the page.                                     | &check; | [Bug #2: Nav update login](https://github.com/Julia-Wagner/pawfect-match/issues/47)         | [5b18cab](https://github.com/Julia-Wagner/pawfect-match/commit/5b18cabdb5af9b9830240edf6f544fd88c9abbb9)                                | My mentor helped me find out that I was just missing curly braces at an API call.                               |
+| Logging in in an incognito tab is not possible.                                                                             | &check; | [Bug #3: Incognito Login](https://github.com/Julia-Wagner/pawfect-match/issues/48)          | [Knwon issue](https://code-institute-room.slack.com/archives/C02MTH5MBDG/p1659719243446449?thread_ts=1659705919.570999&cid=C02MTH5MBDG) | As described above, this is a known issue and I decided to adapt browser settings to allow third-party cookies. |
+| For the additional images slider on the dog detail page there is always one more empty slide than there are images.         | &check; | [Bug #4: Additional Images Slider](https://github.com/Julia-Wagner/pawfect-match/issues/49) | [87ddad6](https://github.com/Julia-Wagner/pawfect-match/commit/87ddad6403489ef3319841ed3b55dd4e133a8c94)                                | I had the h3 inside the Carousel and it was treated as a child element.                                         |
+| The sidebar is not visible for tablet screen size, but the mobile menu with the sidebar is not visible at this size either. | &check; | [Bug #6: Sidebar not visible](https://github.com/Julia-Wagner/pawfect-match/issues/51)      | [46a991c](https://github.com/Julia-Wagner/pawfect-match/commit/46a991c67b27a3a5e4c6827e48256d2c350cf7e1)                                | I used the mobile navbar withour the Sidebar for medium screen sizes.                                           |
+| The truncate style for posts does not work on safari.                                                                       | &check; | [Bug #7: Post Truncate Safari](https://github.com/Julia-Wagner/pawfect-match/issues/52)     | [c3e4a42](https://github.com/Julia-Wagner/pawfect-match/commit/c3e4a424356cf8ca7929216e4f10ba7b3b5b065f)                                | I adapted the CSS class to work for safari.                                                                     |
