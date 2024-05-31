@@ -56,7 +56,7 @@ const Post = (props) => {
                     ]);
                     setPostDogs(postDogs);
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             }
         };
@@ -89,7 +89,7 @@ const Post = (props) => {
             await axiosRes.delete(`/posts/${id}/`);
             navigate(-1);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -106,7 +106,7 @@ const Post = (props) => {
             }));
             triggerUpdate();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -123,7 +123,7 @@ const Post = (props) => {
             }));
             triggerUpdate();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

@@ -29,7 +29,7 @@ export const CurrentUserProvider = ({ children }) => {
                 setIsShelterUser(profileResponse.data.type === "shelter");
             }
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         } finally {
             setLoading(false);
         }
@@ -46,7 +46,7 @@ export const CurrentUserProvider = ({ children }) => {
                     const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}/`);
                     setIsShelterUser(profileResponse.data.type === "shelter");
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             };
             checkShelterUser();

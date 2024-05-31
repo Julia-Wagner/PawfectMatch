@@ -37,7 +37,7 @@ const Sidebar = () => {
                 setDogs(dogItems)
                 setHasLoaded(true)
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
 

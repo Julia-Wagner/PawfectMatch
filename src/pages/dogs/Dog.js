@@ -66,7 +66,7 @@ const Dog = (props) => {
                     ]);
                     setDogPosts(dogPosts);
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
             }
         };
@@ -97,7 +97,7 @@ const Dog = (props) => {
             await axiosRes.delete(`/dogs/${id}/`);
             navigate(-1);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

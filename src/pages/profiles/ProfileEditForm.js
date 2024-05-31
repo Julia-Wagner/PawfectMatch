@@ -84,7 +84,7 @@ const ProfileEditForm = () => {
                     });
                     setType(type)
                 } catch (err) {
-                    console.log(err);
+                    // console.log(err);
                     navigate("/");
                 }
             } else {
@@ -126,7 +126,7 @@ const ProfileEditForm = () => {
             }));
             navigate(-1);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             setErrors(err.response?.data);
         }
     };

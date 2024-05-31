@@ -9,7 +9,7 @@ const useFollow = (clickedId = null) => {
             await axiosReq.post("/followers/", {followed: clickedId});
             triggerUpdate();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -19,7 +19,7 @@ const useFollow = (clickedId = null) => {
             await axiosRes.delete(`/followers/${clickedProfile.data.following_id}/`);
             triggerUpdate();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 

@@ -38,7 +38,7 @@ function PostsPage({message = ""}) {
                 setPosts({ results: postItems })
                 setHasLoaded(true)
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
 

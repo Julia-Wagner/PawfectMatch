@@ -23,7 +23,7 @@ function DogPage() {
                 ])
                 setDog({results: [dog]})
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         };
 

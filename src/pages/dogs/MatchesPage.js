@@ -64,7 +64,7 @@ function MatchesPage({message, filter = ""}) {
                 const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 
@@ -89,7 +89,7 @@ function MatchesPage({message, filter = ""}) {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
 
@@ -107,7 +107,7 @@ function MatchesPage({message, filter = ""}) {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                console.log(err)
+                // console.log(err)
             }
         }
 
