@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"; // Import PropTypes
 import Spinner from "react-bootstrap/Spinner";
 import styles from "../styles/Asset.module.css";
 
@@ -14,6 +15,13 @@ const Asset = ({ spinner, src, message }) => {
             {message && <p className="mt-4">{message}</p>}
         </div>
     );
+};
+
+// Define prop types
+Asset.propTypes = {
+    spinner: PropTypes.bool,
+    src: PropTypes.string,
+    message: PropTypes.string,
 };
 
 export default Asset;
