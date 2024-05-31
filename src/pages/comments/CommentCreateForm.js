@@ -6,7 +6,9 @@ import InputGroup from "react-bootstrap/InputGroup";
 
 import styles from "../../styles/ProfilePage.module.css";
 import {axiosRes} from "../../api/axiosDefaults";
-import {Alert, Button, Image} from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 import btnStyles from "../../styles/Button.module.css";
 
 function CommentCreateForm(props) {

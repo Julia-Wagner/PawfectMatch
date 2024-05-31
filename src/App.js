@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import BottomNavBar from "./components/BottomNavBar";

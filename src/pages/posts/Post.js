@@ -3,7 +3,10 @@ import DOMPurify from 'dompurify';
 import appStyles from "../../App.module.css";
 import styles from "../../styles/Post.module.css"
 import {useCurrentUser} from "../../contexts/CurrentUserContext";
-import {Card, Image, OverlayTrigger, Tooltip} from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Image from "react-bootstrap/Image";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosReq, axiosRes} from "../../api/axiosDefaults";

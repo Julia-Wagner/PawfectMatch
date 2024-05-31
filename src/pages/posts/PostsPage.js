@@ -8,7 +8,7 @@ import appStyles from "../../App.module.css";
 import {Link, useLocation, useParams} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
-import {Image} from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import { useCurrentUser, useIsShelterUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/playground.svg";

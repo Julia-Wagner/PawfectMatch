@@ -8,7 +8,10 @@ import appStyles from "../../App.module.css";
 import {useLocation} from "react-router-dom";
 import {axiosReq} from "../../api/axiosDefaults";
 import Dog from "./Dog";
-import {Accordion, Button, Form, Image} from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Image from "react-bootstrap/Image";
 import { useCurrentUser, useIsShelterUser } from "../../contexts/CurrentUserContext";
 
 import NoResults from "../../assets/playground.svg";

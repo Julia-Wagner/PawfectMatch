@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from "react"
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
-import {Badge, Card, Carousel, Col, Container, Image, Row} from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Card from "react-bootstrap/Card";
+import Carousel from "react-bootstrap/Carousel";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import {Link, useNavigate} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import {axiosReq, axiosRes} from "../../api/axiosDefaults";

@@ -9,7 +9,9 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate, useParams} from "react-router-dom";
-import {Alert, Figure, Image} from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Figure from "react-bootstrap/Figure";
+import Image from "react-bootstrap/Image";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
