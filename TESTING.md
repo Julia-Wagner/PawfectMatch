@@ -14,6 +14,7 @@
   * [**Validation**](#validation)
     * [**HTML Validation**](#html-validation)
     * [**CSS Validation**](#css-validation)
+    * [**JavaScript and JSX Validation**](#javascript-and-jsx-validation)
 <!-- TOC -->
 
 ## **Manual Testing**
@@ -108,3 +109,11 @@ I used the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) to validate
 
 ![CSS validation](docs/testing/css_validation.png)\
 *CSS validation result for custom CSS*
+
+### **JavaScript and JSX Validation**
+
+[ESlint](https://eslint.org/) was used in my code editor to test my JavaScript and JSX code. 
+
+On the first run I got quite a few errors. However, most of them where because of missing prop-types. After defining them and fixing some other smaller issues, I have **no errors or warnings**.
+
+The pretty-printed JSON result can be found [here](/docs/testing/eslint-results.pdf).
