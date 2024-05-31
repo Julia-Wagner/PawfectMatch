@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import PropTypes from 'prop-types';
 
 
 const FollowersContext = createContext();
@@ -15,6 +16,10 @@ export const FollowersProvider = ({ children }) => {
             {children}
         </FollowersContext.Provider>
     );
+};
+
+FollowersProvider.propTypes = {
+    children: PropTypes.node,
 };
 
 export const useFollowers = () => useContext(FollowersContext);

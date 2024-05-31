@@ -1,3 +1,5 @@
+import React from "react";
+import PropTypes from 'prop-types';
 import {createContext, useContext, useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -111,3 +113,7 @@ export const CurrentUserProvider = ({ children }) => {
         </CurrentUserContext.Provider>
     )
 }
+
+CurrentUserProvider.propTypes = {
+    children: PropTypes.node,
+};

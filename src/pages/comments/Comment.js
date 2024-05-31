@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {MoreDropdown} from "../../components/MoreDropdown";
 import CommentEditForm from "./CommentEditForm";
@@ -47,7 +48,9 @@ const Comment = (props) => {
                 ...prevComments,
                 results: prevComments.results.filter((comment) => comment.id !== id),
             }));
-        } catch (err) {}
+        } catch (err) {
+            // console.log(err)
+        }
     };
 
     return (
@@ -84,6 +87,17 @@ const Comment = (props) => {
             </Container>
         </>
     );
+};
+
+Comment.propTypes = {
+    profile_id: PropTypes.number,
+    profile_image: PropTypes.string,
+    owner: PropTypes.string,
+    updated_at: PropTypes.string,
+    content: PropTypes.string,
+    id: PropTypes.number,
+    setProfile: PropTypes.func,
+    setComments: PropTypes.func,
 };
 
 export default Comment;

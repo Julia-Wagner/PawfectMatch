@@ -17,7 +17,6 @@ const Asset = ({ spinner, src, message }) => {
     );
 };
 
-// Define prop types
 Asset.propTypes = {
     spinner: PropTypes.bool,
     src: PropTypes.string,

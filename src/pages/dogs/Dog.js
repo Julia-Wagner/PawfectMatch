@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react"
+import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import styles from "../../styles/Post.module.css"
 import Badge from "react-bootstrap/Badge";
@@ -24,11 +25,9 @@ const Dog = (props) => {
         owner,
         is_owner,
         owner_name,
-        birthday,
         birthday_formatted,
         age,
         breed,
-        characteristics,
         characteristics_names,
         gender,
         is_adopted,
@@ -36,10 +35,8 @@ const Dog = (props) => {
         size,
         description,
         main_image,
-        created_at,
         updated_at,
         dogPage,
-        setDogs,
         profile_id,
         owner_phone,
         owner_address,
@@ -212,14 +209,14 @@ const Dog = (props) => {
                                 <h3 className={styles.LinkHeading}>Posts linked to {name}</h3>
                                 <hr />
                                 <InfiniteScroll
-                                    children={dogPosts.results.map((post) => (
-                                        <Post key={post.id} {...post} setPosts={setDogPosts} />
-                                    ))}
                                     dataLength={dogPosts.results.length}
                                     loader={<Asset spinner />}
                                     hasMore={!!dogPosts.next}
-                                    next={() => fetchMoreData(dogPosts, setDogPosts)}
-                                />
+                                    next={() => fetchMoreData(dogPosts, setDogPosts)}>
+                                    {dogPosts.results.map((post) => (
+                                        <Post key={post.id} {...post} setPosts={setDogPosts} />
+                                    ))}
+                                </InfiniteScroll>
                             </div>
                         )}
                     </Container>
@@ -233,5 +230,30 @@ const Dog = (props) => {
         </Card>
     )
 }
+
+Dog.propTypes = {
+    id: PropTypes.number,
+    owner: PropTypes.string,
+    is_owner: PropTypes.bool,
+    owner_name: PropTypes.string,
+    birthday_formatted: PropTypes.string,
+    age: PropTypes.string,
+    breed: PropTypes.string,
+    characteristics_names: PropTypes.array,
+    gender: PropTypes.string,
+    is_adopted: PropTypes.bool,
+    name: PropTypes.string,
+    size: PropTypes.string,
+    description: PropTypes.string,
+    main_image: PropTypes.shape({
+        url: PropTypes.string
+    }),
+    updated_at: PropTypes.string,
+    dogPage: PropTypes.bool,
+    profile_id: PropTypes.number,
+    owner_phone: PropTypes.string,
+    owner_address: PropTypes.string,
+    additional_images: PropTypes.array,
+};
 
 export default Dog

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import PropTypes from 'prop-types';
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -19,7 +20,7 @@ import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
 
-function PostsPage({message, filter = ""}) {
+function PostsPage({filter = ""}) {
     const [posts, setPosts] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
     const {pathname} = useLocation();
@@ -67,14 +68,15 @@ function PostsPage({message, filter = ""}) {
                         <>
                             {posts.results.length ? (
                                 <InfiniteScroll
-                                    children={
-                                    posts.results.map((post) => (
-                                        <Post key={post.id} {...post} setPosts={setPosts} />
-                                    ))}
                                     next={() => fetchMoreData(posts, setPosts)}
                                     hasMore={!!posts.next}
                                     loader={<Asset spinner />}
-                                    dataLength={posts.results.length}/>
+                                    dataLength={posts.results.length}>
+                                    {/* Nest children between opening and closing tags */}
+                                    {posts.results.map((post) => (
+                                        <Post key={post.id} {...post} setPosts={setPosts} />
+                                    ))}
+                                </InfiniteScroll>
                             ) : (
                                 <Container className={appStyles.Content}>
                                     <h2 className="mt-3 mb-5 text-center">No posts to display.</h2>
@@ -93,5 +95,9 @@ function PostsPage({message, filter = ""}) {
         </Container>
     );
 }
+
+PostsPage.propTypes = {
+    filter: PropTypes.string,
+};
 
 export default PostsPage;

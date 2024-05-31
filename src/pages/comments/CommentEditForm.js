@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -54,20 +55,25 @@ function CommentEditForm(props) {
                 <button
                     className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
                     onClick={() => setShowEditForm(false)}
-                    type="button"
-                >
+                    type="button">
                     cancel
                 </button>
                 <button
                     className={`${btnStyles.Button}`}
                     disabled={!content.trim()}
-                    type="submit"
-                >
+                    type="submit">
                     save
                 </button>
             </div>
         </Form>
     );
 }
+
+CommentEditForm.propTypes = {
+    id: PropTypes.number,
+    content: PropTypes.string,
+    setShowEditForm: PropTypes.func,
+    setComments: PropTypes.func,
+};
 
 export default CommentEditForm;

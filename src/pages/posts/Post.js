@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react"
+import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import appStyles from "../../App.module.css";
 import styles from "../../styles/Post.module.css"
@@ -29,11 +30,8 @@ const Post = (props) => {
         saves_count,
         save_id,
         title,
-        type,
         content,
-        dogs,
         main_image,
-        created_at,
         updated_at,
         postPage,
         setPosts,
@@ -112,7 +110,7 @@ const Post = (props) => {
 
     const handleUnsave = async () => {
         try {
-            const {data} = await axiosRes.delete(`/saves/${save_id}`);
+            await axiosRes.delete(`/saves/${save_id}`);
             setPosts((prevPosts) => ({
                 ...prevPosts,
                 results: prevPosts.results.map((post) => {
@@ -206,14 +204,14 @@ const Post = (props) => {
                         <h3 className={styles.LinkHeading}>Dogs linked to this post</h3>
                         <hr />
                         <InfiniteScroll
-                            children={postDogs.results.map((dog) => (
-                                <Dog key={dog.id} {...dog} setDogs={setPostDogs} />
-                            ))}
                             dataLength={postDogs.results.length}
                             loader={<Asset spinner />}
                             hasMore={!!postDogs.next}
-                            next={() => fetchMoreData(postDogs, setPostDogs)}
-                        />
+                            next={() => fetchMoreData(postDogs, setPostDogs)}>
+                            {postDogs.results.map((dog) => (
+                                <Dog key={dog.id} {...dog} setDogs={setPostDogs} />
+                            ))}
+                        </InfiniteScroll>
                     </div>
                 )}
             </Card.Body>
@@ -225,5 +223,24 @@ const Post = (props) => {
         </Card>
     )
 }
+
+Post.propTypes = {
+    id: PropTypes.number,
+    owner: PropTypes.string,
+    is_owner: PropTypes.bool,
+    is_following: PropTypes.bool,
+    profile_id: PropTypes.number,
+    profile_image: PropTypes.string,
+    saves_count: PropTypes.number,
+    save_id: PropTypes.number,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    main_image: PropTypes.shape({
+        url: PropTypes.string
+    }),
+    updated_at: PropTypes.string,
+    postPage: PropTypes.bool,
+    setPosts: PropTypes.func,
+};
 
 export default Post

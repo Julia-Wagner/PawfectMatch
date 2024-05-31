@@ -1,5 +1,7 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import btnStyles from "../styles/Button.module.css";
 
 const ConfirmationModal = ({ title, text, show, onHide, onConfirm }) => {
@@ -22,6 +24,14 @@ const ConfirmationModal = ({ title, text, show, onHide, onConfirm }) => {
             </Modal.Footer>
         </Modal>
     );
+};
+
+ConfirmationModal.propTypes = {
+    title: PropTypes.string,
+    text: PropTypes.string,
+    show: PropTypes.bool,
+    onHide: PropTypes.func,
+    onConfirm: PropTypes.func,
 };
 
 export default ConfirmationModal;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 
@@ -12,6 +13,8 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
         }}
     />
 ));
+
+ThreeDots.displayName = "ThreeDots";
 
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
     return (
@@ -30,4 +33,13 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
             </Dropdown.Menu>
         </Dropdown>
     );
+};
+
+MoreDropdown.propTypes = {
+    handleEdit: PropTypes.func,
+    handleDelete: PropTypes.func,
+};
+
+ThreeDots.propTypes = {
+    onClick: PropTypes.func,
 };

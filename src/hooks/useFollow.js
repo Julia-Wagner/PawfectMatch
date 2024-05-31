@@ -1,7 +1,7 @@
 import {axiosReq, axiosRes} from "../api/axiosDefaults";
 import {useFollowers} from "../contexts/FollowersContext";
 
-const useFollow = (clickedId = null) => {
+const useFollow = () => {
     const {triggerUpdate} = useFollowers();
 
     const handleFollow = async (clickedId) => {

@@ -22,7 +22,7 @@ import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
 
-function MatchesPage({message, filter = ""}) {
+function MatchesPage() {
     const [dogs, setDogs] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
     const [characteristics, setCharacteristics] = useState([]);
@@ -171,14 +171,14 @@ function MatchesPage({message, filter = ""}) {
                         <>
                             {dogs.length ? (
                                 <InfiniteScroll
-                                    children={
-                                        dogs.map((dog) => (
-                                        <Dog key={dog.id} {...dog} setDogs={setDogs} />
-                                    ))}
                                     next={() => fetchMoreData(dogs, setDogs)}
                                     hasMore={!!dogs.next}
                                     loader={<Asset spinner />}
-                                    dataLength={dogs.length}/>
+                                    dataLength={dogs.length}>
+                                    {dogs.map((dog) => (
+                                        <Dog key={dog.id} {...dog} setDogs={setDogs} />
+                                    ))}
+                                </InfiniteScroll>
                             ) : (
                                 <Container className={appStyles.Content}>
                                     <h2 className="mt-3 mb-5 text-center">No dogs to display.</h2>

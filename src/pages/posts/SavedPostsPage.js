@@ -18,7 +18,7 @@ import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useSavedPosts} from "../../contexts/SavedPostsContext";
 
-function PostsPage({message = ""}) {
+function SavedPostsPage() {
     const [posts, setPosts] = useState({results: []});
     const [hasLoaded, setHasLoaded] = useState(false);
     const {pathname} = useLocation();
@@ -56,14 +56,14 @@ function PostsPage({message = ""}) {
                                 <div>
                                     <h2 className="text-center mb-3">You have {posts.results.length} saved posts</h2>
                                     <InfiniteScroll
-                                        children={
-                                            posts.results.map((post) => (
-                                                <Post key={post.id} {...post} setPosts={setPosts} />
-                                            ))}
                                         next={() => fetchMoreData(posts, setPosts)}
                                         hasMore={!!posts.next}
                                         loader={<Asset spinner />}
-                                        dataLength={posts.results.length}/>
+                                        dataLength={posts.results.length}>
+                                        {posts.results.map((post) => (
+                                            <Post key={post.id} {...post} setPosts={setPosts} />
+                                        ))}
+                                    </InfiniteScroll>
                                 </div>
                             ) : (
                                 <Container className={appStyles.Content}>
@@ -84,4 +84,4 @@ function PostsPage({message = ""}) {
     );
 }
 
-export default PostsPage;
+export default SavedPostsPage;

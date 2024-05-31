@@ -92,7 +92,7 @@ function ProfilePage() {
                 <>
                     <hr />
                     <p className="text-center">
-                        <Link to={`/posts/profile/${profile.id}`}>{profile?.name? profile.name : profile.owner}'s posts</Link>
+                        <Link to={`/posts/profile/${profile.id}`}>{profile?.name? profile.name : profile.owner}&apos;s posts</Link>
                     </p>
                     <hr />
                 </>
@@ -131,20 +131,20 @@ function ProfilePage() {
                 "Comments"
             ) : null}
             {comments.results.length ? (
-                    <InfiniteScroll
-                        children={comments.results.map((comment) => (
-                            <Comment
-                                key={comment.id}
-                                {...comment}
-                                setProfile={setProfileData}
-                                setComments={setComments}
-                            />
-                        ))}
-                        dataLength={comments.results.length}
-                        loader={<Asset spinner />}
-                        hasMore={!!comments.next}
-                        next={() => fetchMoreData(comments, setComments)}
-                    />
+                <InfiniteScroll
+                    dataLength={comments.results.length}
+                    loader={<Asset spinner />}
+                    hasMore={!!comments.next}
+                    next={() => fetchMoreData(comments, setComments)}>
+                    {comments.results.map((comment) => (
+                        <Comment
+                            key={comment.id}
+                            {...comment}
+                            setProfile={setProfileData}
+                            setComments={setComments}
+                        />
+                    ))}
+                </InfiniteScroll>
             ) : currentUser ? (
                 <span>No comments yet, be the first to comment!</span>
             ) : (

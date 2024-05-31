@@ -40,7 +40,7 @@ function PostEditForm() {
         type: "image",
         is_main_image: true,
     });
-    const {image, media_name, media_description, type, is_main_image} = postMediaData;
+    const {image, media_description, type, is_main_image} = postMediaData;
 
     const imageInput = useRef(null);
 
@@ -52,8 +52,6 @@ function PostEditForm() {
 
     const [dogs, setDogs] = useState([]);
     const [selectedDogs, setSelectedDogs] = useState([]);
-
-    const [editor, setEditor] = useState(null);
 
     const handleChange = (event) => {
         setPostData({
@@ -204,8 +202,6 @@ function PostEditForm() {
             }
         }
     }
-
-    const today = new Date().toISOString().split("T")[0];
 
     return (
         <Container>

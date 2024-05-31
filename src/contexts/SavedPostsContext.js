@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import PropTypes from 'prop-types';
 
 
 const SavedPostsContext = createContext();
@@ -15,6 +16,10 @@ export const SavedPostsProvider = ({ children }) => {
             {children}
         </SavedPostsContext.Provider>
     );
+};
+
+SavedPostsProvider.propTypes = {
+    children: PropTypes.node,
 };
 
 export const useSavedPosts = () => useContext(SavedPostsContext);

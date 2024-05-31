@@ -19,10 +19,8 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
-import {useIsShelterUser} from "../../contexts/CurrentUserContext";
 
 function PostCreateForm() {
-    const isShelterUser = useIsShelterUser();
     const navigate = useNavigate();
     const quillRef = useRef(null);
 
@@ -40,7 +38,7 @@ function PostCreateForm() {
         type: "image",
         is_main_image: true,
     });
-    const {image, name, description, type, is_main_image} = postMediaData;
+    const {image, description, type, is_main_image} = postMediaData;
 
     const imageInput = useRef(null);
 
@@ -153,7 +151,7 @@ function PostCreateForm() {
 
 
         try {
-            const {data} = await axiosReq.post(`/medias/post/${post_id}/`, formData);
+            await axiosReq.post(`/medias/post/${post_id}/`, formData);
             navigate(`/posts/${post_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {

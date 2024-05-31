@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
@@ -86,5 +87,13 @@ function CommentCreateForm(props) {
         </Form>
     );
 }
+
+CommentCreateForm.propTypes = {
+    profile: PropTypes.object,
+    setProfile: PropTypes.func,
+    setComments: PropTypes.func,
+    commenter_image: PropTypes.string,
+    commenter_id: PropTypes.number,
+};
 
 export default CommentCreateForm;
