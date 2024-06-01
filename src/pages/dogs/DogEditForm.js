@@ -9,7 +9,9 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import {useNavigate, useParams} from "react-router-dom";
-import {Alert, Figure, Image} from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Figure from "react-bootstrap/Figure";
+import Image from "react-bootstrap/Image";
 
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
@@ -40,15 +42,13 @@ function DogEditForm() {
     });
     const {image, media_name, media_description, type, is_main_image} = dogMediaData;
 
-    const imageInput = useRef(null);
-
     const [dogData, setDogData] = useState({
         name: "",
         description: "",
         breed: "",
         birthday: "",
-        size: "",
-        gender: "",
+        size: "medium",
+        gender: "male",
         is_adopted: false
     });
     const {
@@ -83,6 +83,24 @@ function DogEditForm() {
         }
     }
 
+    const [videoData, setVideoData] = useState({
+        video: null,
+    });
+    const { video } = videoData;
+
+    const handleChangeVideo = (event) => {
+        if (event.target.files.length) {
+            const selectedFile = event.target.files[0];
+            URL.revokeObjectURL(video);
+            setVideoData({
+                video: {
+                    url: URL.createObjectURL(selectedFile),
+                    file: selectedFile,
+                },
+            });
+        }
+    };
+
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -96,11 +114,13 @@ function DogEditForm() {
                     gender,
                     is_adopted,
                     characteristics,
-                    is_owner} = data;
+                    is_owner,
+                    video} = data;
                 const image = data.main_image.url;
 
                 if (is_owner) {
-                    setDogData({name,
+                    setDogData({
+                        name,
                         description,
                         breed,
                         birthday,
@@ -114,11 +134,14 @@ function DogEditForm() {
                         image: image,
                         file: image,
                     })
+                    if (video) {
+                        setVideoData({video});
+                    }
                 } else {
                     navigate("/feed");
                 }
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         }
 
@@ -191,6 +214,11 @@ function DogEditForm() {
 
         try {
             const {data} = await axiosReq.put(`/dogs/${id}/`, formData);
+            // check if a video was uploaded
+            if (video && video.file) {
+                await handleSubmitVideo(id, data.video.id);
+            }
+
             // check if an image was uploaded
             if (image.length > 1 || data.main_image.id !== null) {
                 // check if the image changed
@@ -205,6 +233,31 @@ function DogEditForm() {
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
+            }
+        }
+    }
+
+    const handleSubmitVideo = async (dog_id, video_id) => {
+        if (video && video.file) {
+            const videoFormData = new FormData();
+            videoFormData.append("video", video.file);
+            videoFormData.append("name", name);
+            videoFormData.append("description", "");
+            videoFormData.append("type", "video");
+            videoFormData.append("is_main_image", false);
+
+            try {
+                if (video_id) {
+                    // change the media if another video was uploaded before
+                    await axiosReq.put(`/medias/${video_id}/`, videoFormData);
+                } else {
+                    // create a new media if no video was uploaded before
+                    await axiosReq.post(`/medias/dog/${dog_id}/`, videoFormData);
+                }
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data);
+                }
             }
         }
     }
@@ -245,7 +298,7 @@ function DogEditForm() {
                         <Container className={appStyles.Content}>
                             <div className="text-center">
                                 <Form.Group controlId="name" className="mb-4">
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label>Name *</Form.Label>
                                     <Form.Control type="text" name="name" value={name} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.name?.map((message, idx) => (
@@ -259,21 +312,21 @@ function DogEditForm() {
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="breed" className="mb-4">
-                                    <Form.Label>Breed</Form.Label>
+                                    <Form.Label>Breed *</Form.Label>
                                     <Form.Control type="text" name="breed" value={breed} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.breed?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="birthday" className="mb-4">
-                                    <Form.Label>Birthday</Form.Label>
+                                    <Form.Label>Birthday *</Form.Label>
                                     <Form.Control type="date" name="birthday" value={birthday} onChange={handleChange} max={today} />
                                 </Form.Group>
                                 {errors?.birthday?.map((message, idx) => (
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="size" className="mb-4">
-                                    <Form.Label>Size</Form.Label>
+                                    <Form.Label>Size *</Form.Label>
                                     <Form.Select value={size} name="size" onChange={handleChange}>
                                         <option key="small" value="small">Small</option>
                                         <option key="medium" value="medium">Medium</option>
@@ -284,7 +337,7 @@ function DogEditForm() {
                                     <Alert variant="warning" key={idx}>{message}</Alert>
                                 ))}
                                 <Form.Group controlId="gender" className="mb-4">
-                                    <Form.Label>Gender</Form.Label>
+                                    <Form.Label>Gender *</Form.Label>
                                     <Form.Select value={gender} name="gender" onChange={handleChange}>
                                         <option key="male" value="male">Male</option>
                                         <option key="female" value="female">Female</option>
@@ -303,7 +356,7 @@ function DogEditForm() {
                                     </Form.Select>
                                 </Form.Group>
                                 <Form.Group controlId="adopted" className="mb-4 d-flex justify-content-center gap-2">
-                                    <Form.Label >Adopted?</Form.Label>
+                                    <Form.Label>Adopted?</Form.Label>
                                     <Form.Check type="checkbox" name="is_adopted" value={is_adopted} onChange={handleChange} />
                                 </Form.Group>
                                 {errors?.is_adopted?.map((message, idx) => (
@@ -324,16 +377,16 @@ function DogEditForm() {
                     </Col>
                     <Col className="py-2 p-0 p-md-2" sm={12} md={6}>
                         <Container
-                            className={`${appStyles.Content} d-flex flex-column justify-content-center`}
-                        >
+                            className={`${appStyles.Content} d-flex flex-column justify-content-center`}>
                             <Form.Group className="text-center">
+                                <h3 className="mt-3">Main image</h3>
                                 {image ? (
                                     <>
                                         <Figure>
                                             <Image className={appStyles.Image} src={image} rounded />
                                         </Figure>
                                         <div>
-                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="main-image-upload">
                                                 Change the image
                                             </Form.Label>
                                         </div>
@@ -341,15 +394,37 @@ function DogEditForm() {
                                 ) : (
                                     <Form.Label
                                         className="d-flex justify-content-center"
-                                        htmlFor="media-upload"
-                                    >
+                                        htmlFor="main-image-upload">
                                         <Asset src={Upload} message="Click or tap to upload an image" />
                                     </Form.Label>
                                 )}
-                                <Form.Control id="media-upload" type="file"
-                                              onChange={handleChangeMedia} ref={imageInput} />
+                                <Form.Control id="main-image-upload" type="file" onChange={handleChangeMedia} />
                             </Form.Group>
-                            {errors?.image?.map((message, idx) => (
+                            {errors?.main_image?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
+                            <Form.Group className="text-center">
+                                <h4 className="mt-3">Video</h4>
+                                <p>You can upload a video that will be shown for the dog.</p>
+                                {video && video.url ? (
+                                    <>
+                                        <video className={appStyles.Video} controls>
+                                            <source src={video.url} type="video/mp4" />
+                                        </video>
+                                        <div>
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="video-upload">
+                                                Change the video
+                                            </Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label className="d-flex justify-content-center" htmlFor="video-upload">
+                                        <Asset src={Upload} message="Click or tap to upload a video" />
+                                    </Form.Label>
+                                )}
+                                <Form.Control id="video-upload" type="file" accept="video/*" onChange={handleChangeVideo} />
+                            </Form.Group>
+                            {errors?.video?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Container>
