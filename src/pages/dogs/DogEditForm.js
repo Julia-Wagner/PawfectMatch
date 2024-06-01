@@ -23,16 +23,14 @@ import Spinner from "react-bootstrap/Spinner";
 
 function DogEditForm() {
     const {id} = useParams();
-
     const navigate = useNavigate();
     const quillRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const handleGoBack = () => {
         navigate(-1);
     }
-
-    const [errors, setErrors] = useState({});
 
     const [dogData, setDogData] = useState({
         name: "",
@@ -43,14 +41,7 @@ function DogEditForm() {
         gender: "male",
         is_adopted: false
     });
-    const {
-        name,
-        description,
-        breed,
-        birthday,
-        size,
-        gender,
-        is_adopted} = dogData;
+    const { name, description, breed, birthday, size, gender, is_adopted } = dogData;
 
     const [characteristics, setCharacteristics] = useState([]);
     const [selectedCharacteristics, setSelectedCharacteristics] = useState([]);
@@ -65,8 +56,9 @@ function DogEditForm() {
 
     const [dogMediaData, setDogMediaData] = useState({
         main_image: null,
+        more_images: [],
     });
-    const { main_image } = dogMediaData;
+    const { main_image, more_images } = dogMediaData;
 
     const handleChangeMedia = (event) => {
         if (event.target.files.length) {
@@ -78,11 +70,55 @@ function DogEditForm() {
                 media_description: "",
             }));
             URL.revokeObjectURL(main_image);
-            setDogMediaData({
-                main_image: selectedImages[0]
-            });
+            setDogMediaData((prevState) => ({
+                ...prevState,
+                main_image: selectedImages[0],
+            }));
         }
     }
+
+    const handleAdditionalImagesChange = (event) => {
+        if (event.target.files.length) {
+            const selectedFiles = Array.from(event.target.files);
+            const newImages = selectedFiles.map(file => ({
+                file,
+                url: URL.createObjectURL(file),
+                media_name: "",
+                media_description: "",
+            }));
+            setDogMediaData((prevState) => ({
+                ...prevState,
+                more_images: [...prevState.more_images, ...newImages],
+            }));
+        }
+    };
+
+    // remove a newly added additional image
+    const handleRemoveImage = (index) => {
+        setDogMediaData((prevState) => {
+            const newImages = [...prevState.more_images];
+            newImages.splice(index, 1);
+            return {
+                ...prevState,
+                more_images: newImages
+            };
+        });
+    };
+
+    // update name and description for additional images
+    const handleMediaDataChange = (index, field, value) => {
+        setDogMediaData((prevState) => {
+            const newImages = [...prevState.more_images];
+            newImages[index] = {
+                ...newImages[index],
+                [field]: value,
+            };
+            return {
+                ...prevState,
+                more_images: newImages
+            };
+        });
+    };
 
     const [videoData, setVideoData] = useState({
         video: null,
@@ -101,6 +137,7 @@ function DogEditForm() {
         }
     };
 
+    // delete a main image, video or additional image
     const handleDeleteMedia = async (mediaId) => {
         try {
             await axiosReq.delete(`/medias/${mediaId}/`);
@@ -129,7 +166,8 @@ function DogEditForm() {
                     characteristics,
                     is_owner,
                     main_image,
-                    video} = data;
+                    video,
+                    additional_images} = data;
 
                 if (is_owner) {
                     setDogData({
@@ -141,8 +179,17 @@ function DogEditForm() {
                         gender,
                         is_adopted});
                     setSelectedCharacteristics(characteristics);
+
+                    const formattedAdditionalImages = additional_images.map(image => ({
+                        id: image.id,
+                        url: image.image,
+                        media_name: image.name || "",
+                        media_description: image.description || "",
+                    }));
+
                     setDogMediaData({
                         main_image,
+                        more_images: formattedAdditionalImages,
                     });
                     if (video) {
                         setVideoData({video});
@@ -230,11 +277,17 @@ function DogEditForm() {
                 await handleSubmitVideo(id, data.video.id);
             }
 
+            // check if additional images were uploaded
+            if (more_images && more_images.length > 0) {
+                await handleSubmitAdditionalMedia(id);
+            }
+
             // check if a main image was uploaded
             if (main_image && main_image.file) {
                 // check if the image changed
                 if (main_image.id !== data.main_image.id) {
                     await handleSubmitMedia(id, data.main_image.id);
+                    navigate(`/dogs/${id}`);
                 } else {
                     navigate(`/dogs/${id}/`)
                 }
@@ -299,8 +352,27 @@ function DogEditForm() {
                 }
             }
         }
+    }
 
-        navigate(`/dogs/${dog_id}`);
+    const handleSubmitAdditionalMedia = async (dog_id) => {
+        for (let image of more_images) {
+            if (image.file) {
+                const imageFormData = new FormData();
+                imageFormData.append("image", image.file);
+                imageFormData.append("name", image.media_name || name);
+                imageFormData.append("description", image.media_description);
+                imageFormData.append("type", "image");
+                imageFormData.append("is_main_image", false);
+
+                try {
+                    await axiosReq.post(`/medias/dog/${dog_id}/`, imageFormData);
+                } catch (err) {
+                    if (err.response?.status !== 401) {
+                        setErrors(err.response?.data);
+                    }
+                }
+            }
+        }
     }
 
     const today = new Date().toISOString().split("T")[0];
@@ -461,6 +533,83 @@ function DogEditForm() {
                                 <Form.Control id="video-upload" type="file" accept="video/*" onChange={handleChangeVideo} />
                             </Form.Group>
                             {errors?.video?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
+                            <Form.Group className="text-center">
+                                <h4 className="mt-5">Additional images</h4>
+                                <Form.Label className="d-flex justify-content-center" htmlFor="additional-image-upload">
+                                    <Asset src={Upload} message="Click or tap to upload images" />
+                                </Form.Label>
+                                <div>
+                                    <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="additional-image-upload">
+                                        Add another image
+                                    </Form.Label>
+                                </div>
+                                <Form.Control id="additional-image-upload" type="file" multiple onChange={handleAdditionalImagesChange} />
+
+                                <div className="mt-3">
+                                    {more_images && more_images.length > 0 && (
+                                        <>
+                                            {more_images.map((image, index) => (
+                                                <div key={index} className="mt-5 position-relative">
+                                                    <Figure>
+                                                        <Image className={appStyles.Image} src={image.url} rounded />
+                                                    </Figure>
+                                                    <div className="mb-3">
+                                                        {image.id ? (
+                                                            <Button
+                                                                variant="danger"
+                                                                className={`${btnStyles.Button} ${btnStyles.DeleteButton}`}
+                                                                onClick={() => {
+                                                                    handleDeleteMedia(image.id);
+                                                                    handleRemoveImage(index);
+                                                                }}>
+                                                                Delete Image
+                                                            </Button>
+                                                        ) : (
+                                                            <Button variant="danger" className="position-absolute top-0 end-0" onClick={() => handleRemoveImage(index)}>
+                                                                Remove
+                                                            </Button>
+                                                        )}
+                                                    </div>
+                                                    {image.id ? (
+                                                        <>
+                                                            <Form.Group className="mb-3">
+                                                                <Form.Label>Media Name (*)</Form.Label>
+                                                                <Form.Control type="text" disabled value={image.media_name} />
+                                                            </Form.Group>
+                                                            <Form.Group className="mb-3">
+                                                                <Form.Label>Media Description</Form.Label>
+                                                                <Form.Control type="text" disabled value={image.media_description} />
+                                                            </Form.Group>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Form.Group className="mb-3">
+                                                                <Form.Label>Media Name (*)</Form.Label>
+                                                                <Form.Control
+                                                                    type="text"
+                                                                    value={image.media_name}
+                                                                    onChange={(e) => handleMediaDataChange(index, 'media_name', e.target.value)}
+                                                                />
+                                                            </Form.Group>
+                                                            <Form.Group className="mb-3">
+                                                                <Form.Label>Media Description</Form.Label>
+                                                                <Form.Control
+                                                                    type="text"
+                                                                    value={image.media_description}
+                                                                    onChange={(e) => handleMediaDataChange(index, 'media_description', e.target.value)}
+                                                                />
+                                                            </Form.Group>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
+                                </div>
+                            </Form.Group>
+                            {errors?.additional_images?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Container>

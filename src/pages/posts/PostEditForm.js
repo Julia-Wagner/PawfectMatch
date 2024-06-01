@@ -162,6 +162,7 @@ function PostEditForm() {
                 // check if the image changed
                 if (main_image.id !== data.main_image.id) {
                     await handleSubmitMedia(id, data.main_image.id);
+                    navigate(`/posts/${id}`)
                 } else {
                     navigate(`/posts/${id}/`)
                 }
@@ -201,8 +202,6 @@ function PostEditForm() {
                 }
             }
         }
-
-        navigate(`/posts/${post_id}`)
     }
 
     const handleDeleteMedia = async (mediaId) => {

@@ -131,7 +131,8 @@ function PostCreateForm() {
 
         try {
             const {data} = await axiosReq.post('/posts/', formData);
-            handleSubmitMedia(data.id);
+            await handleSubmitMedia(data.id);
+            navigate(`/posts/${data.id}`)
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
@@ -157,7 +158,6 @@ function PostCreateForm() {
 
         try {
             await axiosReq.post(`/medias/post/${post_id}/`, formData);
-            navigate(`/posts/${post_id}`)
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)

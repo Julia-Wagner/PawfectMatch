@@ -198,7 +198,8 @@ function DogCreateForm() {
 
         try {
             const {data} = await axiosReq.post('/dogs/', formData);
-            handleSubmitMedia(data.id);
+            await handleSubmitMedia(data.id);
+            navigate(`/dogs/${data.id}`);
         } catch (err) {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
@@ -229,7 +230,7 @@ function DogCreateForm() {
         for (let image of additional_images) {
             const formData = new FormData();
             formData.append("image", image.file);
-            formData.append("name", image.media_name);
+            formData.append("name", image.media_name || name);
             formData.append("description", image.media_description);
             formData.append("type", "image");
             formData.append("is_main_image", false);
@@ -259,8 +260,6 @@ function DogCreateForm() {
                 }
             }
         }
-
-        navigate(`/dogs/${dog_id}`);
     }
 
     const today = new Date().toISOString().split("T")[0];
