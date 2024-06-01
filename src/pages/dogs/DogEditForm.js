@@ -436,7 +436,7 @@ function DogEditForm() {
                                 <p>You can upload a video that will be shown for the dog.</p>
                                 {video && video.url ? (
                                     <>
-                                        <video className={appStyles.Video} controls>
+                                        <video className={appStyles.Video} controls key={video.url}>
                                             <source src={video.url} type="video/mp4" />
                                         </video>
                                         <div>
