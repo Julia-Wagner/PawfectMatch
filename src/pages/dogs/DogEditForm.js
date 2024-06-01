@@ -32,16 +32,6 @@ function DogEditForm() {
 
     const [errors, setErrors] = useState({});
 
-    const [dogMediaData, setDogMediaData] = useState({
-        image: "",
-        video: "",
-        media_name: "",
-        media_description: "",
-        type: "image",
-        is_main_image: true,
-    });
-    const {image, media_name, media_description, type, is_main_image} = dogMediaData;
-
     const [dogData, setDogData] = useState({
         name: "",
         description: "",
@@ -71,15 +61,24 @@ function DogEditForm() {
         });
     };
 
+    const [dogMediaData, setDogMediaData] = useState({
+        main_image: null,
+    });
+    const { main_image } = dogMediaData;
+
     const handleChangeMedia = (event) => {
         if (event.target.files.length) {
-            const selectedMedia = event.target.files[0];
-            URL.revokeObjectURL(image);
+            const selectedFiles = Array.from(event.target.files);
+            const selectedImages = selectedFiles.map(file => ({
+                file,
+                url: URL.createObjectURL(file),
+                media_name: "",
+                media_description: "",
+            }));
+            URL.revokeObjectURL(main_image);
             setDogMediaData({
-                ...dogMediaData,
-                image: URL.createObjectURL(selectedMedia),
-                file: selectedMedia,
-            })
+                main_image: selectedImages[0]
+            });
         }
     }
 
@@ -91,11 +90,10 @@ function DogEditForm() {
     const handleChangeVideo = (event) => {
         if (event.target.files.length) {
             const selectedFile = event.target.files[0];
-            URL.revokeObjectURL(video);
             setVideoData({
                 video: {
-                    url: URL.createObjectURL(selectedFile),
                     file: selectedFile,
+                    url: URL.createObjectURL(selectedFile),
                 },
             });
         }
@@ -115,8 +113,8 @@ function DogEditForm() {
                     is_adopted,
                     characteristics,
                     is_owner,
+                    main_image,
                     video} = data;
-                const image = data.main_image.url;
 
                 if (is_owner) {
                     setDogData({
@@ -126,14 +124,11 @@ function DogEditForm() {
                         birthday,
                         size,
                         gender,
-                        is_adopted,
-                        characteristics});
+                        is_adopted});
                     setSelectedCharacteristics(characteristics);
                     setDogMediaData({
-                        ...dogMediaData,
-                        image: image,
-                        file: image,
-                    })
+                        main_image,
+                    });
                     if (video) {
                         setVideoData({video});
                     }
@@ -219,11 +214,11 @@ function DogEditForm() {
                 await handleSubmitVideo(id, data.video.id);
             }
 
-            // check if an image was uploaded
-            if (image.length > 1 || data.main_image.id !== null) {
+            // check if a main image was uploaded
+            if (main_image && main_image.file) {
                 // check if the image changed
-                if (image !== data.main_image.url) {
-                    handleSubmitMedia(id, data.main_image.id);
+                if (main_image.id !== data.main_image.id) {
+                    await handleSubmitMedia(id, data.main_image.id);
                 } else {
                     navigate(`/dogs/${id}/`)
                 }
@@ -265,26 +260,29 @@ function DogEditForm() {
     const handleSubmitMedia = async (dog_id, image_id) => {
         const formData = new FormData();
 
-        formData.append("image", dogMediaData.file)
-        formData.append("name", name)
-        formData.append("description", media_description)
-        formData.append("type", type)
-        formData.append("is_main_image", is_main_image)
+        if (main_image && main_image.file) {
+            formData.append("image", main_image.file);
+            formData.append("name", name);
+            formData.append("description", main_image.media_description || "");
+            formData.append("type", "image");
+            formData.append("is_main_image", true);
 
-        try {
-            if (image_id) {
-                // change the media if another image was uploaded before
-                await axiosReq.put(`/medias/${image_id}/`, formData);
-            } else {
-                // create a new media if no image was uploaded before
-                await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
-            }
-            navigate(`/dogs/${dog_id}`)
-        } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
+            try {
+                if (image_id) {
+                    // change the media if another image was uploaded before
+                    await axiosReq.put(`/medias/${image_id}/`, formData);
+                } else {
+                    // create a new media if no image was uploaded before
+                    await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
+                }
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data);
+                }
             }
         }
+
+        navigate(`/dogs/${dog_id}`);
     }
 
     const today = new Date().toISOString().split("T")[0];
@@ -380,10 +378,10 @@ function DogEditForm() {
                             className={`${appStyles.Content} d-flex flex-column justify-content-center`}>
                             <Form.Group className="text-center">
                                 <h3 className="mt-3">Main image</h3>
-                                {image ? (
+                                {main_image ? (
                                     <>
                                         <Figure>
-                                            <Image className={appStyles.Image} src={image} rounded />
+                                            <Image className={appStyles.Image} src={main_image.url} rounded />
                                         </Figure>
                                         <div>
                                             <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="main-image-upload">

@@ -377,6 +377,30 @@ function DogCreateForm() {
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                             <Form.Group className="text-center">
+                                <h4 className="mt-3">Video</h4>
+                                <p>You can upload a video that will be shown for the dog.</p>
+                                {video ? (
+                                    <>
+                                        <video className={appStyles.Video} controls>
+                                            <source src={video.url} type="video/mp4" />
+                                        </video>
+                                        <div>
+                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="video-upload">
+                                                Change the video
+                                            </Form.Label>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Form.Label className="d-flex justify-content-center" htmlFor="video-upload">
+                                        <Asset src={Upload} message="Click or tap to upload a video" />
+                                    </Form.Label>
+                                )}
+                                <Form.Control id="video-upload" type="file" accept="video/*" onChange={handleChangeVideo} />
+                            </Form.Group>
+                            {errors?.video?.map((message, idx) => (
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            ))}
+                            <Form.Group className="text-center">
                                 <h4 className="mt-5">Additional images</h4>
                                 <p>You can upload additional images that will be shown in a slider.</p>
                                 <Form.Label className="d-flex justify-content-center" htmlFor="additional-image-upload">
@@ -419,30 +443,6 @@ function DogCreateForm() {
                                 </div>
                             </Form.Group>
                             {errors?.additional_images?.map((message, idx) => (
-                                <Alert variant="warning" key={idx}>{message}</Alert>
-                            ))}
-                            <Form.Group className="text-center">
-                                <h4 className="mt-3">Video</h4>
-                                <p>You can upload a video that will be shown for the dog.</p>
-                                {video ? (
-                                    <>
-                                        <video className={appStyles.Video} controls>
-                                            <source src={video.url} type="video/mp4" />
-                                        </video>
-                                        <div>
-                                            <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="video-upload">
-                                                Change the video
-                                            </Form.Label>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <Form.Label className="d-flex justify-content-center" htmlFor="video-upload">
-                                        <Asset src={Upload} message="Click or tap to upload a video" />
-                                    </Form.Label>
-                                )}
-                                <Form.Control id="video-upload" type="file" accept="video/*" onChange={handleChangeVideo} />
-                            </Form.Group>
-                            {errors?.video?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Container>
