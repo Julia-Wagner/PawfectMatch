@@ -50,8 +50,6 @@ const Dog = (props) => {
 
     const [dogPosts, setDogPosts] = useState({ results: [] });
     const [additionalImages, setAdditionalImages] = useState([]);
-    const [dogVideo, setDogVideo] = useState([]);
-
     useEffect(() => {
         setAdditionalImages(additional_images || []);
     }, [additional_images]);
@@ -77,12 +75,6 @@ const Dog = (props) => {
             setImageUrl(main_image.url);
         }
     }, [main_image]);
-
-    useEffect(() => {
-        if (video && video.url) {
-            setDogVideo(video);
-        }
-    }, [video]);
 
     // Sanitize HTML content to prevent security issues
     const sanitizedDescription = React.useMemo(() => {
@@ -190,11 +182,11 @@ const Dog = (props) => {
                             </>
                         )}
 
-                        {dogVideo.length > 0 && (
+                        {video && video.url && (
                             <>
                                 <h3 className="text-center">Video for {name}</h3>
-                                <video controls className="d-block mx-auto">
-                                    <source src={dogVideo.url} type="video/mp4" />
+                                <video controls className={`${appStyles.Video} d-block mx-auto`}>
+                                    <source src={video.url} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                                 <hr/>
