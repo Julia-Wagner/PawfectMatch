@@ -75,6 +75,12 @@ a:hover span {
     cursor: pointer;
 }
 
+.Video {
+    max-width: 100%;
+    max-height: 300px;
+    max-height: 300px;
+}
+
 /* SCROLLBAR */
 *::-webkit-scrollbar {
     width: 5px;
