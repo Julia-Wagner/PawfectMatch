@@ -32,23 +32,16 @@ function PostEditForm() {
 
     const [errors, setErrors] = useState({});
 
-    const [postMediaData, setPostMediaData] = useState({
-        image: "",
-        video: "",
-        media_name: "",
-        media_description: "",
-        type: "image",
-        is_main_image: true,
-    });
-    const {image, media_description, type, is_main_image} = postMediaData;
-
-    const imageInput = useRef(null);
-
     const [postData, setPostData] = useState({
         title: "",
         content: "",
     });
     const {title, content} = postData;
+
+    const [postMediaData, setPostMediaData] = useState({
+        main_image: null,
+    });
+    const { main_image } = postMediaData;
 
     const [dogs, setDogs] = useState([]);
     const [selectedDogs, setSelectedDogs] = useState([]);
@@ -62,12 +55,16 @@ function PostEditForm() {
 
     const handleChangeMedia = (event) => {
         if (event.target.files.length) {
-            const selectedMedia = event.target.files[0];
-            URL.revokeObjectURL(image);
+            const selectedFiles = Array.from(event.target.files);
+            const selectedImages = selectedFiles.map(file => ({
+                file,
+                url: URL.createObjectURL(file),
+                media_name: "",
+                media_description: "",
+            }));
+            URL.revokeObjectURL(main_image);
             setPostMediaData({
-                ...postMediaData,
-                image: URL.createObjectURL(selectedMedia),
-                file: selectedMedia,
+                main_image: selectedImages[0]
             })
         }
     }
@@ -76,16 +73,13 @@ function PostEditForm() {
         const handleMount = async () => {
             try {
                 const {data} = await axiosReq.get(`/posts/${id}/`)
-                const {title, content, dogs, is_owner} = data;
-                const image = data.main_image.url;
+                const {title, content, dogs, is_owner, main_image} = data;
 
                 if (is_owner) {
                     setPostData({title, content});
                     setSelectedDogs(dogs);
                     setPostMediaData({
-                        ...postMediaData,
-                        image: image,
-                        file: image,
+                        main_image,
                     })
                 } else {
                     navigate("/feed");
@@ -160,11 +154,11 @@ function PostEditForm() {
 
         try {
             const {data} = await axiosReq.put(`/posts/${id}/`, formData);
-            // check if an image was uploaded
-            if (image.length > 1 || data.main_image.id !== null) {
+            // check if a main image was uploaded
+            if (main_image && main_image.file) {
                 // check if the image changed
-                if (image !== data.main_image.url) {
-                    handleSubmitMedia(id, data.main_image.id);
+                if (main_image.id !== data.main_image.id) {
+                    await handleSubmitMedia(id, data.main_image.id);
                 } else {
                     navigate(`/posts/${id}/`)
                 }
@@ -181,27 +175,39 @@ function PostEditForm() {
     const handleSubmitMedia = async (post_id, image_id) => {
         const formData = new FormData();
 
-        formData.append("image", postMediaData.file)
-        formData.append("name", title)
-        formData.append("description", media_description)
-        formData.append("type", type)
-        formData.append("is_main_image", is_main_image)
+        if (main_image && main_image.file) {
+            formData.append("image", main_image.file)
+            formData.append("name", title)
+            formData.append("description", main_image.media_description || "");
+            formData.append("type", "image");
+            formData.append("is_main_image", true);
 
-        try {
-            if (image_id) {
-                // change the media if another image was uploaded before
-                await axiosReq.put(`/medias/${image_id}/`, formData);
-            } else {
-                // create a new media if no image was uploaded before
-                await axiosReq.post(`/medias/post/${post_id}/`, formData);
-            }
-            navigate(`/posts/${post_id}`)
-        } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
+            try {
+                if (image_id) {
+                    // change the media if another image was uploaded before
+                    await axiosReq.put(`/medias/${image_id}/`, formData);
+                } else {
+                    // create a new media if no image was uploaded before
+                    await axiosReq.post(`/medias/post/${post_id}/`, formData);
+                }
+            } catch (err) {
+                if (err.response?.status !== 401) {
+                    setErrors(err.response?.data)
+                }
             }
         }
+
+        navigate(`/posts/${post_id}`)
     }
+
+    const handleDeleteMedia = async (mediaId) => {
+        try {
+            await axiosReq.delete(`/medias/${mediaId}/`);
+            setPostMediaData({ ...postMediaData, main_image: null });
+        } catch (err) {
+            // console.log(err);
+        }
+    };
 
     return (
         <Container>
@@ -248,19 +254,25 @@ function PostEditForm() {
                         </Container>
                     </Col>
                     <Col className="py-2 p-0 p-md-2" sm={12} md={6}>
-                        <Container
-                            className={`${appStyles.Content} d-flex flex-column justify-content-center`}
-                        >
+                        <Container className={`${appStyles.Content} d-flex flex-column justify-content-center`}>
                             <Form.Group className="text-center">
-                                {image ? (
+                                {main_image ? (
                                     <>
                                         <Figure>
-                                            <Image className={appStyles.Image} src={image} rounded />
+                                            <Image className={appStyles.Image} src={main_image.url} rounded />
                                         </Figure>
                                         <div>
                                             <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="media-upload">
                                                 Change the image
                                             </Form.Label>
+                                            {main_image.id && (
+                                                <Button
+                                                    variant="danger"
+                                                    className={`${btnStyles.Button} ${btnStyles.DeleteButton}`}
+                                                    onClick={() => handleDeleteMedia(main_image.id)}>
+                                                    Delete Image
+                                                </Button>
+                                            )}
                                         </div>
                                     </>
                                 ) : (
@@ -271,10 +283,9 @@ function PostEditForm() {
                                         <Asset src={Upload} message="Click or tap to upload an image" />
                                     </Form.Label>
                                 )}
-                                <Form.Control id="media-upload" type="file"
-                                              onChange={handleChangeMedia} ref={imageInput} />
+                                <Form.Control id="media-upload" type="file" onChange={handleChangeMedia} />
                             </Form.Group>
-                            {errors?.image?.map((message, idx) => (
+                            {errors?.main_image?.map((message, idx) => (
                                 <Alert variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Container>

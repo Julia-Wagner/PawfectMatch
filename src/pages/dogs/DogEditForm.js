@@ -99,6 +99,19 @@ function DogEditForm() {
         }
     };
 
+    const handleDeleteMedia = async (mediaId) => {
+        try {
+            await axiosReq.delete(`/medias/${mediaId}/`);
+            if (mediaId === main_image.id) {
+                setDogMediaData({ ...dogMediaData, main_image: null });
+            } else if (mediaId === video.id) {
+                setVideoData({ ...videoData, video: null });
+            }
+        } catch (err) {
+            // console.log(err);
+        }
+    };
+
     useEffect(() => {
         const handleMount = async () => {
             try {
@@ -387,6 +400,14 @@ function DogEditForm() {
                                             <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="main-image-upload">
                                                 Change the image
                                             </Form.Label>
+                                            {main_image.id && (
+                                                <Button
+                                                    variant="danger"
+                                                    className={`${btnStyles.Button} ${btnStyles.DeleteButton}`}
+                                                    onClick={() => handleDeleteMedia(main_image.id)}>
+                                                    Delete Image
+                                                </Button>
+                                            )}
                                         </div>
                                     </>
                                 ) : (
@@ -413,6 +434,14 @@ function DogEditForm() {
                                             <Form.Label className={`mb-3 ${btnStyles.Button}`} htmlFor="video-upload">
                                                 Change the video
                                             </Form.Label>
+                                            {video.id && (
+                                                <Button
+                                                    variant="danger"
+                                                    className={`${btnStyles.Button} ${btnStyles.DeleteButton}`}
+                                                    onClick={() => handleDeleteMedia(video.id)}>
+                                                    Delete Video
+                                                </Button>
+                                            )}
                                         </div>
                                     </>
                                 ) : (

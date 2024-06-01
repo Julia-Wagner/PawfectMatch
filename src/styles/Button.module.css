@@ -22,6 +22,11 @@
     border-color: #0d546f !important;
 }
 
+.DeleteButton {
+    background-color: red;
+    border-color: red;
+}
+
 .Button:hover {
     opacity: 0.8;
     border-color: transparent;
