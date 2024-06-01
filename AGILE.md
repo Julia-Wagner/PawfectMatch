@@ -9,6 +9,16 @@
   * [**Table of Contents**](#table-of-contents)
   * [**Methodology**](#methodology)
   * [**Sprints**](#sprints)
+    * [**Sprint 1 (23.03. - 29.03.)**](#sprint-1-2303---2903)
+    * [**Sprint 2 (30.03. - 05.04.)**](#sprint-2-3003---0504)
+    * [**Sprint 3 (06.04. - 12.04.)**](#sprint-3-0604---1204)
+    * [**Sprint 4 (13.04. - 19.04.)**](#sprint-4-1304---1904)
+    * [**Sprint 5 (20.04. - 26.04.)**](#sprint-5-2004---2604)
+    * [**Sprint 6 (27.04. - 03.05.)**](#sprint-6-2704---0305)
+    * [**Sprint 7 (04.05. - 10.05.)**](#sprint-7-0405---1005)
+    * [**Sprint 8 (11.05. - 17.05.)**](#sprint-8-1105---1705)
+    * [**Sprint 9 (18.05. - 24.05.)**](#sprint-9-1805---2405)
+    * [**Sprint 10 (25.05. - 31.05.)**](#sprint-10-2505---3105)
 <!-- TOC -->
 
 ## **Methodology**
@@ -98,7 +108,7 @@ For my next sprint, I added three user stories with a total of **16 story points
 ![Sprint 6 start](docs/agile/sprint6_start.png)\
 *Start of Sprint 6*
 
-Two of my planned user stories are finished. For the third, I did not finish all tasks so I am moving it back to the backlog for now. In addition to these three I fixed the bug from the last sprint.
+Two of my planned user stories are finished. For the third, I did not finish all tasks, so I am moving it back to the backlog for now. In addition to these three I fixed the bug from the last sprint.
 
 ![Sprint 6 end](docs/agile/sprint6_end.png)\
 *End of Sprint 6*
@@ -145,3 +155,16 @@ I added 4 user stories with a total of **26 story points** for this sprint.
 
 ![Sprint 10 start](docs/agile/sprint10_start.png)\
 *Start of Sprint 10*
+
+I finished all planned user stories and many additional bugs. With this sprint, I managed to finish all *must have* and *should have* user stories.
+
+To finish my project, I will test everything again thoroughly and complete documentation. But for these last steps I will not create another sprint.
+
+![Sprint 10 end](docs/agile/sprint10_end.png)\
+*End of Sprint 10*
+
+## **Conclusion**
+
+Breaking the project down into epics and user stories, really thinking about them and adding acceptance criteria and tasks helped me get a better idea of the application from the beginning. Creating milestones and planning sprints was great to plan ahead and be able to estimate the duration of this project.
+
+I have four **backend user stories** and five **frontend user stories** left, that I labelled as *won´t have* for now, as they are not necessary for the first release of the application.
