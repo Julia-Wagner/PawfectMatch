@@ -89,7 +89,7 @@ function CommentCreateForm(props) {
 }
 
 CommentCreateForm.propTypes = {
-    profile: PropTypes.object,
+    profile: PropTypes.string,
     setProfile: PropTypes.func,
     setComments: PropTypes.func,
     commenter_image: PropTypes.string,

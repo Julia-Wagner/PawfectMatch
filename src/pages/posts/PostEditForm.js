@@ -19,12 +19,14 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
+import Spinner from "react-bootstrap/Spinner";
 
 function PostEditForm() {
     const {id} = useParams();
 
     const navigate = useNavigate();
     const quillRef = useRef(null);
+    const [loading, setLoading] = useState(false);
 
     const handleGoBack = () => {
         navigate(-1);
@@ -141,6 +143,7 @@ function PostEditForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setLoading(true);
         const formData = new FormData();
 
         formData.append("title", title)
@@ -169,6 +172,8 @@ function PostEditForm() {
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data)
             }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -243,11 +248,15 @@ function PostEditForm() {
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
-                                            onClick={handleGoBack}>
+                                            onClick={handleGoBack} disabled={loading}>
                                         Go back
                                     </Button>
-                                    <Button className={`${btnStyles.Button}`} type="submit">
-                                        Save Post
+                                    <Button className={`${btnStyles.Button}`} type="submit" disabled={loading}>
+                                        {loading ? (
+                                            <Spinner animation="border" size="sm" />
+                                        ) : (
+                                            "Save Post"
+                                        )}
                                     </Button>
                                 </div>
                             </div>

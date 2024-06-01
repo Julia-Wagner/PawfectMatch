@@ -19,6 +19,7 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
 import {getAllCountries} from "react-country-list";
+import Spinner from "react-bootstrap/Spinner";
 
 const countries = getAllCountries();
 
@@ -28,6 +29,7 @@ const ProfileEditForm = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const imageFile = useRef();
+    const [loading, setLoading] = useState(false);
 
     const [profileData, setProfileData] = useState({
         name: "",
@@ -104,6 +106,7 @@ const ProfileEditForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const formData = new FormData();
         formData.append("name", name);
         formData.append("description", description);
@@ -128,6 +131,8 @@ const ProfileEditForm = () => {
         } catch (err) {
             // console.log(err);
             setErrors(err.response?.data);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -219,11 +224,15 @@ const ProfileEditForm = () => {
 
                                 <div className="mt-4">
                                     <Button className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}
-                                            onClick={handleGoBack}>
+                                            onClick={handleGoBack} disabled={loading}>
                                         Go back
                                     </Button>
-                                    <Button className={`${btnStyles.Button}`} type="submit">
-                                        Save Changes
+                                    <Button className={`${btnStyles.Button}`} type="submit" disabled={loading}>
+                                        {loading ? (
+                                            <Spinner animation="border" size="sm" />
+                                        ) : (
+                                            "Save Changes"
+                                        )}
                                     </Button>
                                 </div>
                             </div>
@@ -247,8 +256,7 @@ const ProfileEditForm = () => {
                                 <div>
                                     <Form.Label
                                         className={`${btnStyles.Button} btn mt-auto mb-3`}
-                                        htmlFor="image-upload"
-                                    >
+                                        htmlFor="image-upload">
                                         Change the image
                                     </Form.Label>
                                 </div>
