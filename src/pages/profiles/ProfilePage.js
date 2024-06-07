@@ -128,7 +128,7 @@ function ProfilePage() {
                     setComments={setComments}
                 />
             ) : comments.results.length ? (
-                "Comments"
+                "Log in to add a comment."
             ) : null}
             {comments.results.length ? (
                 <InfiniteScroll
