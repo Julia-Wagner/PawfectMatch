@@ -42,7 +42,9 @@ const Sidebar = () => {
         }
 
         setHasLoaded(false);
-        fetchSavedPosts();
+        if (currentUser) {
+            fetchSavedPosts();
+        }
     }, [pathname, currentUser, shouldUpdate]);
 
     return (
