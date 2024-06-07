@@ -274,7 +274,7 @@ function DogEditForm() {
             const {data} = await axiosReq.put(`/dogs/${id}/`, formData);
             // check if a video was uploaded
             if (video && video.file) {
-                await handleSubmitVideo(id, data.video.id);
+                await handleSubmitVideo(id, data.video);
             }
 
             // check if additional images were uploaded
@@ -303,7 +303,7 @@ function DogEditForm() {
         }
     }
 
-    const handleSubmitVideo = async (dog_id, video_id) => {
+    const handleSubmitVideo = async (dog_id, video_obj) => {
         if (video && video.file) {
             const videoFormData = new FormData();
             videoFormData.append("video", video.file);
@@ -313,9 +313,9 @@ function DogEditForm() {
             videoFormData.append("is_main_image", false);
 
             try {
-                if (video_id) {
+                if (video_obj) {
                     // change the media if another video was uploaded before
-                    await axiosReq.put(`/medias/${video_id}/`, videoFormData);
+                    await axiosReq.put(`/medias/${video_obj.id}/`, videoFormData);
                 } else {
                     // create a new media if no video was uploaded before
                     await axiosReq.post(`/medias/dog/${dog_id}/`, videoFormData);
