@@ -294,7 +294,9 @@ The *Following* page is shown only for logged-in users. It renders posts like th
 
 ## **Post CRUD**
 
-Full CRUD functionality is implemented for posts. Logged-in shelter users can create posts and add a title, content and image to it. For the content, I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
+Full CRUD functionality is implemented for posts. Logged-in shelter users can create posts and add a title, content and image to it. Dogs that are created by the logged-in shelter can also be linked to a post. 
+
+For the content, I installed a WYSIWYG editor to allow more styling of the post. I installed the package *dompurify* to render the content safely and avoid security risks.
 
 ![Create post](docs/screenshots/post_create_desktop.png)\
 *Create a post on a desktop*
@@ -340,7 +342,7 @@ Banned words can be defined in the admin panel. Comments are checked before post
 
 ### **Edit profile**
 
-Each user can change their name, description, country and profile image. Only shelters are allowed to add an exact address and phone number.
+Each user can change their name, description, country and profile image. Only shelters are allowed to add an exact address, phone number and mail address.
 
 ![Profile edit shelter](docs/screenshots/profile_edit_shelter_desktop.png)\
 *Profile edit shelter on a desktop*
@@ -355,18 +357,23 @@ Only shelters can create dogs. They have a link in the navbar that takes them to
 ![Dogs page](docs/screenshots/dogs_page.png)\
 *Dogs page on a desktop*
 
-To create a dog, the name, breed, birthday, size and gender of the dog have to be added. Additionally, a description can be added using the WYSIWYG editor and characteristics can be chosen for the dog. A main image and additional images can be uploaded for dogs.
+To create a dog, the name, breed, birthday, size and gender of the dog have to be added. Additionally, a description can be added using the WYSIWYG editor and characteristics can be chosen for the dog. A main image, a video and additional images can be uploaded for dogs.
 
 ![Create a dog](docs/screenshots/create_dog.png)\
 *Create a do on a desktop*
 
-The detail page of a dog includes the main image, name and description of the dog. Additional information and characteristics of the dog are rendered using icons and colorful tags. If additional images have been uploaded, they are shown in a slideshow. At the bottom of the dog detail page, the contact information of the shelter and posts where this dog is linked are shown.
+The detail page of a dog includes the main image, name and description of the dog. Additional information and characteristics of the dog are rendered using icons and colorful tags. If additional images have been uploaded, they are shown in a slideshow. If a video was uploaded, it is shown under the slideshow.
+
+At the bottom of the dog detail page, the contact information of the shelter and posts where this dog is linked are shown.
 
 ![Dog detail phone](docs/screenshots/dog_detail_phone.png)\
 *Dog detail page on a phone*
 
 ![Dog detail page](docs/screenshots/dog_detail.png)\
 *Dog detail page on a desktop*
+
+![Dog detail video](docs/screenshots/dog_video_phone.png)\
+*Dog detail page with a video on a phone*
 
 ### **Matches**
 
