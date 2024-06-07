@@ -412,6 +412,18 @@ If a page that does not exist is opened, the *Not found page* is shown.
 ![Not found page](docs/screenshots/not_found.png)\
 *Not found page*
 
+# **Future Enhancements**
+
+After extensive testing and getting feedback from testers, I can say that the project is ready to be used as a real-world application.
+
+I have some user stories left that I marked as *won´t have* for the first release of the project. These might be implemented for future releases as enhancements of the application. The future features are:
+  
+  - **Deactivating a profile** - Users can deactivate and hide their profiles. They can reactivate it any time to be shown in the application again.
+  - **Notifications** - Users get notifications and can mark these as read.
+  - **Chat** - Create an in-app chat for adopters to chat with shelters.
+
+Another user story I marked as *won´t have* is defining adoption requirements for a dog. I decided to drop this completely and not plan it for future versions either. The reason for this is that while developing and testing the application, I started to think that it would be too complicated for users to add additional requirements. For many dogs these would not be necessary and if there are special requirements they can be added manually to the description of the dog and be discussed directly between the shelter and possible adopters.
+
 # **Testing**
 
 Please refer to the separate [TESTING.md](TESTING.md) file.
