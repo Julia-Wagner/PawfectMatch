@@ -40,6 +40,7 @@ const Dog = (props) => {
         profile_id,
         owner_phone,
         owner_address,
+        owner_mail_address,
         additional_images,
         video,
     } = props;
@@ -203,6 +204,13 @@ const Dog = (props) => {
                                 {owner_phone &&
                                     <Col className="py-2 p-0 p-lg-2">
                                         <i className={`fa-solid fa-phone ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {owner_phone}
+                                    </Col>
+                                }
+                            </Row>
+                            <Row>
+                                {owner_mail_address &&
+                                    <Col className="py-2 p-0 p-lg-2">
+                                        <i className={`fa-solid fa-envelope ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {owner_mail_address}
                                     </Col>
                                 }
                             </Row>

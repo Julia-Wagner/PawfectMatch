@@ -35,6 +35,7 @@ const ProfileEditForm = () => {
         name: "",
         description: "",
         phone_number: "",
+        mail_address: "",
         address_1: "",
         address_2: "",
         city: "",
@@ -45,6 +46,7 @@ const ProfileEditForm = () => {
         name,
         description,
         phone_number,
+        mail_address,
         address_1,
         address_2,
         city,
@@ -65,6 +67,7 @@ const ProfileEditForm = () => {
                         name,
                         description,
                         phone_number,
+                        mail_address,
                         address_1,
                         address_2,
                         city,
@@ -77,6 +80,7 @@ const ProfileEditForm = () => {
                         name,
                         description,
                         phone_number,
+                        mail_address,
                         address_1,
                         address_2,
                         city,
@@ -111,6 +115,7 @@ const ProfileEditForm = () => {
         formData.append("name", name);
         formData.append("description", description);
         formData.append("phone_number", phone_number);
+        formData.append("mail_address", mail_address);
         formData.append("address_1", address_1);
         formData.append("address_2", address_2);
         formData.append("city", city);
@@ -147,6 +152,13 @@ const ProfileEditForm = () => {
                 <Form.Control type="text" name="phone_number" value={phone_number} onChange={handleChange} />
             </Form.Group>
             {errors?.phone_number?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            ))}
+            <Form.Group controlId="mail_address" className="mb-4">
+                <Form.Label>E-Mail address</Form.Label>
+                <Form.Control type="text" name="mail_address" value={mail_address} onChange={handleChange} />
+            </Form.Group>
+            {errors?.mail_address?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>{message}</Alert>
             ))}
             <Form.Group controlId="address_1" className="mb-4">

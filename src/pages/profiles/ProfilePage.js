@@ -106,6 +106,13 @@ function ProfilePage() {
                 }
             </Row>
             <Row>
+                {profile?.mail_address && profile.type === "shelter" &&
+                    <Col className="py-2 p-0 p-lg-2">
+                        <i className={`fa-solid fa-envelope ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {profile.mail_address}
+                    </Col>
+                }
+            </Row>
+            <Row>
                 {profile?.address &&
                     <Col className="py-2 p-0 p-lg-2">
                         <i className={`fa-solid fa-location-dot ${appStyles.Icon} ${appStyles.BlueIcon}`}/> {profile.address}
