@@ -30,7 +30,7 @@ const BottomNavBar = () => {
     )
 
     return (
-        <Navbar className={`d-md-none ${styles.BottomNavBar}`} sticky="bottom">
+        <Navbar className={`d-lg-none ${styles.BottomNavBar}`} sticky="bottom">
             <Container className="p-0">
                 <Navbar.Collapse id="bottom-navbar-nav">
                     <Nav className={`text-center w-100 ${styles.BottomGrid}`}>
