@@ -1,6 +1,5 @@
-import React from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from "react";
 import PropTypes from 'prop-types';
-import {createContext, useContext, useEffect, useMemo, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
@@ -19,9 +18,9 @@ export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [isShelterUser, setIsShelterUser] = useState(false);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const handleMount = async () => {
+    const handleMount = useCallback(async () => {
         try {
             const { data } = await axiosRes.get("dj-rest-auth/user/");
             setCurrentUser(data);
@@ -35,11 +34,11 @@ export const CurrentUserProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         handleMount();
-    }, []);
+    }, [handleMount]);
 
     useEffect(() => {
         if (currentUser && currentUser.profile_id) {
@@ -57,6 +56,10 @@ export const CurrentUserProvider = ({ children }) => {
         }
     }, [currentUser]);
 
+    const contextValue = useMemo(() => currentUser, [currentUser]);
+    const setContextValue = useMemo(() => setCurrentUser, []);
+    const shelterContextValue = useMemo(() => isShelterUser, [isShelterUser]);
+
     useMemo(() => {
         axiosReq.interceptors.request.use(
             async (config) => {
@@ -70,7 +73,7 @@ export const CurrentUserProvider = ({ children }) => {
                             }
                             return null;
                         });
-                        removeTokenTimestamp()
+                        removeTokenTimestamp();
                         return config;
                     }
                 }
@@ -94,7 +97,7 @@ export const CurrentUserProvider = ({ children }) => {
                             }
                             return null;
                         });
-                        removeTokenTimestamp()
+                        removeTokenTimestamp();
                     }
                     return axios(err.config);
                 }
@@ -104,15 +107,15 @@ export const CurrentUserProvider = ({ children }) => {
     }, [navigate]);
 
     return (
-        <CurrentUserContext.Provider value={currentUser}>
-            <SetCurrentUserContext.Provider value={setCurrentUser}>
-                <ShelterUserContext.Provider value={isShelterUser}>
+        <CurrentUserContext.Provider value={contextValue}>
+            <SetCurrentUserContext.Provider value={setContextValue}>
+                <ShelterUserContext.Provider value={shelterContextValue}>
                     {loading ? <Asset spinner /> : children}
                 </ShelterUserContext.Provider>
             </SetCurrentUserContext.Provider>
         </CurrentUserContext.Provider>
-    )
-}
+    );
+};
 
 CurrentUserProvider.propTypes = {
     children: PropTypes.node,

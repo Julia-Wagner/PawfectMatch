@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,7 +9,6 @@ import {useCurrentUser, useIsShelterUser, useSetCurrentUser} from "../contexts/C
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import {removeTokenTimestamp} from "../utils/utils";
-import React from "react";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -25,35 +25,36 @@ const NavBar = () => {
         } catch (err) {
             // console.log(err);
         }
-    }
+    };
 
-    const loggedInIcons = <>
-        <div className="d-none d-lg-flex">
-            <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
-            <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
-            {isShelterUser ? (
-                <NavLink to="/dogs" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Dogs</NavLink>
-            ) : (
-                <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
-            )}
-            <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
-            <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
-        </div>
-        <div className="d-flex d-lg-none flex-column">
-            <NavLink to="/saves" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Saved Posts</NavLink>
-            <NavLink to="/adopted" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Adopted Dogs</NavLink>
-            <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
-        </div>
+    const loggedInIcons =  useMemo(() => (
+        <>
+            <div className="d-none d-lg-flex">
+                <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
+                <NavLink to="/following" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Following</NavLink>
+                {isShelterUser ? (
+                    <NavLink to="/dogs" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Dogs</NavLink>
+                ) : (
+                    <NavLink to="/matches" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Matches</NavLink>
+                )}
+                <NavLink to={`/profiles/${currentUser?.profile_id}`} className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Profile</NavLink>
+                <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
+            </div>
+            <div className="d-flex d-lg-none flex-column">
+                <NavLink to="/saves" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Saved Posts</NavLink>
+                <NavLink to="/adopted" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Adopted Dogs</NavLink>
+                <NavLink to="/" className={styles.NavLink} onClick={handleSignOut}>Sign out</NavLink>
+            </div>
+        </>
+    ), [currentUser, isShelterUser]);
 
-    </>
-
-    const loggedOutIcons = (
+    const loggedOutIcons = useMemo(() => (
         <>
             <NavLink to="/feed" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Feed</NavLink>
             <NavLink to="/signin" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign in</NavLink>
             <NavLink to="/signup" className={({ isActive }) => isActive ? styles.Active : styles.NavLink}>Sign up</NavLink>
         </>
-    )
+    ), []);
 
     return (
         <header>
@@ -77,7 +78,7 @@ const NavBar = () => {
                 </Container>
             </Navbar>
         </header>
-    )
-}
+    );
+};
 
 export default NavBar;
