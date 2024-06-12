@@ -20,6 +20,7 @@ import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
 import Spinner from "react-bootstrap/Spinner";
+import {toast} from "react-toastify";
 
 function PostCreateForm() {
     const navigate = useNavigate();
@@ -133,10 +134,10 @@ function PostCreateForm() {
             const {data} = await axiosReq.post('/posts/', formData);
             await handleSubmitMedia(data.id);
             navigate(`/posts/${data.id}`)
+            toast.success("Post created successfully");
         } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
-            }
+            setErrors(err.response?.data)
+            toast.warning("Please check your data again");
         } finally {
             setLoading(false);
         }

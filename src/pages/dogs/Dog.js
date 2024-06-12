@@ -18,6 +18,7 @@ import Post from "../posts/Post";
 import Asset from "../../components/Asset";
 import {fetchMoreData} from "../../utils/utils";
 import appStyles from "../../App.module.css";
+import {toast} from "react-toastify";
 
 const Dog = (props) => {
     const {
@@ -93,9 +94,10 @@ const Dog = (props) => {
     const handleConfirmDelete = async () => {
         try {
             await axiosRes.delete(`/dogs/${id}/`);
-            navigate(-1);
+            navigate("/feed");
+            toast.success("Dog deleted successfully");
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data)
         }
     };
 

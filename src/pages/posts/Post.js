@@ -86,9 +86,10 @@ const Post = (props) => {
     const handleConfirmDelete = async () => {
         try {
             await axiosRes.delete(`/posts/${id}/`);
-            navigate(-1);
+            navigate("/feed");
+            toast.success("Post deleted successfully");
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data)
         }
     };
 

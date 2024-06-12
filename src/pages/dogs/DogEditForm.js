@@ -20,6 +20,7 @@ import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
 import Spinner from "react-bootstrap/Spinner";
+import {toast} from "react-toastify";
 
 function DogEditForm() {
     const {id} = useParams();
@@ -294,10 +295,10 @@ function DogEditForm() {
             } else {
                 navigate(`/dogs/${id}/`)
             }
+            toast.success("Dog edited successfully");
         } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
-            }
+            setErrors(err.response?.data)
+            toast.warning("Please check your data again");
         } finally {
             setLoading(false);
         }

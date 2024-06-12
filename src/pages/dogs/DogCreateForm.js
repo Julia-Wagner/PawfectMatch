@@ -20,6 +20,7 @@ import Asset from "../../components/Asset";
 
 import Upload from "../../assets/upload.png"
 import Spinner from "react-bootstrap/Spinner";
+import {toast} from "react-toastify";
 
 function DogCreateForm() {
     const navigate = useNavigate();
@@ -200,10 +201,10 @@ function DogCreateForm() {
             const {data} = await axiosReq.post('/dogs/', formData);
             await handleSubmitMedia(data.id);
             navigate(`/dogs/${data.id}`);
+            toast.success("Dog created successfully");
         } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
-            }
+            setErrors(err.response?.data)
+            toast.warning("Please check your data again");
         } finally {
             setLoading(false);
         }
