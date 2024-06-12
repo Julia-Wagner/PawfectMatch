@@ -11,6 +11,7 @@
     * [**iPhone Testing**](#iphone-testing)
   * [**User Story Testing**](#user-story-testing)
   * [**Accessibility Testing**](#accessibility-testing)
+  * [**Lighthouse Testing**](#lighthouse-testing)
   * [**Validation**](#validation)
     * [**HTML Validation**](#html-validation)
     * [**CSS Validation**](#css-validation)
@@ -24,7 +25,13 @@ I started this project by setting everything up and deploying it right away. Whi
 
 I always tested new input by entering incorrect information and trying to break it. This way I ensured correct error handling and feedback to the user.
 
-I regularly tested the application in different browsers and devices, like my phone and tablet. When I found a bug while testing on my phone, I created a **Bug Issue** on my Kanban board and provided details and screenshots. After finishing all my *must have* user stories for the MVP, I did a first big round of testing.
+I regularly tested the application in different browsers and devices, like my phone and tablet. Specific scenarios included:
+
+  - Navigating through different pages to ensure smooth transitions.
+  - Testing form submissions with both valid and invalid inputs. 
+  - Verifying the responsiveness of the application on various screen sizes.
+
+When I found a bug while testing on my phone, I created a **Bug Issue** on my Kanban board and provided details and screenshots. After finishing all my *must have* user stories for the MVP, I did a first big round of testing.
 
 The *#peer-code-review* channel on Code Institute´s Slack was used to get some feedback from other students. I also sent the link to my project to friends and family asking them to test it.
 
@@ -92,6 +99,57 @@ The returned alerts are because of *redundant alternative text* and *redundant l
 
 ![Accessibility Testing WAVE result](docs/testing/wave_check.png)\
 *WAVE result for Stock Items*
+
+## **Lighthouse Testing**
+
+I ran Lighthouse for mobile and desktop regularly while developing new features. For the final testing, I ran it again on every page of the application.
+
+The value for **SEO** is *100* on all pages. 
+
+For **Accessibility** it is *100* on some, but lower on others. The reason for this is *redundant alt text*. However, that is because the profile images have the username of the profile as the alt text. So if more than one post by the same profile is visible, the same image with the same alt text is showing multiple times.
+
+![Lighthouse Accessibility](docs/testing/lighthouse_accessibility.png)\
+*Lighthouse Accessibility result*
+
+For **Best Practices** the value is not *100* because of two reasons. When I am logged out, I have three error logs in the console. These are supposed to be here as explained in the Moments walkthrough. However, Lighthouse treats errors logged to the console as a problem.
+
+The other reason is that third-party cookies are used when I am logged in, which also decreases the value.
+
+![Lighthouse Best Practices](docs/testing/lighthouse_best_practices.png)\
+*Lighthouse Best Practices result*
+
+![Lighthouse Best Practices Cookies](docs/testing/lighthouse_best_practices_cookies.png)\
+*Lighthouse Best Practices result Cookies*
+
+The values for **Performance** where not very good in the beginning. I took several steps to improve my page speed:
+
+  - On the **backend** I installed *django-resized* to automatically compress uploaded images and save them as *.webp*
+  - On the **frontend** I tried to optimize the API requests by:
+    - Reducing the number of requests
+    - Fetching multiple resources concurrently
+    - Avoiding unnecessary data fetching
+    - Lazy loading components
+    - Minimizing re-renders
+
+The value for **Performance** varies depending on the device and time of the day but here are some values for the most important pages of the application. In general performance is better, when the user is logged-out. That is due to the necessary API requests for loading the saved posts and adopted dogs in the sidebar.
+
+![Lighthouse result post desktop](docs/testing/lighthouse_post_desktop.png)\
+*Lighthouse result post detail page (desktop)*
+
+![Lighthouse result feed desktop](docs/testing/lighthouse_feed_desktop.png)\
+*Lighthouse result feed (desktop)*
+
+![Lighthouse result sign in mobile](docs/testing/lighthouse_signin_mobile.png)\
+*Lighthouse result sign in page (mobile)*
+
+![Lighthouse result following mobile](docs/testing/lighthouse_following_mobile.png)\
+*Lighthouse result following page (mobile)*
+
+![Lighthouse result profile desktop](docs/testing/lighthouse_profile_desktop.png)\
+*Lighthouse result profile page (desktop)*
+
+![Lighthouse result about desktop](docs/testing/lighthouse_about_desktop.png)\
+*Lighthouse result about page (desktop)*
 
 ## **Validation**
 

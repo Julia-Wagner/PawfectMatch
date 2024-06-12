@@ -271,6 +271,7 @@ Dog.propTypes = {
     dogPage: PropTypes.bool,
     profile_id: PropTypes.number,
     owner_phone: PropTypes.string,
+    owner_mail_address: PropTypes.string,
     owner_address: PropTypes.string,
     additional_images: PropTypes.array,
     video: PropTypes.object,

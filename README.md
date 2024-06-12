@@ -1,6 +1,6 @@
 # **PawfectMatch**
 
-PawfectMatch is a platform to connect shelters with loving homes for their dogs. Shelters can register and post their dogs, share stories and photos. Future dog owners can register to look for dogs.
+PawfectMatch is a platform designed to connect dog shelters with prospective dog owners. Shelters can register, post details about their dogs, and share stories and photos, while future dog owners can register and search for their perfect match.
 
 Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.herokuapp.com/).
 
@@ -48,6 +48,7 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
   * [**Saved Posts and Recent Adoptions**](#saved-posts-and-recent-adoptions)
   * [**About Page**](#about-page)
   * [**Not found Page**](#not-found-page)
+* [**Future Enhancements**](#future-enhancements)
 * [**Testing**](#testing)
 * [**Deployment**](#deployment)
 * [**Packages and Frameworks**](#packages-and-frameworks)
