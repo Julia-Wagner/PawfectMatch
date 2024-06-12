@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PrivateRoute from "./components/PrivateRoute";
 import Asset from "./components/Asset";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpForm = lazy(() => import("./pages/auth/SignUpForm"));
 const SignInForm = lazy(() => import("./pages/auth/SignInForm"));
@@ -31,6 +33,7 @@ function App() {
     return (
         <div className={styles.App}>
             <NavBar />
+            <ToastContainer position="top-center" theme="dark" />
             <main className={styles.Main}>
                 <Suspense fallback={<Asset spinner />}>
                     <Routes>

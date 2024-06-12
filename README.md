@@ -458,6 +458,7 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode) - for unauthorized errors.
 - [quill](https://quilljs.com/docs/quickstart) - the WYSIWYG editor.
 - [dompurify](https://www.npmjs.com/package/dompurify) - to prevent security issues from HTML in content.
+- [react-toastify](https://fkhadra.github.io/react-toastify/introduction) - to provide feedback to the user with toasts.
 
 # **Credits**
 

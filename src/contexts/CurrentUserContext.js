@@ -38,7 +38,7 @@ export const CurrentUserProvider = ({ children }) => {
 
     useEffect(() => {
         handleMount();
-    }, [handleMount]);
+    }, []);
 
     useEffect(() => {
         if (currentUser && currentUser.profile_id) {
