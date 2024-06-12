@@ -18,6 +18,7 @@ import playground from "../../assets/playground.svg";
 import {useSetCurrentUser} from "../../contexts/CurrentUserContext";
 import {useRedirect} from "../../hooks/useRedirect";
 import {setTokenTimestamp} from "../../utils/utils";
+import {toast} from "react-toastify";
 
 function SignInForm() {
     const setCurrentUser = useSetCurrentUser();
@@ -41,6 +42,7 @@ function SignInForm() {
             navigate('/feed');
         } catch (err) {
             setErrors(err.response?.data);
+            toast.warning("Please check your data again");
         }
     };
 

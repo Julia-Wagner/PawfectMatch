@@ -15,6 +15,7 @@ import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 import {useRedirect} from "../../hooks/useRedirect";
+import {toast} from "react-toastify";
 
 const SignUpForm = () => {
     useRedirect('loggedIn')
@@ -54,8 +55,10 @@ const SignUpForm = () => {
                 });
             }
             navigate("/signin");
+            toast.success("Account created successfully");
         } catch (err) {
             setErrors(err.response?.data);
+            toast.warning("Please check your data again");
         }
     }
 
