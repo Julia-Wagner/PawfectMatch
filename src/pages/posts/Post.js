@@ -18,6 +18,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 import {fetchMoreData} from "../../utils/utils";
 import Dog from "../dogs/Dog";
+import {toast} from "react-toastify";
 
 const Post = (props) => {
     const {
@@ -103,8 +104,9 @@ const Post = (props) => {
                 }),
             }));
             triggerUpdate();
+            toast.success("Saved successfully");
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data);
         }
     };
 
@@ -120,8 +122,9 @@ const Post = (props) => {
                 }),
             }));
             triggerUpdate();
+            toast.success("Unsaved successfully");
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data);
         }
     };
 

@@ -20,6 +20,7 @@ import appStyles from "../../App.module.css";
 
 import {getAllCountries} from "react-country-list";
 import Spinner from "react-bootstrap/Spinner";
+import {toast} from "react-toastify";
 
 const countries = getAllCountries();
 
@@ -133,9 +134,10 @@ const ProfileEditForm = () => {
                 profile_image: data.image,
             }));
             navigate(-1);
+            toast.success("Profile edited successfully");
         } catch (err) {
-            // console.log(err);
             setErrors(err.response?.data);
+            toast.warning("Please check your data again");
         } finally {
             setLoading(false);
         }
