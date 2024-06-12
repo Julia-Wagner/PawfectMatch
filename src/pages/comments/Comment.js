@@ -9,6 +9,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
+import {toast} from "react-toastify";
 
 const Comment = (props) => {
     const {
@@ -48,8 +49,9 @@ const Comment = (props) => {
                 ...prevComments,
                 results: prevComments.results.filter((comment) => comment.id !== id),
             }));
+            toast.success("Comment deleted successfully");
         } catch (err) {
-            // console.log(err)
+            toast.error(err.response?.data)
         }
     };
 

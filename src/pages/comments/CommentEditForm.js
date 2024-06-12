@@ -6,11 +6,15 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/ProfilePage.module.css";
 import btnStyles from "../../styles/Button.module.css";
+import {toast} from "react-toastify";
+import Alert from "react-bootstrap/Alert";
 
 function CommentEditForm(props) {
     const { id, content, setShowEditForm, setComments } = props;
 
     const [formContent, setFormContent] = useState(content);
+
+    const [errors, setErrors] = useState({});
 
     const handleChange = (event) => {
         setFormContent(event.target.value);
@@ -35,8 +39,10 @@ function CommentEditForm(props) {
                 }),
             }));
             setShowEditForm(false);
+            setErrors({});
+            toast.success("Comment edited successfully");
         } catch (err) {
-            // console.log(err);
+            setErrors(err.response?.data);
         }
     };
 
@@ -51,6 +57,9 @@ function CommentEditForm(props) {
                     rows={2}
                 />
             </Form.Group>
+            {errors.content?.map((message, idx) =>
+                <Alert variant="warning" key={idx}>{message}</Alert>
+            )}
             <div className="d-flex justify-content-end">
                 <button
                     className={`${btnStyles.ReverseButton} ${btnStyles.Button}`}

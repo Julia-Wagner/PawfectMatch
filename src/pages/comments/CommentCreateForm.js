@@ -11,6 +11,7 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
 import btnStyles from "../../styles/Button.module.css";
+import {toast} from "react-toastify";
 
 function CommentCreateForm(props) {
     const { profile, setProfile, setComments, commenter_image, commenter_id } = props;
@@ -49,6 +50,7 @@ function CommentCreateForm(props) {
             });
             setContent("");
             setErrors({});
+            toast.success("Comment added successfully");
         } catch (err) {
             setErrors(err.response?.data);
         }
