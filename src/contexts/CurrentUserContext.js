@@ -31,7 +31,13 @@ export const CurrentUserProvider = ({ children }) => {
                 setIsShelterUser(profileResponse.data.type === "shelter");
             }
         } catch (err) {
-            toast.error(err.response?.data);
+            let message = "Error, please try again later.";
+            if (err.response?.data?.detail) {
+                message = err.response?.data?.detail;
+            } else if (err.message) {
+                message = err.message;
+            }
+            toast.error(message);
         } finally {
             setLoading(false);
         }
@@ -48,7 +54,13 @@ export const CurrentUserProvider = ({ children }) => {
                     const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}/`);
                     setIsShelterUser(profileResponse.data.type === "shelter");
                 } catch (err) {
-                    toast.error(err.response?.data);
+                    let message = "Error, please try again later.";
+                    if (err.response?.data?.detail) {
+                        message = err.response?.data?.detail;
+                    } else if (err.message) {
+                        message = err.message;
+                    }
+                    toast.error(message);
                 }
             };
             checkShelterUser();

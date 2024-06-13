@@ -65,7 +65,13 @@ function MatchesPage() {
                 const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
             } catch (err) {
-                toast.error(err.response?.data);
+                let message = "Error, please try again later.";
+                if (err.response?.data?.detail) {
+                    message = err.response?.data?.detail;
+                } else if (err.message) {
+                    message = err.message;
+                }
+                toast.error(message);
             }
         };
 
@@ -90,7 +96,13 @@ function MatchesPage() {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                toast.error(err.response?.data);
+                let message = "Error, please try again later.";
+                if (err.response?.data?.detail) {
+                    message = err.response?.data?.detail;
+                } else if (err.message) {
+                    message = err.message;
+                }
+                toast.error(message);
             }
         }
 
@@ -108,7 +120,13 @@ function MatchesPage() {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                toast.error(err.response?.data);
+                let message = "Error, please try again later.";
+                if (err.response?.data?.detail) {
+                    message = err.response?.data?.detail;
+                } else if (err.message) {
+                    message = err.message;
+                }
+                toast.error(message);
             }
         }
 
