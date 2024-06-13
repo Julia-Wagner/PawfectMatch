@@ -35,6 +35,12 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
     * [**Colors and Fonts**](#colors-and-fonts)
     * [**Logo**](#logo)
 * [**Agile Process**](#agile-process)
+* [**Security**](#security)
+  * [**Authentication and Authorization**](#authentication-and-authorization)
+  * [**Defensive Design**](#defensive-design)
+  * [**CSRF Tokens**](#csrf-tokens)
+  * [**Robust Code**](#robust-code)
+  * [**Error handling and feedback**](#error-handling-and-feedback)
 * [**Features**](#features)
   * [**User registration and login**](#user-registration-and-login)
   * [**Feed**](#feed)
@@ -254,6 +260,29 @@ I created a logo for **PawfectMatch** using the paw print of my dog and the head
 
 # **Agile Process**
 I used a [GitHub Projects Board](https://github.com/users/Julia-Wagner/projects/4) to plan and document my work. The details of my agile approach can be found in the separate [AGILE.md file](AGILE.md).
+
+# **Security**
+
+I took various steps to ensure security for this project. Logging in is required for all private routes and to perform actions.
+
+## **Authentication and Authorization**
+
+**Django AllAuth** was used to implement user authentication. The package ensures secure user registration and login. Role-based access control ensures that only a superuser has access to the admin panel.
+
+The profile type of the user (**shelter** or **adoptant**) is set on registration based on the checkbox in the registration form. As described in the features section below, at the moment there is no further step to validate that the user is a shelter. However, that would be an important step to add before publishing the application to real-world shelters.
+
+## **Defensive Design**
+
+I used a defensive design approach building this project. User input is validated and error messages provide feedback to the user. Users who are not logged in are redirected to the *Login* page if they try to access restricted content. When trying to delete a post or dog, a confirm step is used before actually deleting the content. A custom error page was implemented to stay consistent with the application design.
+
+## **CSRF Tokens**
+
+Cross-Site Request Forgery (CSRF) protection is implemented using CSRF tokens. This prevents unauthorized requests from malicious websites.
+
+## **Robust Code**
+
+I frequently reviewed and improved my code to identify and eliminate security issues. Extensive testing ensures validated features and security. Sensitive information like secret keys and database credentials are stored as environment variables. This ensures that important data remains confidential and is not exposed.
+
 
 # **Features**
 
