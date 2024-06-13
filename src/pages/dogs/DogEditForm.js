@@ -149,7 +149,13 @@ function DogEditForm() {
             }
             toast.success("Media deleted successfully");
         } catch (err) {
-            toast.error(err.response?.data)
+            let message = "Error, please try again later.";
+            if (err.response?.data?.detail) {
+                message = err.response?.data?.detail;
+            } else if (err.message) {
+                message = err.message;
+            }
+            toast.error(message);
         }
     };
 
@@ -247,7 +253,13 @@ function DogEditForm() {
                 const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
             } catch (error) {
-                console.error("Error fetching dog characteristics:", error);
+                let message = "Error, please try again later.";
+                if (err.response?.data?.detail) {
+                    message = err.response?.data?.detail;
+                } else if (err.message) {
+                    message = err.message;
+                }
+                toast.error(message);
             }
         };
 

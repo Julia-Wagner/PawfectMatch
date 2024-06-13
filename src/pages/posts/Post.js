@@ -95,7 +95,13 @@ const Post = (props) => {
             navigate("/feed");
             toast.success("Post deleted successfully");
         } catch (err) {
-            toast.error(err.response?.data)
+            let message = "Error, please try again later.";
+            if (err.response?.data?.detail) {
+                message = err.response?.data?.detail;
+            } else if (err.message) {
+                message = err.message;
+            }
+            toast.error(message);
         }
     };
 

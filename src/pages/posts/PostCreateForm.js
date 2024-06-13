@@ -104,7 +104,13 @@ function PostCreateForm() {
                 const userDogs = response.data.results.filter(dog => dog.is_owner);
                 setDogs(userDogs);
             } catch (error) {
-                console.error("Error fetching user's dogs:", error);
+                let message = "Error, please try again later.";
+                if (err.response?.data?.detail) {
+                    message = err.response?.data?.detail;
+                } else if (err.message) {
+                    message = err.message;
+                }
+                toast.error(message);
             }
         };
 
