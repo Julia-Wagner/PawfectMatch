@@ -9,6 +9,7 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
 import Dog from "./Dog";
+import {toast} from "react-toastify";
 
 function DogPage() {
     const {id} = useParams();
@@ -23,7 +24,7 @@ function DogPage() {
                 ])
                 setDog({results: [dog]})
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         };
 

@@ -222,9 +222,8 @@ function DogCreateForm() {
             try {
                 await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
             } catch (err) {
-                if (err.response?.status !== 401) {
-                    setErrors(err.response?.data);
-                }
+                setErrors(err.response?.data)
+                toast.warning("Please check your image again");
             }
         }
 
@@ -239,9 +238,8 @@ function DogCreateForm() {
             try {
                 await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
             } catch (err) {
-                if (err.response?.status !== 401) {
-                    setErrors(err.response?.data);
-                }
+                setErrors(err.response?.data)
+                toast.warning("Please check your images again");
             }
         }
 
@@ -256,9 +254,8 @@ function DogCreateForm() {
             try {
                 await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
             } catch (err) {
-                if (err.response?.status !== 401) {
-                    setErrors(err.response?.data);
-                }
+                setErrors(err.response?.data)
+                toast.warning("Please check your video again");
             }
         }
     }

@@ -65,7 +65,7 @@ const Dog = (props) => {
                     ]);
                     setDogPosts(dogPosts);
                 } catch (err) {
-                    // console.log(err);
+                    toast.error(err.response?.data);
                 }
             }
         };

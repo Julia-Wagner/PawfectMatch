@@ -39,7 +39,7 @@ function SignInForm() {
             const {data} = await axios.post("/dj-rest-auth/login/", signInData);
             setCurrentUser(data.user);
             setTokenTimestamp(data);
-            navigate('/feed');
+            navigate("/feed");
         } catch (err) {
             setErrors(err.response?.data);
             toast.warning("Please check your data again");

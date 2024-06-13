@@ -91,7 +91,7 @@ const ProfileEditForm = () => {
                     });
                     setType(type)
                 } catch (err) {
-                    // console.log(err);
+                    toast.error(err.response?.data);
                     navigate("/");
                 }
             } else {

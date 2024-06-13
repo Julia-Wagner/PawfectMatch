@@ -160,9 +160,8 @@ function PostCreateForm() {
         try {
             await axiosReq.post(`/medias/post/${post_id}/`, formData);
         } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data)
-            }
+            setErrors(err.response?.data);
+            toast.warning("Please check your data again");
         }
     }
 

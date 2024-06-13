@@ -21,6 +21,7 @@ import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
+import {toast} from "react-toastify";
 
 function MatchesPage() {
     const [dogs, setDogs] = useState({results: []});
@@ -64,7 +65,7 @@ function MatchesPage() {
                 const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
             } catch (err) {
-                // console.log(err);
+                toast.error(err.response?.data);
             }
         };
 
@@ -89,7 +90,7 @@ function MatchesPage() {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         }
 
@@ -107,7 +108,7 @@ function MatchesPage() {
                 setDogs(data.results);
                 setHasLoaded(true);
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         }
 

@@ -55,7 +55,7 @@ const Post = (props) => {
                     ]);
                     setPostDogs(postDogs);
                 } catch (err) {
-                    // console.log(err);
+                    toast.error(err.response?.data);
                 }
             }
         };

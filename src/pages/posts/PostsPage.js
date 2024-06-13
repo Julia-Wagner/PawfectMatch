@@ -19,6 +19,7 @@ import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
+import {toast} from "react-toastify";
 
 function PostsPage({filter = ""}) {
     const [posts, setPosts] = useState({results: []});
@@ -45,7 +46,7 @@ function PostsPage({filter = ""}) {
                 setPosts(data)
                 setHasLoaded(true)
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         }
 

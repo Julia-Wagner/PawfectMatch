@@ -22,6 +22,7 @@ import CommentCreateForm from "../comments/CommentCreateForm";
 import Comment from "../comments/Comment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {fetchMoreData} from "../../utils/utils";
+import {toast} from "react-toastify";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -46,7 +47,7 @@ function ProfilePage() {
                 setComments(comments);
                 setHasLoaded(true);
             } catch (err) {
-                // console.log(err);
+                toast.error(err.response?.data);
             }
         };
         fetchData();

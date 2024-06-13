@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { axiosReq } from "../api/axiosDefaults";
+import {toast} from "react-toastify";
 
 export const fetchMoreData = async (resource, setResource) => {
     try {
@@ -14,7 +15,7 @@ export const fetchMoreData = async (resource, setResource) => {
             }, prevResource.results),
         }));
     } catch (err) {
-        // console.log(err)
+        toast.error(err.response?.data);
     }
 };
 

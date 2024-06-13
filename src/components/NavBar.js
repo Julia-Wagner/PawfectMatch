@@ -9,6 +9,7 @@ import {useCurrentUser, useIsShelterUser, useSetCurrentUser} from "../contexts/C
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import {removeTokenTimestamp} from "../utils/utils";
+import {toast} from "react-toastify";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -22,8 +23,9 @@ const NavBar = () => {
             await axios.post("dj-rest-auth/logout/");
             setCurrentUser(null);
             removeTokenTimestamp();
+            toast.info("You are now logged out")
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data);
         }
     };
 

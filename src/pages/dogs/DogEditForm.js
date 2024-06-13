@@ -147,8 +147,9 @@ function DogEditForm() {
             } else if (mediaId === video.id) {
                 setVideoData({ ...videoData, video: null });
             }
+            toast.success("Media deleted successfully");
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data)
         }
     };
 
@@ -199,7 +200,7 @@ function DogEditForm() {
                     navigate("/feed");
                 }
             } catch (err) {
-                // console.log(err);
+                toast.error(err.response?.data);
             }
         }
 
@@ -322,9 +323,8 @@ function DogEditForm() {
                     await axiosReq.post(`/medias/dog/${dog_id}/`, videoFormData);
                 }
             } catch (err) {
-                if (err.response?.status !== 401) {
-                    setErrors(err.response?.data);
-                }
+                setErrors(err.response?.data);
+                toast.warning("Please check your data again");
             }
         }
     }
@@ -348,9 +348,8 @@ function DogEditForm() {
                     await axiosReq.post(`/medias/dog/${dog_id}/`, formData);
                 }
             } catch (err) {
-                if (err.response?.status !== 401) {
-                    setErrors(err.response?.data);
-                }
+                setErrors(err.response?.data);
+                toast.warning("Please check your data again");
             }
         }
     }
@@ -368,9 +367,8 @@ function DogEditForm() {
                 try {
                     await axiosReq.post(`/medias/dog/${dog_id}/`, imageFormData);
                 } catch (err) {
-                    if (err.response?.status !== 401) {
-                        setErrors(err.response?.data);
-                    }
+                    setErrors(err.response?.data);
+                    toast.warning("Please check your data again");
                 }
             }
         }

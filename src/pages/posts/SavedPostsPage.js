@@ -17,6 +17,7 @@ import {fetchMoreData} from "../../utils/utils";
 import Asset from "../../components/Asset";
 import Sidebar from "../../components/Sidebar";
 import {useSavedPosts} from "../../contexts/SavedPostsContext";
+import {toast} from "react-toastify";
 
 function SavedPostsPage() {
     const [posts, setPosts] = useState({results: []});
@@ -38,7 +39,7 @@ function SavedPostsPage() {
                 setPosts({ results: postItems })
                 setHasLoaded(true)
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         }
 

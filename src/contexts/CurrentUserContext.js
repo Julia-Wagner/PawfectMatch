@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import {removeTokenTimestamp, shouldRefreshToken} from "../utils/utils";
 import Asset from "../components/Asset";
+import {toast} from "react-toastify";
 
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
@@ -30,7 +31,7 @@ export const CurrentUserProvider = ({ children }) => {
                 setIsShelterUser(profileResponse.data.type === "shelter");
             }
         } catch (err) {
-            // console.log(err);
+            toast.error(err.response?.data);
         } finally {
             setLoading(false);
         }
@@ -47,7 +48,7 @@ export const CurrentUserProvider = ({ children }) => {
                     const profileResponse = await axiosReq.get(`/profiles/${currentUser.profile_id}/`);
                     setIsShelterUser(profileResponse.data.type === "shelter");
                 } catch (err) {
-                    // console.log(err);
+                    toast.error(err.response?.data);
                 }
             };
             checkShelterUser();
@@ -69,6 +70,7 @@ export const CurrentUserProvider = ({ children }) => {
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {
                             if (prevCurrentUser) {
+                                toast.info("You are logged out.");
                                 navigate("/signin");
                             }
                             return null;
@@ -93,6 +95,7 @@ export const CurrentUserProvider = ({ children }) => {
                     } catch (err) {
                         setCurrentUser((prevCurrentUser) => {
                             if (prevCurrentUser) {
+                                toast.info("You are logged out.");
                                 navigate("/signin");
                             }
                             return null;

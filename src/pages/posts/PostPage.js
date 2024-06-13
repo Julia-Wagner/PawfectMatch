@@ -9,6 +9,7 @@ import {axiosReq} from "../../api/axiosDefaults";
 import Post from "./Post";
 import Sidebar from "../../components/Sidebar";
 import {useFollowers} from "../../contexts/FollowersContext";
+import {toast} from "react-toastify";
 
 function PostPage() {
     const {id} = useParams();
@@ -23,7 +24,7 @@ function PostPage() {
                 ])
                 setPost({results: [post]})
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         };
 

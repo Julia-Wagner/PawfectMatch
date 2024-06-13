@@ -7,6 +7,7 @@ import {useCurrentUser} from "../contexts/CurrentUserContext";
 import {axiosReq} from "../api/axiosDefaults";
 import Asset from "./Asset";
 import {useSavedPosts} from "../contexts/SavedPostsContext";
+import {toast} from "react-toastify";
 
 const Sidebar = () => {
     const [posts, setPosts] = useState({results: []});
@@ -37,7 +38,7 @@ const Sidebar = () => {
                 setDogs(dogItems)
                 setHasLoaded(true)
             } catch (err) {
-                // console.log(err)
+                toast.error(err.response?.data);
             }
         }
 
