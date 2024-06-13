@@ -19,6 +19,7 @@ import Asset from "../../components/Asset";
 import {fetchMoreData} from "../../utils/utils";
 import Dog from "../dogs/Dog";
 import {toast} from "react-toastify";
+import btnStyles from "../../styles/Button.module.css";
 
 const Post = (props) => {
     const {
@@ -164,19 +165,19 @@ const Post = (props) => {
                     <div className={styles.PostBar}>
                         {is_owner ? (
                             <OverlayTrigger placement="top" overlay={<Tooltip>You can´t follow yourself!</Tooltip>}>
-                                <span><i className="fa fa-plus-circle" /> Follow</span>
+                                <button className={btnStyles.LinkButton}><i className="fa fa-plus-circle" /> Follow</button>
                             </OverlayTrigger>
                         ) : is_following ? (
-                            <span onClick={() => handleUnfollow(profile_id)}>
-                            <span className={`${styles.Heart} ${appStyles.Pointer}`}><i className="fa fa-check-circle" /> Following</span>
-                        </span>
+                            <button className={btnStyles.LinkButton} onClick={() => handleUnfollow(profile_id)}>
+                                <span className={`${styles.Heart} ${appStyles.Pointer}`}><i className="fa fa-check-circle" /> Following</span>
+                            </button>
                         ) : currentUser ? (
-                            <span onClick={() => handleFollow(profile_id)}>
-                            <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}><i className="fa fa-plus-circle" /> Follow</span>
-                        </span>
+                            <button className={btnStyles.LinkButton} onClick={() => handleFollow(profile_id)}>
+                                <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}><i className="fa fa-plus-circle" /> Follow</span>
+                            </button>
                         ) : (
                             <OverlayTrigger placement="top" overlay={<Tooltip>Log in to follow profiles!</Tooltip>}>
-                                <span><i className="fa fa-plus-circle" /> Follow</span>
+                                <button className={btnStyles.LinkButton}><i className="fa fa-plus-circle" /> Follow</button>
                             </OverlayTrigger>
                         )}
                     </div>
@@ -209,19 +210,19 @@ const Post = (props) => {
                 <div className={styles.PostBar}>
                     {is_owner ? (
                         <OverlayTrigger placement="top" overlay={<Tooltip>You can´t save your own post!</Tooltip>}>
-                            <span>Save <i className="far fa-heart" /></span>
+                            <button className={btnStyles.LinkButton}>Save <i className="far fa-heart" /></button>
                         </OverlayTrigger>
                     ) : save_id ? (
-                        <span onClick={handleUnsave}>
+                        <button className={btnStyles.LinkButton} onClick={handleUnsave}>
                             <span className={`${styles.Heart} ${appStyles.Pointer}`}>Saved <i className="fas fa-heart" /></span>
-                        </span>
+                        </button>
                     ) : currentUser ? (
-                        <span onClick={handleSave}>
+                        <button className={btnStyles.LinkButton} onClick={handleSave}>
                             <span className={`${styles.HeartOutline} ${appStyles.Pointer}`}>Save <i className="far fa-heart" /></span>
-                        </span>
+                        </button>
                     ) : (
                         <OverlayTrigger placement="top" overlay={<Tooltip>Log in to save posts!</Tooltip>}>
-                            <span>Save <i className="far fa-heart" /></span>
+                            <button className={btnStyles.LinkButton}>Save <i className="far fa-heart" /></button>
                         </OverlayTrigger>
                     )}
                     <span className="fw-bold">{saves_count}</span>

@@ -27,6 +27,11 @@
     border-color: red;
 }
 
+.LinkButton {
+    background: none;
+    border: none;
+}
+
 .Button:hover {
     opacity: 0.8;
     border-color: transparent;

@@ -38,7 +38,7 @@ function AboutPage() {
                         </ol>
                         <h3 className="text-center mt-4">Contact us</h3>
                         <p className="text-center">We&apos;d love to hear from you! If you have any questions, suggestions, or need assistance,
-                            feel free to reach out to us at <span className={appStyles.SidebarLink}>pawfect-match@email.com</span> or follow us on our social media channels for the latest updates.</p>
+                            feel free to reach out to us at <a href="mailto:julia@p-wagner.at" className={appStyles.SidebarLink}>pawfect-match@email.com</a> or follow us on our social media channels for the latest updates.</p>
                         <ul className={styles.UnorderedList}>
                             <li className={styles.ListItem}>
                                 <a href="https://github.com/Julia-Wagner" className="footer-icon" target="_blank" rel="noreferrer noopener" aria-label="open my GitHub profile in a new tab">
