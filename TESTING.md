@@ -9,6 +9,7 @@
   * [**Table of Contents**](#table-of-contents)
   * [**Manual Testing**](#manual-testing)
     * [**iPhone Testing**](#iphone-testing)
+  * [**Error handling and feedback**](#error-handling-and-feedback)
   * [**User Story Testing**](#user-story-testing)
   * [**Accessibility Testing**](#accessibility-testing)
   * [**Lighthouse Testing**](#lighthouse-testing)
@@ -48,6 +49,51 @@ There I got the information, that this is a known issue and can be solved by all
 
 ![BrowserStack iPad](docs/testing/ipad_safari.png)\
 *BrowserStack testing iPad*
+
+## **Error handling and feedback**
+
+I installed *react-toastify* to implement toasts. They give feedback to the user after interacting with the application and display error messages.
+
+For the warnings I tried to create and edit posts and dogs with required data missing.
+
+![Toast warning invalid data](docs/testing/toast_invalid_data.png)\
+*Toast warning invalid data*
+
+I used pages with an invalid ID and blocked certain requests to test the error messages.
+
+![Toast error blocked request](docs/testing/toast_blocked_request.png)\
+*Toast error blocked request*
+
+![Toast error incorrect id](docs/testing/toast_incorrect_id.png)\
+*Toast error incorrect id*
+
+The info messages are used to inform the user about the authentication status after logging out or when they try to access the login page while already being logged-in.
+
+![Toast info logout](docs/testing/toast_logout.png)\
+*Toast info logout*
+
+![Toast info redirect](docs/testing/toast_redirect.png)\
+*Toast info redirect*
+
+Success messages are shown after signing up for the application, creating, editing or deleting a post, dog or comment, editing the profile, following/unfollowing a user and saving/unsaving a post.
+
+![Toast success account](docs/testing/toast_account.png)\
+*Toast success create account*
+
+![Toast success create](docs/testing/toast_create.png)\
+*Toast success create a dog*
+
+![Toast success edit](docs/testing/toast_edit.png)\
+*Toast success edit a post*
+
+![Toast success delete](docs/testing/toast_delete.png)\
+*Toast success delete a comment*
+
+![Toast success follow](docs/testing/toast_follow.png)\
+*Toast success follow a user*
+
+![Toast success save](docs/testing/toast_save.png)\
+*Toast success save a post*
 
 ## **User Story Testing**
 

@@ -40,7 +40,6 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
   * [**Defensive Design**](#defensive-design)
   * [**CSRF Tokens**](#csrf-tokens)
   * [**Robust Code**](#robust-code)
-  * [**Error handling and feedback**](#error-handling-and-feedback)
 * [**Features**](#features)
   * [**User registration and login**](#user-registration-and-login)
   * [**Feed**](#feed)
@@ -282,7 +281,6 @@ Cross-Site Request Forgery (CSRF) protection is implemented using CSRF tokens. T
 ## **Robust Code**
 
 I frequently reviewed and improved my code to identify and eliminate security issues. Extensive testing ensures validated features and security. Sensitive information like secret keys and database credentials are stored as environment variables. This ensures that important data remains confidential and is not exposed.
-
 
 # **Features**
 
