@@ -476,6 +476,14 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
    5. Select your created app and open the *Deploy* tab
    6. Connect your GitHub repository and click *Deploy Branch* at the bottom of the page.
 
+## **Forking**
+
+Forking creates a copy of the project on GitHub. Follow these steps to fork this repository:
+1. Log in to your GitHub account and navigate to [the PawfectMatch repository](https://github.com/Julia-Wagner/pawfect-match).
+2. Click the **Fork** button on the top right of the repository.
+3. You can now open the forked copy of this project as your own repository.
+4. Follow the above steps to work on the project.
+
 # **Packages and Frameworks**
 
 - [react-bootstrap](https://react-bootstrap.netlify.app/) - to use Bootstrap components.
