@@ -103,7 +103,7 @@ function PostCreateForm() {
                 const response = await axiosReq.get("/dogs/");
                 const userDogs = response.data.results.filter(dog => dog.is_owner);
                 setDogs(userDogs);
-            } catch (error) {
+            } catch (err) {
                 let message = "Error, please try again later.";
                 if (err.response?.data?.detail) {
                     message = err.response?.data?.detail;

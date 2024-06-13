@@ -252,7 +252,7 @@ function DogEditForm() {
             try {
                 const {data} = await axiosReq.get("/dogs/characteristics/");
                 setCharacteristics(data.results);
-            } catch (error) {
+            } catch (err) {
                 let message = "Error, please try again later.";
                 if (err.response?.data?.detail) {
                     message = err.response?.data?.detail;
