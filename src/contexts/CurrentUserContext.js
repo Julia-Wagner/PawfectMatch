@@ -31,13 +31,7 @@ export const CurrentUserProvider = ({ children }) => {
                 setIsShelterUser(profileResponse.data.type === "shelter");
             }
         } catch (err) {
-            let message = "Error, please try again later.";
-            if (err.response?.data?.detail) {
-                message = err.response?.data?.detail;
-            } else if (err.message) {
-                message = err.message;
-            }
-            toast.error(message);
+
         } finally {
             setLoading(false);
         }
