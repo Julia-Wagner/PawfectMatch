@@ -182,9 +182,11 @@ const Dog = (props) => {
                         {additionalImages.length > 0 && (
                             <>
                                 <h3 className="text-center">Additional images for {name}</h3>
-                                <Carousel className="my-3">
+                                <Carousel className="my-3"
+                                          prevIcon={<span className={styles.CarouselIcon}><i className="fa-solid fa-circle-chevron-left"></i></span>}
+                                          nextIcon={<span className={styles.CarouselIcon}><i className="fa-solid fa-circle-chevron-right"></i></span>}>
                                     {additional_images.map((imageData) => (
-                                        <Carousel.Item key={imageData.id} interval={5000}>
+                                        <Carousel.Item className="text-center" key={imageData.id} interval={5000}>
                                             <Image src={imageData.image} alt={imageData.name} fluid />
                                             <Carousel.Caption className={styles.CarouselCaption}>
                                                 <h4 className={styles.CarouselHeading}>{imageData.name}</h4>

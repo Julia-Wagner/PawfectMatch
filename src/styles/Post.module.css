@@ -79,3 +79,14 @@
     color: #eee6d9;
     margin-bottom: 0;
 }
+
+.CarouselIcon {
+    background-color: #fff;
+    border-radius: 100%;
+    padding: 4px;
+}
+
+.CarouselIcon i {
+    font-size: 2.5rem;
+    color: #000;
+}
