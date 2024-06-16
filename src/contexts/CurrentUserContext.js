@@ -19,7 +19,6 @@ export const CurrentUserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [isShelterUser, setIsShelterUser] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isRefreshing, setIsRefreshing] = useState(false);
     const navigate = useNavigate();
 
     const handleMount = useCallback(async () => {
@@ -68,11 +67,10 @@ export const CurrentUserProvider = ({ children }) => {
     const setContextValue = useMemo(() => setCurrentUser, []);
     const shelterContextValue = useMemo(() => isShelterUser, [isShelterUser]);
 
-    useEffect(() => {
-        const refreshInterceptor = axiosReq.interceptors.request.use(
+    useMemo(() => {
+        axiosReq.interceptors.request.use(
             async (config) => {
-                if (shouldRefreshToken() && !isRefreshing) {
-                    setIsRefreshing(true);
+                if (shouldRefreshToken()) {
                     try {
                         await axios.post("/dj-rest-auth/token/refresh/");
                     } catch (err) {
@@ -85,8 +83,6 @@ export const CurrentUserProvider = ({ children }) => {
                         });
                         removeTokenTimestamp();
                         return config;
-                    } finally {
-                        setIsRefreshing(false);
                     }
                 }
                 return config;
@@ -96,11 +92,10 @@ export const CurrentUserProvider = ({ children }) => {
             }
         );
 
-        const responseInterceptor = axiosRes.interceptors.response.use(
+        axiosRes.interceptors.response.use(
             (response) => response,
             async (err) => {
-                if (err.response?.status === 401 && !isRefreshing) {
-                    setIsRefreshing(true);
+                if (err.response?.status === 401) {
                     try {
                         await axios.post("/dj-rest-auth/token/refresh/");
                     } catch (err) {
@@ -112,20 +107,13 @@ export const CurrentUserProvider = ({ children }) => {
                             return null;
                         });
                         removeTokenTimestamp();
-                    } finally {
-                        setIsRefreshing(false);
                     }
                     return axios(err.config);
                 }
                 return Promise.reject(err);
             }
         );
-
-        return () => {
-            axiosReq.interceptors.request.eject(refreshInterceptor);
-            axiosRes.interceptors.response.eject(responseInterceptor);
-        };
-    }, [navigate, isRefreshing]);
+    }, [navigate]);
 
     return (
         <CurrentUserContext.Provider value={contextValue}>
