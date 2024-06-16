@@ -56,6 +56,7 @@ Here is the [link to the deployed project](https://pawfectmatch-60f883124db2.her
 * [**Future Enhancements**](#future-enhancements)
 * [**Testing**](#testing)
 * [**Deployment**](#deployment)
+  * [**Forking**](#forking)
 * [**Packages and Frameworks**](#packages-and-frameworks)
 * [**Credits**](#credits)
   * [**Acknowledgements**](#acknowledgements)
@@ -305,7 +306,7 @@ After successful registration, the user gets redirected to the *sign-in form*. I
 
 After successfully logging in, the users are redirected to the *feed*. This page is also available for unauthorized users. It shows all posts sorted by newest to oldest. Ten posts are loaded, if the user scrolls to the bottom of the page and there are more than ten posts, the next ten are loaded.
 
-For each post, the profile that created the post is shown with the profile image and username. Logged-in users can follow and unfollow the profile or save and unsave the post. The content of the post is clipped after three lines and a link to view the full post is shown.
+For each post, the profile that created the post is shown with the profile image and username. Logged-in users can follow and unfollow the profile or save and unsave the post. The content of the post is clipped after three lines and a link to view the full post is shown. To display posts, the reusable React component *Post* is used.
 
 ![Feed unauthorized desktop](docs/screenshots/feed_unauthorized_desktop.png)\
 *Feed for an unauthorized user on a desktop*
@@ -315,7 +316,7 @@ For each post, the profile that created the post is shown with the profile image
 
 ## **Following**
 
-The *Following* page is shown only for logged-in users. It renders posts like the feed, but only from profiles the user follows.
+The *Following* page is shown only for logged-in users. It renders posts like the feed, but only from profiles the user follows. To display posts, the reusable React component *Post* is used.
 
 ![Following](docs/screenshots/following.png)\
 *Following page on a desktop*
@@ -380,7 +381,7 @@ Each user can change their name, description, country and profile image. Only sh
 
 ## **Dogs**
 
-Only shelters can create dogs. They have a link in the navbar that takes them to the *Dogs* page. There all dogs that the logged-in shelter created are shown and they see a button to create a new dog.
+Only shelters can create dogs. They have a link in the navbar that takes them to the *Dogs* page. There all dogs that the logged-in shelter created are shown and they see a button to create a new dog. To display dogs, the reusable React component *Dog* is used.
 
 ![Dogs page](docs/screenshots/dogs_page.png)\
 *Dogs page on a desktop*
@@ -388,7 +389,7 @@ Only shelters can create dogs. They have a link in the navbar that takes them to
 To create a dog, the name, breed, birthday, size and gender of the dog have to be added. Additionally, a description can be added using the WYSIWYG editor and characteristics can be chosen for the dog. A main image, a video and additional images can be uploaded for dogs.
 
 ![Create a dog](docs/screenshots/create_dog.png)\
-*Create a do on a desktop*
+*Create a dog on a desktop*
 
 The detail page of a dog includes the main image, name and description of the dog. Additional information and characteristics of the dog are rendered using icons and colorful tags. If additional images have been uploaded, they are shown in a slideshow. If a video was uploaded, it is shown under the slideshow.
 
@@ -407,7 +408,7 @@ At the bottom of the dog detail page, the contact information of the shelter and
 
 Adopters do not see the *Dogs* page, instead they have the *Matches* page. This page includes all dogs that are available for adoption. On top of the page, there is a filter to filter the matches by size, gender or characteristics of the dog.
 
-The results load immediately after changing the filter. The button *Reset all filters* closes the filter and shows all dogs again.
+The results load immediately after changing the filter. The button *Reset all filters* closes the filter and shows all dogs again. To display dogs, the reusable React component *Dog* is used.
 
 ![Matches page](docs/screenshots/matches_filter.png)\
 *Matches page with filter on a desktop*
@@ -419,12 +420,12 @@ Posts can be saved and unsaved. On bigger screens, the five most recently saved 
 ![Saved posts desktop](docs/screenshots/feed_sticky_sidebar.png)\
 *Saved posts on a desktop*
 
-The number of saved posts is shown at the top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.
+The number of saved posts is shown at the top of the page. The page as well as the sidebar reload when saving or unsaving a post, so they are always up-to-date.  To display posts, the reusable React component *Post* is used.
 
 ![Saved posts phone](docs/screenshots/saves_phone.png)\
 *Saved posts on a phone*
 
-Recently adopted dogs are also shown in the sticky sidebar on bigger screens and on an additional page for smaller screens. The page includes all dogs that are marked as adopted.
+Recently adopted dogs are also shown in the sticky sidebar on bigger screens and on an additional page for smaller screens. The page includes all dogs that are marked as adopted. To display dogs, the reusable React component *Dog* is used.
 
 ## **About Page**
 
